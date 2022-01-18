@@ -9,7 +9,7 @@ import './index.css'
 import store from 'state'
 //[ store ]
 
-import App from './App.tsx'
+import App from './App'
 //[ pages ]
 
 //=> Render | 渲染页面
