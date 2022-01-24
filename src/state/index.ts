@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit'
 
 //
 import animation from './animation/slice'
+import popup from './popup/slice'
 //[ 导入 state ]
 
 //=> 启用 state 缓存
@@ -12,7 +13,8 @@ import animation from './animation/slice'
 const store = configureStore({
 	//=> 绑定 state
 	reducer: {
-		animation
+		animation,
+		popup
 	}
 
 	//=> 插入缓存 state 中间件

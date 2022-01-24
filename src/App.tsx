@@ -2,8 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 //[ package ]
 
-import Sidebar from 'components/global/Sidebar'
-import Footer from 'components/global/Footer'
+import Sidebar from 'components/page/Sidebar'
+import Footer from 'components/page/Footer'
+import Popups from 'components/global/Popups'
 //[ Components ]
 
 //=> Main Component
@@ -12,6 +13,7 @@ export default () => {
 		<BtnMain>
 			<div>
 				<Main>
+					<Popups />
 					<Sidebar />
 				</Main>
 				<Footer />
@@ -38,6 +40,7 @@ const BtnMain = styled.div`
 `
 
 const Main = styled.main`
+	position: relative;
 	width: 100%;
 	height: calc(100% - 42px);
 	padding: 5px;
