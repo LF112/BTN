@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 //[ package ]
 
 import './index.css'
+import 'assets/element-ui-icon/index.css'
 //[ style ]
 
 import store from 'state'
