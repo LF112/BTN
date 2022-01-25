@@ -17,6 +17,7 @@
 	},
 	"homepage": "https://github.com/btnext/BTN#readme",
 	"dependencies": {
+		"@ant-design/icons": "4.0.0",
 		"@reduxjs/toolkit": "^1.7.1",
 		"@types/node": "^17.0.9",
 		"@types/react": "^17.0.38",

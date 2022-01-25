@@ -2,18 +2,24 @@ import React from 'react'
 import styled from 'styled-components'
 //[ package ]
 
+import Server from './Server'
+//[ components ]
+
 //=> Component
 export default () => {
-	return <Sidebar></Sidebar>
+	return (
+		<Sidebar>
+			<Server />
+		</Sidebar>
+	)
 }
 
 //=> Style Component
 const Sidebar = styled.nav`
-	width: 125px;
+	width: 198px;
 	height: calc(100% - 20px);
 	display: flex;
 	justify-content: center;
-	align-items: center;
 	border-radius: 8px;
 	margin: 10px;
 	background: #282c34;
