@@ -4,25 +4,27 @@ import { configureStore } from '@reduxjs/toolkit'
 //
 import animation from './animation/slice'
 import popup from './popup/slice'
+import config from './config/slice'
 //[ 导入 state ]
 
 //=> 启用 state 缓存
-//import { save, load } from 'redux-localstorage-simple'
-//const PERSISTED_KEYS: string[] = [] //=> 指定要缓存的 state 键名
+import { save, load } from 'redux-localstorage-simple'
+const PERSISTED_KEYS: string[] = ['config'] //=> 指定要缓存的 state 键名
 
 const store = configureStore({
 	//=> 绑定 state
 	reducer: {
 		animation,
-		popup
-	}
+		popup,
+		config
+	},
 
 	//=> 插入缓存 state 中间件
-	// middleware: getDefaultMiddleware =>
-	// 	getDefaultMiddleware({ thunk: true }).concat(
-	// 		save({ states: PERSISTED_KEYS, debounce: 500 })
-	// 	),
-	// preloadedState: load({ states: PERSISTED_KEYS }) // 配置缓存的 state
+	middleware: getDefaultMiddleware =>
+		getDefaultMiddleware({ thunk: true }).concat(
+			save({ states: PERSISTED_KEYS, debounce: 500 })
+		),
+	preloadedState: load({ states: PERSISTED_KEYS }) // 配置缓存的 state
 })
 
 //=> export State
