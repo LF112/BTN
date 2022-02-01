@@ -5,13 +5,17 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 export type ConfigState = {
 	connect: {
 		baseUrl: string
+		apiUse: boolean
+		apiKey: string
 	}
 }
 
 //=> State 表初始化 | '是这个 state 的一些默认值'
 export const initialState: ConfigState = {
 	connect: {
-		baseUrl: '/' // BT-PANEL URL
+		baseUrl: '/', // BT-PANEL URL
+		apiUse: false,
+		apiKey: ''
 	}
 }
 

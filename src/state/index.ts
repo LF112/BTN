@@ -10,6 +10,7 @@ import config from './config/slice'
 //=> 启用 state 缓存
 import { save, load } from 'redux-localstorage-simple'
 const PERSISTED_KEYS: string[] = ['config'] //=> 指定要缓存的 state 键名
+//=> 导入 Fetch 中间件
 
 const store = configureStore({
 	//=> 绑定 state
@@ -18,7 +19,6 @@ const store = configureStore({
 		popup,
 		config
 	},
-
 	//=> 插入缓存 state 中间件
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware({ thunk: true }).concat(
