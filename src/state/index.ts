@@ -24,7 +24,7 @@ const store = configureStore({
 		getDefaultMiddleware({ thunk: true }).concat(
 			save({ states: PERSISTED_KEYS, debounce: 500 })
 		),
-	preloadedState: load({ states: PERSISTED_KEYS }) // 配置缓存的 state
+	preloadedState: load({ states: PERSISTED_KEYS, disableWarnings: true }) // 配置缓存的 state
 })
 
 //=> export State
