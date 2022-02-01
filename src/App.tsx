@@ -16,8 +16,8 @@ export default () => {
 			<div>
 				<Main>
 					<Popups />
-					<Sidebar />
 					<Router>
+						<Sidebar />
 						<Pages />
 					</Router>
 				</Main>

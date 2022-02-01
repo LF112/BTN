@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useLocation } from 'react-router-dom'
 //[ package ]
 
 import Server from './Server'
@@ -11,13 +12,15 @@ import sidebarConsts from 'constants/sidebar_consts'
 
 //=> Component
 export default () => {
+	const { pathname } = useLocation()
+
 	return (
 		<Sidebar>
 			<div>
 				<Server />
 				<Menu>
 					{sidebarConsts.map((data: object, index: number) => {
-						return <Item key={index} data={data} />
+						return <Item key={index} data={{ location: pathname, ...data }} />
 					})}
 				</Menu>
 			</div>

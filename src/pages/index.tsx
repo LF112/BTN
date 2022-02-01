@@ -45,12 +45,22 @@ export default () => {
 	return (
 		<Routes>
 			<Route path={`/`} element={PAGE('Console')} />
+			<Route path={`/site`} element={PAGE('Site')} />
+			<Route path={`/control`} element={PAGE('Control')} />
+			<Route path={`/firewall`} element={PAGE('Firewall')} />
+			<Route path={`/xterm`} element={PAGE('Xterm')} />
+			<Route path={`/files`} element={PAGE('Files')} />
+			<Route path={`/database`} element={PAGE('Database')} />
+			<Route path={`/ftp`} element={PAGE('Ftp')} />
+			<Route path={`/crontab`} element={PAGE('Crontab')} />
+			<Route path={`/soft`} element={PAGE('Soft')} />
+			<Route path={`/config`} element={PAGE('Config')} />
 		</Routes>
 	)
 }
 
 const LoadMaskMain = styled.div`
-	width: 100%;
+	width: calc(100% - 218px);
 	height: 500px;
 	display: flex;
 	align-items: center;

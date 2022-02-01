@@ -1,14 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 //[ package ]
 
 //=> Component
 export default (props: any) => {
-	const { text, icon } = props.data
+	const { text, icon, path, location } = props.data
 
+	const navigate = useNavigate()
+
+	const clicked = location === path
 	return (
-		<MenuItem>
-			<FrameStrip />
+		<MenuItem
+			style={clicked ? { background: '#21242c', pointerEvents: 'none' } : {}}
+			onClick={() => navigate(path)}>
+			<FrameStrip style={{ opacity: clicked ? 1 : 0 }} />
 			<div>
 				<Icon>{icon}</Icon>
 				<h2>{text}</h2>
