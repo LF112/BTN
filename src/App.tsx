@@ -1,10 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
+import { HashRouter as Router } from 'react-router-dom'
 //[ package ]
 
 import Sidebar from 'components/global/Sidebar'
 import Footer from 'components/global/Footer'
 import Popups from 'components/global/Popups'
+import Pages from 'pages'
 //[ Components ]
 
 //=> Main Component
@@ -15,6 +17,9 @@ export default () => {
 				<Main>
 					<Popups />
 					<Sidebar />
+					<Router>
+						<Pages />
+					</Router>
 				</Main>
 				<Footer />
 			</div>
