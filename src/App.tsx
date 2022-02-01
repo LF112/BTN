@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 //[ package ]
 
-import Sidebar from 'components/page/Sidebar'
-import Footer from 'components/page/Footer'
+import Sidebar from 'components/global/Sidebar'
+import Footer from 'components/global/Footer'
 import Popups from 'components/global/Popups'
 //[ Components ]
 
