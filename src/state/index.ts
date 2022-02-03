@@ -5,6 +5,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import animation from './animation/slice'
 import popup from './popup/slice'
 import config from './config/slice'
+import api from './api'
 //[ 导入 state ]
 
 //=> 启用 state 缓存
@@ -17,7 +18,8 @@ const store = configureStore({
 	reducer: {
 		animation,
 		popup,
-		config
+		config,
+		...(api as any)
 	},
 	//=> 插入缓存 state 中间件
 	middleware: getDefaultMiddleware =>
