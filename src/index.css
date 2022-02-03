@@ -45,6 +45,11 @@ span {
 }
 
 @font-face {
+	font-family: 'Geometos';
+	src: url('./assets/fonts/geometos.woff') format('truetype');
+}
+
+@font-face {
 	font-family: 'element-icons';
 	src: url('./assets/fonts/element-icons.woff') format('woff'),
 		url('./assets/fonts/element-icons.ttf') format('truetype');
