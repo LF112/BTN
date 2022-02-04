@@ -1,13 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
+import { PayCircleOutlined, RocketOutlined } from '@ant-design/icons'
 //[ package ]
 
-import FreeIcon from 'components/reusable/VersionBadge'
+import PayIcon from 'components/reusable/VersionBadge'
 import VersionInfo from 'components/page/console/Header/VersionInfo'
 //[ components ]
 
+import { ReactComponent as FreeIcon } from 'assets/svg/global_link.svg'
+//[ assets ]
+
+import { useUpdateApi, useApiState } from 'state/api/hooks'
+//[ hooks ]
+
 //=> DOM
 export default () => {
+	const updateApi = useUpdateApi()
+	const $panel = useApiState('panel')
+
+	//=> 更新状态
+	useEffect(
+		() => updateApi(['panel', 'version', 'name', 'Pro', 'Ltd', 'Beta']),
+		['']
+	)
+
 	return (
 		<Main>
 			<PanelInfo>
@@ -16,7 +32,18 @@ export default () => {
 				<VersionInfo />
 			</PanelInfo>
 			<BadgeList>
-				<FreeIcon />
+				<PayIcon
+					icon={
+						$panel.Pro > 0 ? (
+							<RocketOutlined />
+						) : $panel.ltd > 0 ? (
+							<PayCircleOutlined />
+						) : (
+							<FreeIcon />
+						)
+					}
+					text={$panel.Pro > 0 ? 'Pro' : $panel.Ltd > 0 ? '企业版' : 'Free'}
+				/>
 			</BadgeList>
 		</Main>
 	)

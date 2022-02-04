@@ -2,15 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 //[ package ]
 
-import { ReactComponent as FreeIcon } from 'assets/svg/global_link.svg'
-//[ assets ]
-
 //=> DOM
-export default () => {
+export default (props: any) => {
+	const { icon, text } = props
 	return (
 		<Icon>
-			<FreeIcon />
-			<VersionText>Free</VersionText>
+			{icon}
+			<VersionText>{text}</VersionText>
 		</Icon>
 	)
 }
@@ -27,15 +25,18 @@ const Icon = styled.div`
 	justify-content: center;
 	padding: 5px 10px;
 	user-select: none;
-	> svg {
+	svg {
 		width: 22px;
 		height: 22px;
 		margin-right: 5px;
+		path {
+			fill: #fff;
+		}
 	}
 `
 
 const VersionText = styled.h2`
-	font-family: 'Geometos';
+	font-family: 'Geometos', 'HarmonyOS';
 	font-weight: 400;
 	line-height: 1;
 	font-size: 16px;
