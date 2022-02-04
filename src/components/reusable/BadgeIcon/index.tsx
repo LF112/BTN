@@ -33,6 +33,10 @@ const Icon = styled.div`
 			fill: #fff;
 		}
 	}
+	i {
+		color: #fff;
+		margin-right: 5px;
+	}
 `
 
 const VersionText = styled.h2`
