@@ -30,8 +30,6 @@ span {
 	text-decoration: none;
 	font-weight: lighter;
 	font-size: 12px;
-	cursor: pointer;
-	position: relative;
 }
 
 :not(body) {
