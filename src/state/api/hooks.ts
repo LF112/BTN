@@ -126,6 +126,7 @@ const sendRequest = (
 							value: queueObj(data, fetchParamArr[isAims])
 						})
 					)
+					// '此处可合并 action，对于相同的 API 类型，可以合并到一起再发送，节省 action 开销。'
 				})
 				//console.log(data)
 			},
