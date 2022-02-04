@@ -53,19 +53,30 @@ const Button = styled.button`
 	position: relative;
 	background: #2f353d;
 	box-shadow: 0 1px 3px rgba(26, 26, 26, 45%);
-	padding: 8px 12px;
+	padding: 8px 10px;
 	font-size: 14px;
 	border-radius: 4px;
 	outline: none;
 	line-height: 1;
 	white-space: nowrap;
 	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	> p {
 		color: #fff;
 		font-size: 14px;
 		font-family: 'HarmonyOS';
-		margin: 0 5px;
+		margin: 0 8px;
 	}
+
+	svg {
+		width: 18px;
+		height: 18px;
+		font-size: 16px;
+		fill: #fff;
+	}
+
 	&:hover {
 		transform: scale(0.96);
 		background: #2a2f36;
