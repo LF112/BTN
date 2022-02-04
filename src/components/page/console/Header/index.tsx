@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { PayCircleOutlined, RocketOutlined } from '@ant-design/icons'
 //[ package ]
 
-import PayIcon from 'components/reusable/VersionBadge'
+import { PayCircleOutlined, ThunderboltOutlined } from '@ant-design/icons'
+import BadgeIcon from 'components/reusable/BadgeIcon'
 import VersionInfo from 'components/page/console/Header/VersionInfo'
 //[ components ]
 
@@ -20,7 +20,7 @@ export default () => {
 
 	//=> 更新状态
 	useEffect(
-		() => updateApi(['panel', 'version', 'name', 'Pro', 'Ltd', 'Beta']),
+		() => updateApi(['panel', 'version', 'name', 'Pro', 'Ltd', 'Beta', 'time']),
 		['']
 	)
 
@@ -32,10 +32,10 @@ export default () => {
 				<VersionInfo />
 			</PanelInfo>
 			<BadgeList>
-				<PayIcon
+				<BadgeIcon
 					icon={
 						$panel.Pro > 0 ? (
-							<RocketOutlined />
+							<ThunderboltOutlined />
 						) : $panel.ltd > 0 ? (
 							<PayCircleOutlined />
 						) : (
@@ -44,6 +44,7 @@ export default () => {
 					}
 					text={$panel.Pro > 0 ? 'Pro' : $panel.Ltd > 0 ? '企业版' : 'Free'}
 				/>
+				<BadgeIcon icon={<i className='el-icon-time' />} text={$panel.time} />
 			</BadgeList>
 		</Main>
 	)
