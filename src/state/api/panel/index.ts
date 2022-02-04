@@ -9,46 +9,39 @@ import { ID } from 'state/api/linkId'
 //=> State 默认类型表 | '由于用了 typescript，所以这里的类型表根据下面的决定'
 // { state name }: { state type }
 export type state = {
-	os: string
-	systemdate: string
-	distribution: string
-	disk: [
-		{
-			filesystem: string
-			type: string
-			path: string
-			size: string[]
-			inodes: string[]
-		}
-	]
+	name: string //     面板版本名
+	serverIP: string // 服务器 IP
+	version: string //  面板版本号
+	port: string //     面板端口
+	secPath: string //  面板安全入口
+	secDomain: string //面板安全域名
+	limitIP: string //  面板入口限制 IP
 }
 
 //=> State 表初始化 | '是这个 state 的一些默认值'
 // { state name }: { state default value }
 export const initialState: state = {
-	os: '-',
-	systemdate: '-',
-	distribution: '-',
-	disk: [
-		{
-			filesystem: '-',
-			type: '-',
-			path: '-',
-			size: ['-', '-', '-', '-'],
-			inodes: ['-', '-', '-', '-']
-		}
-	]
+	name: '-',
+	serverIP: '-',
+	version: '-',
+	port: '-',
+	secPath: '-',
+	secDomain: '-',
+	limitIP: '-'
 }
 
-const { CONFIG, GetConcifInfo, GetNetWork } = ID
+const { CONFIG, GetNetWork } = ID
 /**
  * API 更新索引表
  * { state name }: [{ ↑ API ID }, [...{ API Callback JSON }]]
  *   STATA 名字       API ID (url)    参数对应的 API JSON 索引
  */
 export const stateApiUpdateIndex: any = {
-	disk: [GetNetWork, ['disk']],
-	os: [GetNetWork, ['system']],
-	systemdate: [GetConcifInfo, ['systemdate']],
-	distribution: [CONFIG, ['distribution']]
+	name: [GetNetWork, ['title']],
+	serverIP: [CONFIG, ['panel', 'address']],
+	version: [GetNetWork, ['version']],
+	port: [CONFIG, ['panel', 'port']],
+	secPath: [CONFIG, ['panel', 'admin_path']],
+	secDomain: [CONFIG, ['panel', 'domain']],
+	limitIP: [CONFIG, ['panel', 'limitip']]
 }

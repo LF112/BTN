@@ -5,5 +5,8 @@
 
 export const ID = {
 	CONFIG: 'config?action=get_config',
-	GetConcifInfo: 'system?action=GetConcifInfo'
+
+	GetNetWork: 'system?action=GetNetWork',
+	GetConcifInfo: 'system?action=GetConcifInfo',
+	GetAllInfo: 'system?action=GetAllInfo'
 }

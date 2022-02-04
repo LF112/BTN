@@ -37,7 +37,7 @@ export function useApiState(aims: string): object | undefined {
  *  @param queue 更新索引 | ↓
  * 更新多个 => [[{ type }, ...{ child }], [{ type }, ...{ child }]] / 更新一个 => [{ type }, ...{ child }]
  */
-export function useUpdateApi(): (queue: [string[]] | string[]) => void {
+export function useUpdateApi(): (queue: any) => void {
 	const dispatch = useAppDispatch()
 
 	//=> READ CONFIG | '此处仅供给 BtFetch 工具使用'
@@ -45,7 +45,7 @@ export function useUpdateApi(): (queue: [string[]] | string[]) => void {
 
 	//=> MAIN
 	return useCallback(
-		(queue: [string[]] | string[]) => {
+		(queue: any) => {
 			//=> 仅需要更新一个
 			if (typeof queue[0] === 'string') {
 				const [aims, ...args] = queue

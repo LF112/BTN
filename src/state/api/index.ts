@@ -5,10 +5,14 @@ import {
 	initialState as _system,
 	stateApiUpdateIndex as $_system
 } from './system' //=> 系统 STATE
+import { initialState as _panel, stateApiUpdateIndex as $_panel } from './panel' //=> 面板 STATE
 //[ api state ] | '导出格式 STATE: _{ state name } 、 INDEX: $_{ state name }'
 
 //=> Slice 创建队列 | ' [ { slice name }, { slice } ] '
-const sliceQueue: [[string, any, any]] = [['system', _system, $_system]]
+const sliceQueue: any[] = [
+	['system', _system, $_system],
+	['panel', _panel, $_panel]
+]
 
 //=> Create SLICE ARR
 const exportArr = {} // 导出 SLICE 列表
