@@ -16,21 +16,29 @@ export type state = {
 	secPath: string //  面板安全入口
 	secDomain: string //面板安全域名
 	limitIP: string //  面板入口限制 IP
+	Pro: number //      专业版
+	Ltd: number //      企业版
+	Beta: number //     测试版
+	time: string //     持续运行时间
 }
 
 //=> State 表初始化 | '是这个 state 的一些默认值'
 // { state name }: { state default value }
 export const initialState: state = {
 	name: '-',
-	serverIP: '-',
-	version: '-',
+	serverIP: '-.-.-.-',
+	version: '-.-.-',
 	port: '-',
 	secPath: '-',
 	secDomain: '-',
-	limitIP: '-'
+	limitIP: '-',
+	Pro: -2, // -2 为未知 | '-1 = False / +∞ = 专业版余剩时间'
+	Ltd: -2, // -2 为未知 | '-1 = False / +∞ = 企业版余剩时间'
+	Beta: -2, // -2 为未知 | '0 = False / 1 = True'
+	time: '-'
 }
 
-const { CONFIG, GetNetWork } = ID
+const { CONFIG, GetNetWork, GetSoftList, UpdatePanel } = ID
 /**
  * API 更新索引表
  * { state name }: [{ ↑ API ID }, [...{ API Callback JSON }]]
@@ -38,10 +46,14 @@ const { CONFIG, GetNetWork } = ID
  */
 export const stateApiUpdateIndex: any = {
 	name: [GetNetWork, ['title']],
-	serverIP: [CONFIG, ['panel', 'address']],
+	serverIP: [GetSoftList, ['ip']],
 	version: [GetNetWork, ['version']],
 	port: [CONFIG, ['panel', 'port']],
 	secPath: [CONFIG, ['panel', 'admin_path']],
 	secDomain: [CONFIG, ['panel', 'domain']],
-	limitIP: [CONFIG, ['panel', 'limitip']]
+	limitIP: [CONFIG, ['panel', 'limitip']],
+	Pro: [GetSoftList, ['pro']],
+	Ltd: [GetSoftList, ['ltd']],
+	Beta: [UpdatePanel, ['msg', 'is_beta']],
+	time: [GetNetWork, ['time']]
 }

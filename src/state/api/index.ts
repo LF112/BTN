@@ -6,12 +6,21 @@ import {
 	stateApiUpdateIndex as $_system
 } from './system' //=> 系统 STATE
 import { initialState as _panel, stateApiUpdateIndex as $_panel } from './panel' //=> 面板 STATE
+import {
+	initialState as _cpu,
+	stateApiUpdateIndex as $_cpu
+} from './system/cpu/' //=> CPU信息
+import {
+	initialState as _memory,
+	stateApiUpdateIndex as $_memory
+} from './system/memory' //=> 内存信息
 //[ api state ] | '导出格式 STATE: _{ state name } 、 INDEX: $_{ state name }'
 
 //=> Slice 创建队列 | ' [ { slice name }, { slice } ] '
 const sliceQueue: any[] = [
 	['system', _system, $_system],
-	['panel', _panel, $_panel]
+	['panel', _panel, $_panel],
+	['cpu', _cpu, $_cpu]
 ]
 
 //=> Create SLICE ARR

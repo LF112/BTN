@@ -22,7 +22,7 @@ import $fetch from 'utils/btFetch'
  * @param aims state 名字
  * @returns state object / undefined
  */
-export function useApiState(aims: string): object | undefined {
+export function useApiState(aims: string): any {
 	//=> READ STATE
 	const state = useAppSelector(
 		(state: AppState) => state[aims] /* state name */

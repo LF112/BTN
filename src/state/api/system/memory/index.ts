@@ -9,49 +9,27 @@ import { ID } from 'state/api/linkId'
 //=> State 默认类型表 | '由于用了 typescript，所以这里的类型表根据下面的决定'
 // { state name }: { state type }
 export type state = {
-	os: string
-	systemdate: string
-	distribution: string
-	disk: [
-		{
-			filesystem: string
-			type: string
-			path: string
-			size: string[]
-			inodes: string[]
-		}
-	]
-	network: object
+	mem: object
 }
 
 //=> State 表初始化 | '是这个 state 的一些默认值'
 // { state name }: { state default value }
 export const initialState: state = {
-	os: '-',
-	systemdate: '-',
-	distribution: '-',
-	disk: [
-		{
-			filesystem: '-',
-			type: '-',
-			path: '-',
-			size: ['-', '-', '-', '-'],
-			inodes: ['-', '-', '-', '-']
-		}
-	],
-	network: {}
+	mem: {
+		memTotal: 0,
+		memFree: 0,
+		memBuffers: 0,
+		memCached: 0,
+		memRealUsed: 0
+	}
 }
 
-const { CONFIG, GetConcifInfo, GetNetWork } = ID
+const { GetNetWork } = ID
 /**
  * API 更新索引表
  * { state name }: [{ ↑ API ID }, [...{ API Callback JSON }]]
  *   STATA 名字       API ID (url)    参数对应的 API JSON 索引
  */
 export const stateApiUpdateIndex: any = {
-	disk: [GetNetWork, ['disk']],
-	os: [GetNetWork, ['system']],
-	systemdate: [GetConcifInfo, ['systemdate']],
-	distribution: [CONFIG, ['distribution']],
-	network: [GetNetWork, ['network']]
+	mem: [GetNetWork, ['mem']]
 }
