@@ -3,8 +3,13 @@ import styled from 'styled-components'
 import { CloudServerOutlined } from '@ant-design/icons'
 //[ package ]
 
+import { useApiState } from 'state/api/hooks'
+//[ hooks ]
+
 //=> Component
 export default () => {
+	const $panel = useApiState('panel')
+
 	return (
 		<Server>
 			<div>
@@ -13,8 +18,8 @@ export default () => {
 				</Icon>
 				<ServerInfo>
 					<div>
-						<h1>Server 1</h1>
-						<p>127.0.0.1</p>
+						<h1>Server</h1>
+						<p>{$panel.serverIP}</p>
 					</div>
 					<UnfoldIcon>
 						<i className='el-icon-arrow-up'></i>

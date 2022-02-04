@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useLocation } from 'react-router-dom'
 //[ package ]
@@ -10,9 +10,17 @@ import Item from './Item'
 import sidebarConsts from 'constants/sidebar_consts'
 //[ constants ]
 
+import { useUpdateApi } from 'state/api/hooks'
+//[ hooks ]
+
 //=> Component
 export default () => {
 	const { pathname } = useLocation()
+	const updateApi = useUpdateApi()
+
+	useEffect(() => {
+		updateApi(['panel', 'serverIP'])
+	}, [''])
 
 	return (
 		<Sidebar>
