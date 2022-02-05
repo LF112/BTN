@@ -43,6 +43,7 @@
 		"react-redux": "^7.2.6",
 		"react-router-dom": "^6.2.1",
 		"redux-localstorage-simple": "^2.4.1",
+		"setRafTimeout": "^0.2.0",
 		"styled-components": "^5.3.3",
 		"vite": "^2.7.12",
 		"vite-plugin-svgr": "^1.0.1",

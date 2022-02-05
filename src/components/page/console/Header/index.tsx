@@ -10,19 +10,12 @@ import VersionInfo from 'components/page/console/Header/VersionInfo'
 import { ReactComponent as FreeIcon } from 'assets/svg/global_link.svg'
 //[ assets ]
 
-import { useUpdateApi, useApiState } from 'state/api/hooks'
+import { useApiState } from 'state/api/hooks'
 //[ hooks ]
 
 //=> DOM
 export default () => {
-	const updateApi = useUpdateApi()
 	const $panel = useApiState('panel')
-
-	//=> 更新状态
-	useEffect(
-		() => updateApi(['panel', 'version', 'name', 'Pro', 'Ltd', 'Beta', 'time']),
-		['']
-	)
 
 	return (
 		<Main>

@@ -20,7 +20,8 @@ import {
 const sliceQueue: any[] = [
 	['system', _system, $_system],
 	['panel', _panel, $_panel],
-	['cpu', _cpu, $_cpu]
+	['cpu', _cpu, $_cpu],
+	['memory', _memory, $_memory]
 ]
 
 //=> Create SLICE ARR

@@ -22,6 +22,14 @@ export type state = {
 		}
 	]
 	network: object
+	load: {
+		one: number
+		five: number
+		fifteen: number
+		max: number
+		limit: number
+		safe: number
+	}
 }
 
 //=> State 表初始化 | '是这个 state 的一些默认值'
@@ -39,7 +47,15 @@ export const initialState: state = {
 			inodes: ['-', '-', '-', '-']
 		}
 	],
-	network: {}
+	network: {},
+	load: {
+		one: 0,
+		five: 0,
+		fifteen: 0,
+		max: 0,
+		limit: 0,
+		safe: 0
+	}
 }
 
 const { CONFIG, GetConcifInfo, GetNetWork } = ID
@@ -53,5 +69,6 @@ export const stateApiUpdateIndex: any = {
 	os: [GetNetWork, ['system']],
 	systemdate: [GetConcifInfo, ['systemdate']],
 	distribution: [CONFIG, ['distribution']],
-	network: [GetNetWork, ['network']]
+	network: [GetNetWork, ['network']],
+	load: [GetNetWork, ['load']]
 }
