@@ -6,15 +6,15 @@ import styled from 'styled-components'
 export default (props: any) => {
 	const { icon, text } = props
 	return (
-		<Icon>
+		<BadgeIcon>
 			{icon}
 			<VersionText>{text}</VersionText>
-		</Icon>
+		</BadgeIcon>
 	)
 }
 
 //=> Style
-const Icon = styled.div`
+export const BadgeIcon = styled.div`
 	position: relative;
 	height: 30px;
 	border-radius: 5px;

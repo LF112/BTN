@@ -6,6 +6,7 @@ import { setRafInterval, clearRafInterval } from 'setRafTimeout'
 import Header from 'components/page/console/Header'
 import QuickControl from 'components/page/console/QuickControl'
 import StatusPanel from 'components/page/console/StatusPanel'
+import SystemInfo from 'components/page/console/SystemInfo'
 //[ components ]
 
 import { useUpdateApi } from 'state/api/hooks'
@@ -20,13 +21,13 @@ export default () => {
 	useEffect(() => {
 		updateApi([
 			['panel', 'version', 'name', 'Pro', 'Ltd', 'Beta', 'time'],
-			['system', 'load']
+			['system', 'load', 'os']
 		])
 
 		//=> 持续获取面板状态
 		Timer = setRafInterval(() => {
 			updateApi([
-				['system', 'load'],
+				['system', 'load', 'systemdate'],
 				['cpu', 'cpu'],
 				['memory', 'mem']
 			])
@@ -42,6 +43,7 @@ export default () => {
 			</Left>
 			<Right>
 				<QuickControl />
+				<SystemInfo />
 			</Right>
 		</Main>
 	)

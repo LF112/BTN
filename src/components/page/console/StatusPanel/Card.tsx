@@ -101,6 +101,7 @@ const InfoDetail = styled.div`
 		font-family: 'Russo One';
 		color: #fff;
 		margin-bottom: -9px;
+		letter-spacing: 3px;
 	}
 	> span {
 		font-size: 16px;
@@ -109,6 +110,7 @@ const InfoDetail = styled.div`
 		font-family: 'Geometos', 'HarmonyOS';
 		margin-left: 8px;
 	}
+	user-select: none;
 `
 
 //=> FOOTER
