@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { HashRouter as Router } from 'react-router-dom'
 //[ package ]
@@ -10,10 +10,23 @@ import Pages from 'pages'
 import RipplesMask from 'components/global/RipplesMask'
 //[ Components ]
 
+import { useStatus } from 'state/status/hooks'
+import { useToggleFloatTips } from 'state/animation/hooks'
+//[ hooks ]
+
 //=> Main Component
 export default () => {
+	const $apiStatus = useStatus('network', 'apiStatus')
+	const useFloatTips = useToggleFloatTips()
+
+	const node = useRef<HTMLElement>()
+
+	useEffect(() => {
+		if ($apiStatus) useFloatTips(true, node.current)
+	}, [$apiStatus])
+
 	return (
-		<BtnMain>
+		<BtnMain ref={node as any}>
 			<div>
 				<Main>
 					<Popups />

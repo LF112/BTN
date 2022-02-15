@@ -6,6 +6,7 @@ import animation from './animation/slice'
 import popup from './popup/slice'
 import config from './config/slice'
 import api from './api'
+import status from './status/slice'
 //[ 导入 state ]
 
 //=> 启用 state 缓存
@@ -19,12 +20,17 @@ const store = configureStore({
 		animation,
 		popup,
 		config,
+		status,
 		...(api as any)
 	},
 	//=> 插入缓存 state 中间件
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware({ thunk: true }).concat(
-			save({ states: PERSISTED_KEYS, debounce: 500 })
+			save({
+				states: PERSISTED_KEYS,
+				debounce: 500,
+				ignoreStates: ['status']
+			})
 		),
 	preloadedState: load({ states: PERSISTED_KEYS, disableWarnings: true }) // 配置缓存的 state
 })

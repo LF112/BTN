@@ -42,36 +42,43 @@ export function useUpdateApi(): (queue: any) => void {
 	const dispatch = useAppDispatch()
 
 	//=> READ CONFIG | '此处仅供给 BtFetch 工具使用'
-	const { connect } = useAppSelector((state: AppState) => state.config)
+	const STATE = useAppSelector((state: AppState) => state)
+	const { connect } = STATE.config
+	const {
+		network: { apiStatus }
+	} = STATE.status
 
 	//=> MAIN
 	return useCallback(
 		(queue: any) => {
-			//=> 仅需要更新一个
-			if (typeof queue[0] === 'string') {
-				const [aims, ...args] = queue
+			//=> 当 API 未被限制可用时
+			if (apiStatus) {
+				//=> 仅需要更新一个
+				if (typeof queue[0] === 'string') {
+					const [aims, ...args] = queue
 
-				//=> 拟合请求
-				const [fetchUpdateParam] = FitRequestQueue(aims, args)
-				sendRequest(connect, dispatch, fetchUpdateParam, aims)
-			} //=> 更新多个
-			else {
-				let fetchUpdateParam = {}
-				let fetchParamArr = {}
-				queue.forEach((childQueue: any) => {
-					const [aims, ...args] = childQueue
+					//=> 拟合请求
+					const [fetchUpdateParam] = FitRequestQueue(aims, args)
+					sendRequest(connect, dispatch, fetchUpdateParam, aims)
+				} //=> 更新多个
+				else {
+					let fetchUpdateParam = {}
+					let fetchParamArr = {}
+					queue.forEach((childQueue: any) => {
+						const [aims, ...args] = childQueue
 
-					//=> 拟合请求队列
-					const [fitRequestQueue, fitFetchParamArr] = FitRequestQueue(
-						aims,
-						args
-					)
-					//=> 合并更新索引
-					fetchParamArr = { ...fetchParamArr, ...fitFetchParamArr }
-					//=> 合并请求队列
-					fetchUpdateParam = _.merge(fitRequestQueue, fetchUpdateParam)
-				})
-				sendRequest(connect, dispatch, fetchUpdateParam, fetchParamArr)
+						//=> 拟合请求队列
+						const [fitRequestQueue, fitFetchParamArr] = FitRequestQueue(
+							aims,
+							args
+						)
+						//=> 合并更新索引
+						fetchParamArr = { ...fetchParamArr, ...fitFetchParamArr }
+						//=> 合并请求队列
+						fetchUpdateParam = _.merge(fitRequestQueue, fetchUpdateParam)
+					})
+					sendRequest(connect, dispatch, fetchUpdateParam, fetchParamArr)
+				}
 			}
 		},
 		[dispatch]
@@ -115,20 +122,22 @@ const sendRequest = (
 	Object.keys(fitRequestQueue).forEach((URL: string) => {
 		$fetch(
 			connect,
-			(data: any) => {
-				const fetchParamArr = fitRequestQueue[URL]
-				const aimsObj = Object.keys(fetchParamArr)
-				aimsObj.forEach((isAims: string) => {
-					//=> 索引对应值并 dispatch 更新 state
-					dispatch(
-						updater[!queryAims ? aims : aims[isAims]].update({
-							apiType: isAims,
-							value: queueObj(data, fetchParamArr[isAims])
-						})
-					)
-					// '此处可合并 action，对于相同的 API 类型，可以合并到一起再发送，节省 action 开销。'
-				})
-				//console.log(data)
+			(data: any, pureDispatch: boolean = false) => {
+				if (!pureDispatch) {
+					const fetchParamArr = fitRequestQueue[URL]
+					const aimsObj = Object.keys(fetchParamArr)
+					aimsObj.forEach((isAims: string) => {
+						//=> 索引对应值并 dispatch 更新 state
+						dispatch(
+							updater[!queryAims ? aims : aims[isAims]].update({
+								apiType: isAims,
+								value: queueObj(data, fetchParamArr[isAims])
+							})
+						)
+						// '此处可合并 action，对于相同的 API 类型，可以合并到一起再发送，节省 action 开销。'
+					})
+					//console.log(data)
+				} else dispatch(data)
 			},
 			URL
 		)

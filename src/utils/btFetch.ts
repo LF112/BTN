@@ -2,6 +2,7 @@ import { DateTime } from 'luxon'
 import axios from 'axios'
 import { MD5 } from 'crypto-js'
 import qs from 'qs'
+import { updateStatus } from 'state/status/slice'
 //[ package ]
 
 /**
@@ -43,6 +44,24 @@ export default (
 		baseURL: baseUrl,
 		...options
 	})
-		.then((result: any) => callback(result.data))
+		.then((result: any) => {
+			const { data } = result
+			const { status, msg } = data
+
+			//=> API 请求失败校验
+			if (!status && msg)
+				if (/验证失败,禁止|IP校验失败,您的访问/g.test(msg)) {
+					return callback(
+						updateStatus({
+							data: false,
+							type: 'network',
+							aims: 'apiStatus'
+						}),
+						true
+					)
+				}
+
+			return callback(result.data)
+		})
 		.catch((error: any) => callback(error))
 }
