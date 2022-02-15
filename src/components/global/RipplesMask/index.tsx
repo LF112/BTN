@@ -42,13 +42,13 @@ const Main = styled.div`
 	height: 100%;
 	left: 0;
 	top: 0;
-	border-radius: 8px;
 	z-index: 20;
 	> div {
 		position: relative;
 		width: 100%;
 		height: 100%;
 		overflow: hidden;
+		border-radius: 8px 8px 0 0;
 		> div {
 			width: 5px;
 			height: 5px;
