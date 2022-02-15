@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react'
 import { AppState } from 'state'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
-import { updatePageLoad } from './slice'
+import { updatePageLoad, updateRipplesMask } from './slice'
 //[ package ]
 
 /***
@@ -30,5 +30,29 @@ export function useUpdatePageLoadStatus(): (status: boolean) => void {
 	return useCallback(
 		(status: boolean) => dispatch(updatePageLoad({ status: status })),
 		[dispatch]
+	)
+}
+
+export function useRipplesMask(): [boolean, number, number] {
+	const animation = useAppSelector((state: AppState) => state.animation)
+	const { show, x, y } = animation.ripplesMask
+	return [show, x, y]
+}
+
+export function useToggleFloatTips(): (show: boolean, el: any) => void {
+	const animation = useAppSelector((state: AppState) => state.animation)
+	const dispatch = useAppDispatch()
+	return useCallback(
+		(show: boolean, el: any) => {
+			const { x, y } = el.getBoundingClientRect()
+			dispatch(
+				updateRipplesMask({
+					show: show,
+					x: x,
+					y: y
+				})
+			)
+		},
+		[dispatch, animation.ripplesMask.show]
 	)
 }

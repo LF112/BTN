@@ -7,6 +7,7 @@ import Sidebar from 'components/global/Sidebar'
 import Footer from 'components/global/Footer'
 import Popups from 'components/global/Popups'
 import Pages from 'pages'
+import RipplesMask from 'components/global/RipplesMask'
 //[ Components ]
 
 //=> Main Component
@@ -16,6 +17,7 @@ export default () => {
 			<div>
 				<Main>
 					<Popups />
+					<RipplesMask />
 					<Router>
 						<Sidebar />
 						<Pages />

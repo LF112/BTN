@@ -28,9 +28,9 @@ export default (props: any) => {
 
 	return (
 		<Button
-			onClick={() => {
-				if (onClick) onClick()
-				//=> 触发描边海浪
+			onClick={(el: any) => {
+				if (onClick) onClick(el.target) as any
+				//=> 触发描边波浪
 				updateClicked(true)
 			}}>
 			{first}

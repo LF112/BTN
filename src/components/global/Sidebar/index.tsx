@@ -38,6 +38,7 @@ export default () => {
 
 //=> Style Component
 const Sidebar = styled.nav`
+	position: relative;
 	width: 198px;
 	height: calc(100% - 20px);
 	display: flex;
@@ -46,6 +47,7 @@ const Sidebar = styled.nav`
 	margin: 10px;
 	background: #282c34;
 	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+	z-index: 30;
 	> div {
 		width: 100%;
 		height: 100%;
