@@ -27,14 +27,30 @@ export function useStatus(type: string, aims?: string): object {
 export function useUpdateStatus(): (
 	data: string | boolean | number,
 	type: string,
-	aims?: string
+	aims?: string,
+	rawJson?: object,
+	aimsJson?: string[]
 ) => void {
 	const dispatch = useAppDispatch()
 
 	//=> MAIN
 	return useCallback(
-		(data: string | boolean | number, type: string, aims?: string) =>
-			dispatch(updateStatus({ data: data, type: type, aims: aims })),
+		(
+			data: string | boolean | number,
+			type: string,
+			aims?: string,
+			rawJson?: object,
+			aimsJson?: string[]
+		) =>
+			dispatch(
+				updateStatus({
+					data: data,
+					type: type,
+					aims: aims,
+					rawJson: rawJson,
+					aimsJson: aimsJson
+				})
+			),
 		[dispatch]
 	)
 }

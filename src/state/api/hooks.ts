@@ -8,6 +8,7 @@ import { updater, apiIndexUpdater } from './index'
 //[ state / hooks ]
 
 import $fetch from 'utils/btFetch'
+import { queueObj } from 'utils/useTools'
 //[ utils ]
 
 /***
@@ -142,21 +143,4 @@ const sendRequest = (
 			URL
 		)
 	})
-}
-
-/**
- * 索引对象
- * @param obj 对象
- * @param indexArr 索引数组
- * @returns 值
- */
-const queueObj = (obj: Object, queue: string[], count = 1, endCount = 0) => {
-	if (count === 1)
-		if (queue.length === 1) return obj[queue[0]]
-		else return queueObj(obj[queue[0]], queue, count + 1, queue.length)
-	else {
-		queue.shift()
-		if (count === endCount) return obj[queue[0]]
-		else return queueObj(obj[queue[0]], queue, count + 1, endCount)
-	}
 }

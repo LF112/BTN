@@ -55,7 +55,9 @@ export default (
 						updateStatus({
 							data: false,
 							type: 'network',
-							aims: 'apiStatus'
+							aims: 'apiStatus',
+							rawJson: data,
+							aimsJson: ['msg']
 						}),
 						true
 					)

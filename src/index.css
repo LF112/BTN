@@ -37,6 +37,13 @@ span {
 	/* transition: all 0.5s cubic-bezier(0.66, 0.09, 0.49, 1.21); */
 }
 
+/* 字体 */
+
+@font-face {
+	font-family: 'MiSans';
+	src: url('./assets/fonts/MiSans.ttf') format('truetype');
+}
+
 @font-face {
 	font-family: 'HarmonyOS';
 	src: url('./assets/fonts/HarmonyOS.ttf') format('truetype');

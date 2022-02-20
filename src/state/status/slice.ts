@@ -5,13 +5,17 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 export type StatusState = {
 	network: {
 		apiStatus: boolean
+		rawJson: object
+		aimsJson: string[]
 	}
 }
 
 //=> State 表初始化 | '是这个 state 的一些默认值'
 export const initialState: StatusState = {
 	network: {
-		apiStatus: true
+		apiStatus: true,
+		rawJson: {},
+		aimsJson: []
 	}
 }
 
@@ -28,11 +32,15 @@ export const statusSlice = createSlice({
 				data: string | boolean | number
 				type: string
 				aims?: string
+				rawJson?: object
+				aimsJson: string[]
 			}>
 		) => {
-			const { data, type, aims } = action.payload //=> 取得参数 | '一般从这取回 hooks 传来的参数'
+			const { data, type, aims, rawJson, aimsJson } = action.payload //=> 取得参数 | '一般从这取回 hooks 传来的参数'
 			//=> 更新 state
 
+			if (rawJson) state[type].rawJson = rawJson
+			if (aimsJson) state[type].aimsJson = aimsJson
 			if (!aims)
 				//=> 第一层 | '指 state 对象深度'
 				state[type] = data

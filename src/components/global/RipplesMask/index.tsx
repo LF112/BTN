@@ -6,7 +6,8 @@ import { useRipplesMask } from 'state/animation/hooks'
 //[ hooks ]
 
 //=> DOM
-export default () => {
+export default (props: any) => {
+	const { child } = props
 	const [show, x, y] = useRipplesMask()
 	const [_style, updateStyle] = useState<object>({})
 
@@ -23,6 +24,7 @@ export default () => {
 	return (
 		<Main style={{ display: show ? 'block' : 'none' }}>
 			<div>
+				{child}
 				<div
 					style={{
 						left: `${x}px`,
