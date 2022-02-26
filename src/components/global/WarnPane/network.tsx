@@ -23,7 +23,7 @@ export default () => {
 	//=> API 请求异常时
 	useEffect(() => {
 		const { apiStatus } = $network
-		if (apiStatus) {
+		if (!apiStatus) {
 			fastdom.measure(() => {
 				const DOM = node.current
 				const { style } = DOM
