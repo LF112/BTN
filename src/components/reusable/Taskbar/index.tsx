@@ -15,11 +15,22 @@ import { queueObj } from 'utils/useTools'
 
 //=> DOM
 export default (props: any) => {
-	const { rawJson, aimsJson } = props
+	const { rawJson, aimsJson, UpdateNow } = props
 	const [Unfold, toggle] = useToggle()
 
 	const node = useRef<HTMLElement>()
 	const [FoldHeight, updateFoldHeight] = useState<number>(-1)
+	useEffect(() => {
+		if (FoldHeight !== -1) {
+			node.current.style.height = 'auto'
+			setTimeout(() => {
+				const DOM = node.current
+				updateFoldHeight(DOM.clientHeight + 4)
+				DOM.style.height = '0'
+			})
+		}
+	}, [UpdateNow])
+
 	useEffect(() => {
 		setTimeout(() => {
 			const DOM = node.current

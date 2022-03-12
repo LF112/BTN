@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import fastdom from 'fastdom'
 //[ package ]
@@ -20,6 +20,8 @@ export default () => {
 
 	const node = useRef<HTMLElement>()
 
+	const [UpdateNow, setUpdateNow] = useState(null)
+
 	//=> API 请求异常时
 	useEffect(() => {
 		const { apiStatus } = $network
@@ -37,6 +39,7 @@ export default () => {
 				}, 250)
 			})
 		}
+		setUpdateNow(apiStatus)
 	}, [$network])
 
 	return (
@@ -50,7 +53,11 @@ export default () => {
 							<p>
 								侦测到近一次请求中返回了异常的结果，已停用面板相关功能，待解决后将自动恢复。
 							</p>
-							<Taskbar rawJson={rawJson} aimsJson={aimsJson} />
+							<Taskbar
+								rawJson={rawJson}
+								aimsJson={aimsJson}
+								UpdateNow={UpdateNow}
+							/>
 						</>
 					}
 				/>
