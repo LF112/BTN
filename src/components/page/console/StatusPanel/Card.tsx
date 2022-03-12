@@ -40,6 +40,7 @@ export default (props: any) => {
 const Main = styled.main`
 	position: relative;
 	width: 282px;
+	min-width: 262px;
 	height: 100%;
 	padding: 8px 8px 0px 8px;
 	background: #252930;

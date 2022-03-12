@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import styled from 'styled-components'
 //[ package ]
 
@@ -54,29 +54,42 @@ export default () => {
 		updateMem(newMem) // 更新内存使用率
 	}, [memRealUsed, memTotal])
 
+	//=> 显示遮罩
+	const cardBoxNode = useRef<HTMLDivElement>(null)
+	const [showMask, updateShowMask] = useState<boolean>(false)
+	useEffect(() => {
+		if (cardBoxNode) {
+			const DOM = cardBoxNode.current
+			if (DOM.scrollWidth > DOM.clientWidth) updateShowMask(!showMask)
+		}
+	}, [cardBoxNode])
+
 	return (
 		<Main>
-			<StatusCard
-				title={'负载状态'}
-				tips={$loadStatus.title}
-				value={$load || 0}
-				valueColor={$loadStatus.color}
-				icon={'el-icon-odometer'}
-			/>
-			<StatusCard
-				title={'CPU 使用率'}
-				tips={`${cpu[1]} 核心`}
-				value={cpu[0] || 0}
-				valueColor={$cpuColor}
-				icon={'el-icon-cpu'}
-			/>
-			<StatusCard
-				title={'内存使用率'}
-				tips={`${memRealUsed} / ${memTotal} MB`}
-				value={$mem || 0}
-				valueColor={$memColor}
-				icon={'el-icon-files'}
-			/>
+			<CardBox ref={cardBoxNode} showMask={showMask}>
+				<StatusCard
+					title={'负载状态'}
+					tips={$loadStatus.title}
+					value={$load || 0}
+					valueColor={$loadStatus.color}
+					icon={'el-icon-odometer'}
+				/>
+				<StatusCard
+					title={'CPU 使用率'}
+					tips={`${cpu[1]} 核心`}
+					value={cpu[0] || 0}
+					valueColor={$cpuColor}
+					icon={'el-icon-cpu'}
+				/>
+				<StatusCard
+					title={'内存使用率'}
+					tips={`${memRealUsed} / ${memTotal} MB`}
+					value={$mem || 0}
+					valueColor={$memColor}
+					icon={'el-icon-files'}
+				/>
+			</CardBox>
+			<Mask style={{ display: showMask ? 'block' : 'none' }} />
 		</Main>
 	)
 }
@@ -85,9 +98,30 @@ export default () => {
 const Main = styled.main`
 	position: relative;
 	width: 100%;
-	height: 142px;
+	height: 152px;
 	margin-top: 10px;
+`
+
+const CardBox = styled.div<{ showMask: boolean }>`
+	width: 100%;
+	height: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	overflow-x: auto;
+	padding-bottom: 10px;
+	${(props: any) => (props.showMask ? 'padding-right: 30px;' : '')}
+	> main + main {
+		margin-left: 10px;
+	}
+`
+
+const Mask = styled.div`
+	position: absolute;
+	width: 30px;
+	height: calc(100% - 16px);
+	background: linear-gradient(269deg, #323842 1%, transparent);
+	top: 0;
+	right: 0;
+	z-index: 10;
 `
