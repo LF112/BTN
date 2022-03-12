@@ -12,6 +12,12 @@ import { updateStatus } from './slice'
  */
 
 //=> 读取 STATUS
+/**
+ * 读取 STATUS
+ * @param type status 名
+ * @param aims status 目标
+ * @returns status object / undefined
+ */
 export function useStatus(type: string, aims?: string): object {
 	//=> READ STATE
 	const state = useAppSelector(

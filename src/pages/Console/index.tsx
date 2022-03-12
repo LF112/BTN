@@ -10,11 +10,13 @@ import SystemInfo from 'components/page/console/SystemInfo'
 //[ components ]
 
 import { useUpdateApi } from 'state/api/hooks'
+import { useStatus } from 'state/status/hooks'
 //[ hooks ]
 
 //=> DOM
 export default () => {
 	const updateApi = useUpdateApi()
+	const _apiStatus = useStatus('network', 'apiStatus')
 
 	//=> 更新状态
 	let Timer: any = null
@@ -25,15 +27,21 @@ export default () => {
 		])
 
 		//=> 持续获取面板状态
-		Timer = setRafInterval(() => {
-			updateApi([
-				['system', 'load', 'systemdate'],
-				['cpu', 'cpu'],
-				['memory', 'mem']
-			])
-		}, 2000)
+		if (!_apiStatus) {
+			//=> 当 API 被限制时，且 Timer 已定义
+			if (typeof Timer === 'function') clearRafInterval(Timer)
+		} else
+			Timer = setRafInterval(() => {
+				console.log(_apiStatus)
+				if (_apiStatus)
+					updateApi([
+						['system', 'load', 'systemdate'],
+						['cpu', 'cpu'],
+						['memory', 'mem']
+					])
+			}, 2000)
 		return () => clearRafInterval(Timer)
-	}, [''])
+	}, [_apiStatus])
 
 	return (
 		<Main>

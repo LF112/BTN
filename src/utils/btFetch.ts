@@ -65,5 +65,16 @@ export default (
 
 			return callback(result.data)
 		})
-		.catch((error: any) => callback(error))
+		.catch((error: any) => {
+			callback(
+				updateStatus({
+					data: false,
+					type: 'network',
+					aims: 'apiStatus',
+					rawJson: { status: false, msg: error.message },
+					aimsJson: ['msg']
+				}),
+				true
+			)
+		})
 }

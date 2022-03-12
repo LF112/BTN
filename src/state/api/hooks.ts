@@ -45,41 +45,36 @@ export function useUpdateApi(): (queue: any) => void {
 	//=> READ CONFIG | '此处仅供给 BtFetch 工具使用'
 	const STATE = useAppSelector((state: AppState) => state)
 	const { connect } = STATE.config
-	const {
-		network: { apiStatus }
-	} = STATE.status
 
 	//=> MAIN
+	//=> 当 API 未被限制可用时
 	return useCallback(
 		(queue: any) => {
-			//=> 当 API 未被限制可用时
-			if (apiStatus) {
-				//=> 仅需要更新一个
-				if (typeof queue[0] === 'string') {
-					const [aims, ...args] = queue
+			//=> 仅需要更新一个
+			if (typeof queue[0] === 'string') {
+				const [aims, ...args] = queue
 
-					//=> 拟合请求
-					const [fetchUpdateParam] = FitRequestQueue(aims, args)
-					sendRequest(connect, dispatch, fetchUpdateParam, aims)
-				} //=> 更新多个
-				else {
-					let fetchUpdateParam = {}
-					let fetchParamArr = {}
-					queue.forEach((childQueue: any) => {
-						const [aims, ...args] = childQueue
+				//=> 拟合请求
+				const [fetchUpdateParam] = FitRequestQueue(aims, args)
+				sendRequest(connect, dispatch, fetchUpdateParam, aims)
+			} //=> 更新多个
+			else {
+				let fetchUpdateParam = {}
+				let fetchParamArr = {}
+				queue.forEach((childQueue: any) => {
+					const [aims, ...args] = childQueue
 
-						//=> 拟合请求队列
-						const [fitRequestQueue, fitFetchParamArr] = FitRequestQueue(
-							aims,
-							args
-						)
-						//=> 合并更新索引
-						fetchParamArr = { ...fetchParamArr, ...fitFetchParamArr }
-						//=> 合并请求队列
-						fetchUpdateParam = _.merge(fitRequestQueue, fetchUpdateParam)
-					})
-					sendRequest(connect, dispatch, fetchUpdateParam, fetchParamArr)
-				}
+					//=> 拟合请求队列
+					const [fitRequestQueue, fitFetchParamArr] = FitRequestQueue(
+						aims,
+						args
+					)
+					//=> 合并更新索引
+					fetchParamArr = { ...fetchParamArr, ...fitFetchParamArr }
+					//=> 合并请求队列
+					fetchUpdateParam = _.merge(fitRequestQueue, fetchUpdateParam)
+				})
+				sendRequest(connect, dispatch, fetchUpdateParam, fetchParamArr)
 			}
 		},
 		[dispatch]
