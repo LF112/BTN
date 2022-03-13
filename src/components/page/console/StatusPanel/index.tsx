@@ -3,6 +3,7 @@ import styled from 'styled-components'
 //[ package ]
 
 import StatusCard from 'components/page/console/StatusPanel/Card'
+import OverflowMask from 'components/reusable/Mask/Overflow'
 //[ components ]
 
 import { useApiState } from 'state/api/hooks'
@@ -89,7 +90,7 @@ export default () => {
 					icon={'el-icon-files'}
 				/>
 			</CardBox>
-			<Mask style={{ display: showMask ? 'block' : 'none' }} />
+			<OverflowMask showMask={showMask} />
 		</Main>
 	)
 }
@@ -114,14 +115,4 @@ const CardBox = styled.div<{ showMask: boolean }>`
 	> main + main {
 		margin-left: 10px;
 	}
-`
-
-const Mask = styled.div`
-	position: absolute;
-	width: 30px;
-	height: calc(100% - 16px);
-	background: linear-gradient(269deg, #323842 1%, transparent);
-	top: 0;
-	right: 0;
-	z-index: 10;
 `

@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import styled from 'styled-components'
 //[ package ]
 
 import { DefaultCard } from 'components/reusable/Card'
 import { BadgeIcon, Text } from 'components/reusable/BadgeIcon'
 import Progress from 'components/reusable/Progress'
+import OverflowMask from 'components/reusable/Mask/Overflow'
 //[ components ]
 
 import { ReactComponent as DriveIcon } from 'assets/svg/global_drive.svg'
@@ -22,6 +23,17 @@ export default (props: any) => {
 		size: [SizeNum, SizeUsed, , SizeValue]
 	} = data
 
+	//=> 显示遮罩
+	const titleBoxNode = useRef<HTMLDivElement>(null)
+	const [showMask, updateShowMask] = useState<boolean>(false)
+	useEffect(() => {
+		if (titleBoxNode && type) {
+			const DOM = titleBoxNode.current
+			console.log(DOM.scrollWidth, DOM.clientWidth)
+			if (DOM.scrollWidth > DOM.clientWidth) updateShowMask(!showMask)
+		}
+	}, [titleBoxNode, type])
+
 	return (
 		<Card>
 			<Icon>
@@ -31,8 +43,8 @@ export default (props: any) => {
 				</div>
 			</Icon>
 			<Info>
-				<Title>
-					<h1>{path}</h1>
+				<Title ref={titleBoxNode}>
+					<h1>{path}11111111111</h1>
 					<NBadgeIcon>
 						<NText>{type}</NText>
 					</NBadgeIcon>
@@ -44,6 +56,11 @@ export default (props: any) => {
 					value={~~SizeValue.replace('%', '')}
 					style={{ marginTop: '6px', marginLeft: '-4px' }}
 					percentage={true}
+				/>
+				<OverflowMask
+					showMask={showMask}
+					style={{ right: '10px', height: '20px', top: '4px' }}
+					color={'#252930'}
 				/>
 			</Info>
 			<Inode>
@@ -102,6 +119,7 @@ const Icon = styled.div`
 `
 
 const Info = styled.div`
+	position: relative;
 	width: calc(100% - 80px);
 	height: 100%;
 	padding: 4px 5px;
@@ -113,7 +131,7 @@ const Title = styled.header`
 	height: 25px;
 	display: flex;
 	align-items: center;
-	overflow-y: hidden;
+	overflow-x: auto;
 	> h1 {
 		font-family: 'Geometos', 'HarmonyOS';
 		line-height: 1;
