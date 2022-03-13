@@ -44,7 +44,7 @@ export default (props: any) => {
 			</Icon>
 			<Info>
 				<Title ref={titleBoxNode}>
-					<h1>{path}11111111111</h1>
+					<h1>{path}</h1>
 					<NBadgeIcon>
 						<NText>{type}</NText>
 					</NBadgeIcon>
