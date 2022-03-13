@@ -40,6 +40,11 @@ span {
 /* 字体 */
 
 @font-face {
+	font-family: 'consola';
+	src: url('./assets/fonts/consola.ttf') format('truetype');
+}
+
+@font-face {
 	font-family: 'MiSans';
 	src: url('./assets/fonts/MiSans.ttf') format('truetype');
 }
