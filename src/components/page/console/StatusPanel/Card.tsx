@@ -75,6 +75,7 @@ const InfoTitle = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	user-select: none;
 	> h2,
 	p {
 		font-family: 'Geometos', 'HarmonyOS';

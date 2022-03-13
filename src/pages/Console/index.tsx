@@ -32,7 +32,6 @@ export default () => {
 			if (typeof Timer === 'function') clearRafInterval(Timer)
 		} else
 			Timer = setRafInterval(() => {
-				console.log(_apiStatus)
 				if (_apiStatus)
 					updateApi([
 						['system', 'load', 'systemdate'],
