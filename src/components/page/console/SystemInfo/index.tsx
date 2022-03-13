@@ -4,6 +4,7 @@ import date from 'date-and-time'
 import { FieldTimeOutlined } from '@ant-design/icons'
 //[ package ]
 
+import { DefaultCard } from 'components/reusable/Card'
 import SystemCard from './SystemCard'
 //[ components ]
 
@@ -52,15 +53,10 @@ export default () => {
 }
 
 //=> Style
-const Main = styled.main`
-	position: relative;
+const Main = styled(DefaultCard)`
 	width: 100%;
 	height: 142px;
-	background: #252930;
-	box-shadow: 0 1px 3px rgba(26, 26, 26, 45%);
-	border-radius: 10px;
 	margin-top: 10px;
-	padding: 0 10px;
 `
 const FooInfo = styled.div`
 	width: 100%;

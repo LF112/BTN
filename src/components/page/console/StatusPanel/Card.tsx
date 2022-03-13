@@ -2,6 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 //[ package ]
 
+import { DefaultCard as Main } from 'components/reusable/Card'
+//[ components ]
+
 //=> DOM
 export default (props: any) => {
 	const { title, tips, value, valueTips = '%', valueColor = null, icon } = props
@@ -37,18 +40,6 @@ export default (props: any) => {
 }
 
 //=> Style
-const Main = styled.main`
-	position: relative;
-	width: 282px;
-	min-width: 262px;
-	height: 100%;
-	padding: 8px 8px 0px 8px;
-	background: #252930;
-	border-radius: 10px;
-	box-shadow: 0 1px 3px rgba(26, 26, 26, 45%);
-	overflow: hidden;
-`
-
 const StatusICON = styled.div`
 	position: absolute;
 	bottom: -42px;
