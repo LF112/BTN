@@ -5,11 +5,18 @@ import styled from 'styled-components'
 import Card from './Card'
 //[ components ]
 
+import { useApiState } from 'state/api/hooks'
+//[ hooks ]
+
 //=> DOM
 export default () => {
+	const { disk } = useApiState('system')
+
 	return (
 		<DiskCardList>
-			<Card />
+			{disk.map((item: any, index: number) => (
+				<Card key={index} data={item} />
+			))}
 		</DiskCardList>
 	)
 }

@@ -11,21 +11,37 @@ import { ReactComponent as DriveIcon } from 'assets/svg/global_drive.svg'
 //[ assets ]
 
 //=> DOM
-export default () => {
+export default (props: any) => {
+	const { data } = props
+
+	const {
+		path,
+		filesystem,
+		type,
+		inodes: [, , , InodesValue],
+		size: [SizeNum, SizeUsed, , SizeValue]
+	} = data
+
 	return (
 		<Card>
 			<Icon>
 				<DriveIcon />
+				<div>
+					{SizeUsed} / {SizeNum}
+				</div>
 			</Icon>
 			<Info>
 				<Title>
-					<h1>/</h1>
+					<h1>{path}</h1>
 					<NBadgeIcon>
-						<NText>/dev/vda1</NText>
+						<NText>{type}</NText>
+					</NBadgeIcon>
+					<NBadgeIcon>
+						<NText>{filesystem}</NText>
 					</NBadgeIcon>
 				</Title>
 				<Progress
-					value={0}
+					value={~~SizeValue.replace('%', '')}
 					style={{ marginTop: '6px', marginLeft: '-4px' }}
 					percentage={true}
 				/>
@@ -34,15 +50,15 @@ export default () => {
 				<div>
 					<p>INODE</p>
 					<Progress
-						value={0}
+						value={~~InodesValue.replace('%', '')}
 						style={{
-							transform: 'rotate(90deg)',
+							transform: 'rotate(-90deg)',
 							right: '-18px',
 							width: '55px',
 							position: 'absolute'
 						}}
 						style2={{ padding: '6px 5px' }}
-						sticky={'0 0 8px 8px'}
+						sticky={'8px 8px 0 0'}
 					/>
 				</div>
 			</Inode>
@@ -53,7 +69,7 @@ export default () => {
 //=> Style
 const Card = styled(DefaultCard)`
 	width: 100%;
-	height: 75px;
+	height: 78px;
 	display: flex;
 	align-items: center;
 	padding: 10px;
@@ -69,6 +85,20 @@ const Icon = styled.div`
 	> svg {
 		margin-top: 2px;
 	}
+	> div {
+		font-family: 'HarmonyOS';
+		color: #fff;
+		position: absolute;
+		top: 0;
+		left: 0;
+		padding: 4px 8px;
+		font-size: 12px;
+		border-radius: 10px 0 5px 0;
+		line-height: 1;
+		background: #2f353d;
+		opacity: 0.8;
+		box-shadow: 0px 2px 3px rgba(0, 0, 0, 15%);
+	}
 `
 
 const Info = styled.div`
@@ -79,10 +109,11 @@ const Info = styled.div`
 `
 
 const Title = styled.header`
-	width: 100%;
+	width: 185px;
 	height: 25px;
 	display: flex;
 	align-items: center;
+	overflow-y: hidden;
 	> h1 {
 		font-family: 'Geometos', 'HarmonyOS';
 		line-height: 1;

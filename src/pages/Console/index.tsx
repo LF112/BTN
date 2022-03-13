@@ -24,7 +24,7 @@ export default () => {
 	useEffect(() => {
 		updateApi([
 			['panel', 'version', 'name', 'Pro', 'Ltd', 'Beta', 'time'],
-			['system', 'load', 'os']
+			['system', 'load', 'os', 'disk']
 		])
 
 		//=> 持续获取面板状态
@@ -35,7 +35,7 @@ export default () => {
 			Timer = setRafInterval(() => {
 				if (_apiStatus)
 					updateApi([
-						['system', 'load', 'systemdate'],
+						['system', 'load', 'systemdate', 'disk'],
 						['cpu', 'cpu'],
 						['memory', 'mem']
 					])
