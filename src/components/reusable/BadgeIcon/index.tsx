@@ -8,7 +8,7 @@ export default (props: any) => {
 	return (
 		<BadgeIcon>
 			{icon}
-			<VersionText>{text}</VersionText>
+			<Text>{text}</Text>
 		</BadgeIcon>
 	)
 }
@@ -39,7 +39,7 @@ export const BadgeIcon = styled.div`
 	}
 `
 
-const VersionText = styled.h2`
+export const Text = styled.h2`
 	font-family: 'Geometos', 'HarmonyOS';
 	font-weight: 400;
 	line-height: 1;

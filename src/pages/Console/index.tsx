@@ -7,6 +7,7 @@ import Header from 'components/page/console/Header'
 import QuickControl from 'components/page/console/QuickControl'
 import StatusPanel from 'components/page/console/StatusPanel'
 import SystemInfo from 'components/page/console/SystemInfo'
+import DiskCard from 'components/page/console/DiskCard'
 //[ components ]
 
 import { useUpdateApi } from 'state/api/hooks'
@@ -51,6 +52,7 @@ export default () => {
 			<Right>
 				<QuickControl />
 				<SystemInfo />
+				<DiskCard />
 			</Right>
 		</Main>
 	)
