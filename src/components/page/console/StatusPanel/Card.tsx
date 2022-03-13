@@ -3,6 +3,7 @@ import styled from 'styled-components'
 //[ package ]
 
 import { DefaultCard as Main } from 'components/reusable/Card'
+import Progress from 'components/reusable/Progress'
 //[ components ]
 
 //=> DOM
@@ -25,13 +26,12 @@ export default (props: any) => {
 					</span>
 				</InfoDetail>
 			</Information>
-			<StateStrip>
-				<div>
-					<LineMask>
-						<div style={{ width: `${value}%` }} />
-					</LineMask>
-				</div>
-			</StateStrip>
+			<Progress
+				value={value}
+				style={{ height: 'calc(100% - 100px)' }}
+				style2={{ width: '180px' }}
+				sticky={'8px 8px 0 0'}
+			/>
 			<StatusICON>
 				<i className={icon} />
 			</StatusICON>
@@ -104,36 +104,4 @@ const InfoDetail = styled.div`
 		margin-left: 8px;
 	}
 	user-select: none;
-`
-
-//=> FOOTER
-const StateStrip = styled.div`
-	position: relative;
-	width: 100%;
-	height: calc(100% - 100px);
-	display: flex;
-	justify-content: center;
-	align-items: end;
-	z-index: 10;
-	> div {
-		width: 180px;
-		height: 18px;
-		background: linear-gradient(109deg, #1f2229, #1d212b, #1f232c, #1a1d22);
-		border-radius: 8px 8px 0 0;
-		box-shadow: 0 -1px 2px -1px #15171c;
-		padding: 6px 12px;
-	}
-`
-
-const LineMask = styled.div`
-	width: 100%;
-	height: 100%;
-	background: hsl(218deg, 13%, 17%, 85%);
-	border-radius: 20px;
-	> div {
-		width: 0%;
-		height: 100%;
-		border-radius: 20px;
-		background: linear-gradient(90.43deg, #33ceff 1.33%, #37d99f 105.76%);
-	}
 `
