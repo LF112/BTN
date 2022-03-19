@@ -22,6 +22,10 @@ export type state = {
 		}
 	]
 	network: object
+	up: number
+	down: number
+	downTotal: number
+	upTotal: number
 	load: {
 		one: number
 		five: number
@@ -48,6 +52,10 @@ export const initialState: state = {
 		}
 	],
 	network: {},
+	up: 0,
+	down: 0,
+	downTotal: 0,
+	upTotal: 0,
 	load: {
 		one: 0,
 		five: 0,
@@ -70,5 +78,9 @@ export const stateApiUpdateIndex: any = {
 	systemdate: [GetConcifInfo, ['systemdate']],
 	distribution: [CONFIG, ['distribution']],
 	network: [GetNetWork, ['network']],
+	up: [GetNetWork, ['up']],
+	down: [GetNetWork, ['down']],
+	downTotal: [GetNetWork, ['downTotal']],
+	upTotal: [GetNetWork, ['upTotal']],
 	load: [GetNetWork, ['load']]
 }

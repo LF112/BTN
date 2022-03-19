@@ -59,3 +59,43 @@ export const queueObj = (
 			else return queueObj(obj[queue[0]], queue, count + 1, endCount)
 		}
 }
+
+/**
+ * 字节转换
+ * @param bytes 字节
+ * @param is_unit 是否显示单位
+ * @param fixed 小数点位置
+ * @param end_unit 结束单位
+ */
+export const bytesToSize = (
+	bytes: number,
+	is_unit: boolean = true,
+	fixed: number = 2,
+	end_unit: string = ''
+) => {
+	const unit = [' B', ' KB', ' MB', ' GB', 'TB']
+	const c = 1024
+	for (let i = 0; i < unit.length; i++) {
+		const cUnit = unit[i]
+
+		if (cUnit.trim() == end_unit.trim()) {
+			let val =
+				i == 0 ? bytes : fixed == 0 ? bytes : (bytes.toFixed(fixed) as any)
+			if (is_unit) return val + cUnit
+			else {
+				val = parseFloat(val)
+				return val
+			}
+		} else if (bytes < c) {
+			let val =
+				i == 0 ? bytes : fixed == 0 ? bytes : (bytes.toFixed(fixed) as any)
+			if (is_unit) return val + cUnit
+			else {
+				val = parseFloat(val)
+				return val
+			}
+		}
+
+		bytes /= c
+	}
+}

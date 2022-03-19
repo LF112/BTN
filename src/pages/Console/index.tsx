@@ -8,6 +8,7 @@ import QuickControl from 'components/page/console/QuickControl'
 import StatusPanel from 'components/page/console/StatusPanel'
 import SystemInfo from 'components/page/console/SystemInfo'
 import DiskCard from 'components/page/console/DiskCard'
+import DataHub from 'components/page/console/DataHub'
 //[ components ]
 
 import { useUpdateApi } from 'state/api/hooks'
@@ -35,7 +36,16 @@ export default () => {
 			Timer = setRafInterval(() => {
 				if (_apiStatus)
 					updateApi([
-						['system', 'load', 'systemdate', 'disk'],
+						[
+							'system',
+							'load',
+							'systemdate',
+							'disk',
+							'up',
+							'down',
+							'upTotal',
+							'downTotal'
+						],
 						['cpu', 'cpu'],
 						['memory', 'mem']
 					])
@@ -48,6 +58,7 @@ export default () => {
 			<Left>
 				<Header />
 				<StatusPanel />
+				<DataHub />
 			</Left>
 			<Right>
 				<QuickControl />
