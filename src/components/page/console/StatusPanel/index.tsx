@@ -110,7 +110,7 @@ const CardBox = styled.div<{ showMask: boolean }>`
 	align-items: center;
 	justify-content: space-between;
 	overflow-x: auto;
-	padding-bottom: 10px;
+	padding-bottom: 5px;
 	${(props: any) => (props.showMask ? 'padding-right: 30px;' : '')}
 	> main + main {
 		margin-left: 10px;

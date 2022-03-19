@@ -56,6 +56,7 @@ export default () => {
 const Main = styled(DefaultCard)`
 	width: 100%;
 	height: 142px;
+	min-height: 148px;
 	margin-top: 10px;
 `
 const FooInfo = styled.div`

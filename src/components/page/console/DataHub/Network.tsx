@@ -14,19 +14,31 @@ export default (props: any) => {
 			<Left>
 				<Text>流量</Text>
 				<LegendContainer>
-					<LegendCard text={'上行'} data={`${up} KB`} color={'#d3d336'} />
-					<LegendCard text={'下行'} data={`${down} KB`} color={'#36d7ae'} />
+					<LegendCard
+						text={'上行'}
+						data={`${up} KB`}
+						color={'#d3d336'}
+						icon={'el-icon-top-right'}
+					/>
+					<LegendCard
+						text={'下行'}
+						data={`${down} KB`}
+						color={'#36d7ae'}
+						icon={'el-icon-bottom-left'}
+					/>
 					<LegendCard
 						text={'总发送'}
 						data={upTotal}
 						color={'#16a3a8'}
 						noPoint={true}
+						icon={'el-icon-arrow-up'}
 					/>
 					<LegendCard
 						text={'总接收'}
 						data={downTotal}
 						color={'#ca4a24'}
 						noPoint={true}
+						icon={'el-icon-finished'}
 					/>
 				</LegendContainer>
 			</Left>
@@ -37,7 +49,9 @@ export default (props: any) => {
 //=> Style
 const Main = styled(DefaultCard)`
 	height: 50%;
+	min-height: 270px;
 	width: 100%;
+	margin-top: 5px;
 	margin-bottom: 10px;
 	padding: 15px;
 	user-select: none;

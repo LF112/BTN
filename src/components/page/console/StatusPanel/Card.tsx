@@ -42,6 +42,7 @@ export default (props: any) => {
 //=> Style
 const StatusICON = styled.div`
 	position: absolute;
+	min-height: 148px;
 	bottom: -42px;
 	right: -42px;
 	z-index: 0;

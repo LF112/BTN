@@ -7,7 +7,7 @@ import { DefaultCard } from 'components/reusable/Card'
 
 //=> DOM
 export default (props: any) => {
-	const { text, color = '#fff', data, noPoint } = props
+	const { text, color = '#fff', data, noPoint, icon = '' } = props
 
 	return (
 		<LegendCard>
@@ -18,6 +18,9 @@ export default (props: any) => {
 			<LegendData>
 				<p>{data}</p>
 			</LegendData>
+			<LegendIcon>
+				<i className={icon} />
+			</LegendIcon>
 		</LegendCard>
 	)
 }
@@ -39,6 +42,7 @@ const LegendInfo = styled.div<{ color: string }>`
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
+	z-index: 1;
 	> div {
 		width: 8px;
 		height: 8px;
@@ -57,10 +61,22 @@ const LegendData = styled.div`
 	width: 100%;
 	text-align: center;
 	margin-top: 5px;
+	z-index: 1;
 	> p {
 		font-size: 12px;
 		color: #79869c;
 		font-family: 'Russo One';
 		line-height: 1;
+	}
+`
+
+const LegendIcon = styled.div`
+	position: absolute;
+	z-index: 0;
+	right: -15px;
+	bottom: -18px;
+	> i {
+		color: #474f60;
+		font-size: 58px;
 	}
 `
