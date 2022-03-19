@@ -29,7 +29,6 @@ export default (props: any) => {
 	useEffect(() => {
 		if (titleBoxNode && type) {
 			const DOM = titleBoxNode.current
-			console.log(DOM.scrollWidth, DOM.clientWidth)
 			if (DOM.scrollWidth > DOM.clientWidth) updateShowMask(!showMask)
 		}
 	}, [titleBoxNode, type])

@@ -35,7 +35,9 @@ export default () => {
 							<FreeIcon />
 						)
 					}
-					text={$panel.Pro > 0 ? 'Pro' : $panel.Ltd > 0 ? '企业版' : 'Free'}
+					text={
+						$panel.Pro > 0 ? '专业版' : $panel.Ltd > 0 ? '企业版' : '免费版'
+					}
 				/>
 				<BadgeIcon icon={<i className='el-icon-time' />} text={$panel.time} />
 			</BadgeList>

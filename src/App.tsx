@@ -39,6 +39,7 @@ const BtnMain = styled.div`
 	align-items: center;
 	padding: 25px;
 	> div {
+		max-width: 1440px;
 		width: 100%;
 		height: 100%;
 		border-radius: 8px;
