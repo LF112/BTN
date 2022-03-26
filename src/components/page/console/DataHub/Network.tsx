@@ -4,11 +4,13 @@ import styled from 'styled-components'
 
 import { DefaultCard } from 'components/reusable/Card'
 import LegendCard from 'components/reusable/LegendCard'
+import Chart from './Chart'
 //[ components ]
 
 //=> DOM
 export default (props: any) => {
 	const { up, down, upTotal, downTotal } = props
+
 	return (
 		<Main>
 			<Left>
@@ -42,19 +44,22 @@ export default (props: any) => {
 					/>
 				</LegendContainer>
 			</Left>
+			<Right>
+				<Chart up={up} down={down} />
+			</Right>
 		</Main>
 	)
 }
 
 //=> Style
 const Main = styled(DefaultCard)`
-	height: 50%;
-	min-height: 270px;
+	height: 270px;
 	width: 100%;
 	margin-top: 5px;
 	margin-bottom: 10px;
 	padding: 15px;
 	user-select: none;
+	display: flex;
 `
 
 const Text = styled.h1`
@@ -68,6 +73,12 @@ const Text = styled.h1`
 const Left = styled.main`
 	width: 75px;
 	height: 100%;
+`
+
+const Right = styled.main`
+	width: calc(100% - 85px);
+	height: 100%;
+	margin-left: 10px;
 `
 
 const LegendContainer = styled.div`

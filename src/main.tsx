@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 //[ package ]
 
-import './index.css'
+import './index.less'
 import 'assets/element-ui-icon/index.css'
 //[ style ]
 
