@@ -37,6 +37,8 @@
 		"axios": "^0.25.0",
 		"crypto-js": "^4.1.1",
 		"date-and-time": "^2.1.0",
+		"echarts": "^5.3.1",
+		"echarts-for-react": "^3.0.2",
 		"fastdom": "^1.0.10",
 		"less": "^4.1.2",
 		"lodash": "^4.17.21",
