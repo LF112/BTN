@@ -3,10 +3,7 @@ import styled from 'styled-components'
 import ReactEChartsCore from 'echarts-for-react/lib/core'
 import * as echarts from 'echarts/core'
 import { LineChart } from 'echarts/charts'
-import {
-	CanvasRenderer
-	// SVGRenderer
-} from 'echarts/renderers'
+import { CanvasRenderer } from 'echarts/renderers'
 import {
 	TitleComponent,
 	TooltipComponent,
@@ -18,19 +15,28 @@ import {
 export default (props: any) => {
 	const { up, down } = props
 
+	//=> Chart DOM
 	const node = useRef<HTMLDivElement>(null) as any
 
-	const [xAxisData, setXAxisData] = useState<any[]>([])
+	//=> Chart Data
+	const [xAxisData, setXAxisData] = useState<any[]>([]) // X
+	// Y ↓
 	const [upData, setUpData] = useState<any[]>([])
 	const [downData, setDownData] = useState<any[]>([])
+
+	//=> 侦测更新
 	useEffect(() => {
 		const { current: el } = node
 		if (el) {
+			//=> 获取时间
 			const TIME = new Date()
+			//=> 最大纵向数据
 			const limit = 8
 			if (upData.length >= limit) setUpData(upData.splice(0, 1))
 			if (downData.length >= limit) setDownData(downData.splice(0, 1))
 			if (xAxisData.length >= limit) setXAxisData(xAxisData.splice(0, 1))
+
+			//=> Update Data
 			setDownData([...downData, down])
 			setUpData([...upData, up])
 			setXAxisData([
@@ -38,6 +44,7 @@ export default (props: any) => {
 				`${TIME.getHours()}:${TIME.getMinutes()}:${TIME.getSeconds()}`
 			])
 
+			//=> 绘制数据
 			const Echarts = el.getEchartsInstance()
 			Echarts.setOption({
 				xAxis: { data: xAxisData },
@@ -49,6 +56,7 @@ export default (props: any) => {
 		}
 	}, [up, down])
 
+	//=> 装载 ECharts
 	echarts.use([
 		TitleComponent,
 		TooltipComponent,
