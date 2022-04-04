@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 //=> DOM
 export default (props: any) => {
-	const { onClick, text, last, first } = props
+	const { onClick, text, last, first, tag } = props
 	const [clicked, updateClicked] = useState<boolean>(false)
 
 	//=> 描边海浪动画
@@ -36,6 +36,15 @@ export default (props: any) => {
 			{first}
 			<p>{text}</p>
 			{last}
+			{tag ? (
+				<TagMark color={tag}>
+					<div>
+						<div />
+					</div>
+				</TagMark>
+			) : (
+				<></>
+			)}
 			<Diffusion
 				style={{
 					animationName: clicked
@@ -120,6 +129,41 @@ const Diffusion = styled.hr`
 		}
 		to {
 			opacity: 0;
+		}
+	}
+`
+
+const TagMark = styled.div<{ color: string }>`
+	position: absolute;
+	bottom: 0;
+	height: 3px;
+	width: 100%;
+	> div {
+		margin: 0 auto;
+		width: 30px;
+		height: 3px;
+		border-radius: 2px 2px 0 0;
+		overflow: hidden;
+		background: ${props => (props.color ? '#21252b' : 'unset')};
+		> div {
+			width: 100%;
+			height: 100%;
+			background: ${props => props.color};
+			animation-name: breath;
+			animation-duration: 3s;
+			animation-timing-function: ease-in-out;
+			animation-iteration-count: infinite;
+		}
+	}
+	@keyframes breath {
+		from {
+			opacity: 0.2;
+		}
+		50% {
+			opacity: 0.8;
+		}
+		to {
+			opacity: 0.2;
 		}
 	}
 `
