@@ -20,6 +20,7 @@ export type state = {
 	Ltd: number //      企业版
 	Beta: number //     测试版
 	time: string //     持续运行时间
+	isNew: boolean //   是否新版本
 }
 
 //=> State 表初始化 | '是这个 state 的一些默认值'
@@ -35,7 +36,8 @@ export const initialState: state = {
 	Pro: -2, // -2 为未知 | '-1 = False / +∞ = 专业版余剩时间'
 	Ltd: -2, // -2 为未知 | '-1 = False / +∞ = 企业版余剩时间'
 	Beta: -2, // -2 为未知 | '0 = False / 1 = True'
-	time: '-'
+	time: '-',
+	isNew: false
 }
 
 const { CONFIG, GetNetWork, GetSoftList, UpdatePanel } = ID
@@ -55,5 +57,6 @@ export const stateApiUpdateIndex: any = {
 	Pro: [GetSoftList, ['pro']],
 	Ltd: [GetSoftList, ['ltd']],
 	Beta: [UpdatePanel, ['msg', 'is_beta']],
-	time: [GetNetWork, ['time']]
+	time: [GetNetWork, ['time']],
+	isNew: [UpdatePanel, ['status']]
 }

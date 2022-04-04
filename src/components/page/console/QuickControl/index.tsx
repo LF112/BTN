@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 //[ package ]
 
@@ -6,11 +6,25 @@ import { RocketOutlined, ToolOutlined, ReloadOutlined } from '@ant-design/icons'
 import Button from 'components/reusable/Button'
 //[ components ]
 
+import { useApiState } from 'state/api/hooks'
+import { useUpdateLoadId } from 'state/popupbox/hooks'
+//[ hooks ]
+
 //=> DOM
 export default () => {
+	const $panel = useApiState('panel')
+	const updateLoadId = useUpdateLoadId()
+
 	return (
 		<Main>
-			<Button first={<RocketOutlined />} text='更新' />
+			<Button
+				tag={$panel.isNew ? '#f44336' : null}
+				first={<RocketOutlined />}
+				text='更新'
+				onClick={() => {
+					updateLoadId('UpdatePanel', '更新面板')
+				}}
+			/>
 			<Button first={<ToolOutlined />} text='修复' />
 			<Button first={<ReloadOutlined />} text='重启' />
 		</Main>

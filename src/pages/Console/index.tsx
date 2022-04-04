@@ -24,7 +24,7 @@ export default () => {
 	let Timer: any = null
 	useEffect(() => {
 		updateApi([
-			['panel', 'version', 'name', 'Pro', 'Ltd', 'Beta', 'time'],
+			['panel', 'version', 'name', 'Pro', 'Ltd', 'Beta', 'time', 'isNew'],
 			['system', 'load', 'os', 'disk']
 		])
 
@@ -36,16 +36,7 @@ export default () => {
 			Timer = setRafInterval(() => {
 				if (_apiStatus)
 					updateApi([
-						[
-							'system',
-							'load',
-							'systemdate',
-							'disk',
-							'up',
-							'down',
-							'upTotal',
-							'downTotal'
-						],
+						['system', 'load', 'disk', 'up', 'down', 'upTotal', 'downTotal'],
 						['cpu', 'cpu'],
 						['memory', 'mem']
 					])

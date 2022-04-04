@@ -10,7 +10,10 @@ import { addPopup, removePopup, closePopup } from './slice'
  */
 export function useActivePopups() {
 	const list = useAppSelector((state: AppState) => state.popup)
-	return useMemo(() => list.filter(v => Object.keys(v).length > 0), [list])
+	return useMemo(
+		() => list.filter((v: {}) => Object.keys(v).length > 0),
+		[list]
+	)
 }
 
 //=> 存储 choose popup CALLBACK 方法
@@ -35,13 +38,23 @@ export function useAddPopup(): (
 	type: string,
 	callback: any,
 	icon?: any
-) => void {
+) => void | string {
 	const dispatch = useAppDispatch()
 
 	const stateCallback = useCallback(
 		(content: string, type: string, callback: any, icon: any) => {
 			const callbackType = typeof callback
-			if (callbackType === 'function') {
+			if (callback === -1) {
+				const CBID = Math.random().toString(36).slice(-8)
+				dispatch(
+					addPopup({
+						id: CBID,
+						type: type,
+						content: content
+					})
+				)
+				return CBID
+			} else if (callbackType === 'function') {
 				//=> 仅支持选择回调
 				const CBID = Math.random().toString(36).slice(-8)
 				chooseFn[CBID] = callback

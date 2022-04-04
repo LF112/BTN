@@ -9,6 +9,7 @@ import Popups from 'components/global/Popups'
 import Pages from 'pages'
 import RipplesMask from 'components/global/RipplesMask'
 import NetworkWarnPane from 'components/global/WarnPane/network'
+import PopupBox from 'components/global/PopupBox'
 //[ Components ]
 
 //=> Main Component
@@ -18,6 +19,7 @@ export default () => {
 			<div>
 				<Main>
 					<Popups />
+					<PopupBox />
 					<RipplesMask child={<NetworkWarnPane />} />
 					<Router>
 						<Sidebar />

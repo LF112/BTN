@@ -7,6 +7,7 @@ import popup from './popup/slice'
 import config from './config/slice'
 import api from './api'
 import status from './status/slice'
+import popupbox from './popupbox/slice'
 //[ 导入 state ]
 
 //=> 启用 state 缓存
@@ -21,6 +22,7 @@ const store = configureStore({
 		popup,
 		config,
 		status,
+		popupbox,
 		...(api as any)
 	},
 	//=> 插入缓存 state 中间件
