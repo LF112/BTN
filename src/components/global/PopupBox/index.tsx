@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState, useRef } from 'react'
+import React, { Suspense, useEffect, useState, useRef, useMemo } from 'react'
 import styled from 'styled-components'
 //[ package ]
 
@@ -113,7 +113,9 @@ export default () => {
 						<i className='el-icon-close' />
 					</CloseButton>
 				</Header>
-				{loadId ? MSGBOX(loadId) : <></>}
+				{useMemo(() => {
+					return loadId ? MSGBOX(loadId) : <></>
+				}, [loadId])}
 			</Container>
 		</Main>
 	)
