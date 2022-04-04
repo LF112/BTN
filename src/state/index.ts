@@ -11,8 +11,8 @@ import popupbox from './popupbox/slice'
 //[ 导入 state ]
 
 //=> 启用 state 缓存
-import { save, load } from 'redux-localstorage-simple'
-const PERSISTED_KEYS: string[] = ['config'] //=> 指定要缓存的 state 键名
+// import { save, load } from 'redux-localstorage-simple'
+// const PERSISTED_KEYS: string[] = ['config'] //=> 指定要缓存的 state 键名
 //=> 导入 Fetch 中间件
 
 const store = configureStore({
@@ -24,17 +24,17 @@ const store = configureStore({
 		status,
 		popupbox,
 		...(api as any)
-	},
+	}
 	//=> 插入缓存 state 中间件
-	middleware: getDefaultMiddleware =>
-		getDefaultMiddleware({ thunk: true }).concat(
-			save({
-				states: PERSISTED_KEYS,
-				debounce: 500,
-				ignoreStates: ['status']
-			})
-		),
-	preloadedState: load({ states: PERSISTED_KEYS, disableWarnings: true }) // 配置缓存的 state
+	// middleware: getDefaultMiddleware =>
+	// 	getDefaultMiddleware({ thunk: true }).concat(
+	// 		save({
+	// 			states: PERSISTED_KEYS,
+	// 			debounce: 500,
+	// 			ignoreStates: ['status']
+	// 		})
+	// 	),
+	// preloadedState: load({ states: PERSISTED_KEYS, disableWarnings: true }) // 配置缓存的 state
 })
 
 //=> export State
