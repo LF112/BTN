@@ -31,5 +31,5 @@ const { GetNetWork } = ID
  *   STATA 名字       API ID (url)    参数对应的 API JSON 索引
  */
 export const stateApiUpdateIndex: any = {
-	mem: [GetNetWork, ['mem']]
+	mem: [GetNetWork, 'mem']
 }

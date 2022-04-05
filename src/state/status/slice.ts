@@ -6,7 +6,7 @@ export type StatusState = {
 	network: {
 		apiStatus: boolean
 		rawJson: object
-		aimsJson: string[]
+		aimsJson: string
 	}
 }
 
@@ -15,7 +15,7 @@ export const initialState: StatusState = {
 	network: {
 		apiStatus: true,
 		rawJson: {},
-		aimsJson: []
+		aimsJson: ''
 	}
 }
 
@@ -33,7 +33,7 @@ export const statusSlice = createSlice({
 				type: string
 				aims?: string
 				rawJson?: object
-				aimsJson: string[]
+				aimsJson: string
 			}>
 		) => {
 			const { data, type, aims, rawJson, aimsJson } = action.payload //=> 取得参数 | '一般从这取回 hooks 传来的参数'

@@ -40,6 +40,6 @@ const { GetNetWork } = ID
  *   STATA 名字       API ID (url)    参数对应的 API JSON 索引
  */
 export const stateApiUpdateIndex: any = {
-	cpu: [GetNetWork, ['cpu']],
-	cpu_times: [GetNetWork, ['cpu_times']]
+	cpu: [GetNetWork, 'cpu'],
+	cpu_times: [GetNetWork, 'cpu_times']
 }

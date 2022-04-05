@@ -8,7 +8,6 @@ import { updater, apiIndexUpdater } from './index'
 //[ state / hooks ]
 
 import $fetch from 'utils/btFetch'
-import { queueObj } from 'utils/useTools'
 //[ utils ]
 
 /***
@@ -127,7 +126,7 @@ const sendRequest = (
 						dispatch(
 							updater[!queryAims ? aims : aims[isAims]].update({
 								apiType: isAims,
-								value: queueObj(data, fetchParamArr[isAims])
+								value: _.get(data, fetchParamArr[isAims])
 							})
 						)
 						// '此处可合并 action，对于相同的 API 类型，可以合并到一起再发送，节省 action 开销。'

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import Highlight from 'react-highlight'
+import _ from 'lodash'
 //[ package ]
 
 import './oneDark.less'
@@ -10,7 +11,6 @@ import { ReactComponent as ICON_Triangle } from 'assets/svg/global_triangle.svg'
 //[ assets ]
 
 import useToggle from 'utils/useToggle'
-import { queueObj } from 'utils/useTools'
 //[ utils ]
 
 //=> DOM
@@ -52,7 +52,7 @@ export default (props: any) => {
 			<div>
 				<Context>
 					<ICON_Triangle />
-					<p>{queueObj(rawJson, aimsJson) || '-'}</p>
+					<p>{_.get(rawJson, aimsJson) || '-'}</p>
 				</Context>
 				<Fold ref={node as any}>
 					<PackageHighlight className='json'>

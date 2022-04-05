@@ -37,30 +37,6 @@ export const getStatusDisplay = (value: number, updater: any): any => {
 }
 
 /**
- * 索引对象
- * @param obj 对象
- * @param indexArr 索引数组
- * @returns 值
- */
-export const queueObj = (
-	obj: Object,
-	queue: string[],
-	count = 1,
-	endCount = 0
-) => {
-	const Len = queue.length
-	if (Len > 0)
-		if (count === 1)
-			if (Len === 1) return obj[queue[0]]
-			else return queueObj(obj[queue[0]], queue, count + 1, Len)
-		else {
-			queue.shift()
-			if (count === endCount) return obj[queue[0]]
-			else return queueObj(obj[queue[0]], queue, count + 1, endCount)
-		}
-}
-
-/**
  * 字节转换
  * @param bytes 字节
  * @param is_unit 是否显示单位

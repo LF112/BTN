@@ -73,14 +73,14 @@ const { CONFIG, GetConcifInfo, GetNetWork } = ID
  *   STATA 名字       API ID (url)    参数对应的 API JSON 索引
  */
 export const stateApiUpdateIndex: any = {
-	disk: [GetNetWork, ['disk']],
-	os: [GetNetWork, ['system']],
-	systemdate: [GetConcifInfo, ['systemdate']],
-	distribution: [CONFIG, ['distribution']],
-	network: [GetNetWork, ['network']],
-	up: [GetNetWork, ['up']],
-	down: [GetNetWork, ['down']],
-	downTotal: [GetNetWork, ['downTotal']],
-	upTotal: [GetNetWork, ['upTotal']],
-	load: [GetNetWork, ['load']]
+	disk: [GetNetWork, 'disk'],
+	os: [GetNetWork, 'system'],
+	systemdate: [GetConcifInfo, 'systemdate'],
+	distribution: [CONFIG, 'distribution'],
+	network: [GetNetWork, 'network'],
+	up: [GetNetWork, 'up'],
+	down: [GetNetWork, 'down'],
+	downTotal: [GetNetWork, 'downTotal'],
+	upTotal: [GetNetWork, 'upTotal'],
+	load: [GetNetWork, 'load']
 }

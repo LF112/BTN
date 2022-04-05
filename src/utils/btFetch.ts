@@ -57,7 +57,7 @@ export default (
 							type: 'network',
 							aims: 'apiStatus',
 							rawJson: data,
-							aimsJson: ['msg']
+							aimsJson: 'msg'
 						}),
 						true
 					)
@@ -72,7 +72,7 @@ export default (
 					type: 'network',
 					aims: 'apiStatus',
 					rawJson: { status: false, msg: error.message },
-					aimsJson: ['msg']
+					aimsJson: 'msg'
 				}),
 				true
 			)
