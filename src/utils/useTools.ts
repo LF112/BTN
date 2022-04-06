@@ -75,3 +75,32 @@ export const bytesToSize = (
 		bytes /= c
 	}
 }
+
+/**
+ * 字符串日志转换数组
+ * @param str 日志 ( string )
+ * @returns any[]
+ */
+export const strLogsToArr = (str: string): any[] => {
+	const Pretreatment = str
+		.split(/^【(.*)】(.*)/gim)
+		.filter((v: string) => v !== '')
+		.map((v: string) => v.replace('<br>', ''))
+
+	const LogsArr = []
+	if (Pretreatment.length > 0) {
+		let index = 0
+		let next = false
+		Pretreatment.forEach((v: string) => {
+			if (v === '\n') index++
+			else if (!next) {
+				LogsArr[index] = { type: v }
+				next = true
+			} else {
+				LogsArr[index].content = v
+				next = false
+			}
+		})
+	}
+	return LogsArr
+}

@@ -1,5 +1,6 @@
 import React, { Suspense, useEffect, useState, useRef, useMemo } from 'react'
 import styled from 'styled-components'
+import fastdom from 'fastdom'
 //[ package ]
 
 import { DefaultCard } from 'components/reusable/Card'
@@ -14,7 +15,7 @@ import {
 import { useAddPopup, useClosePopup } from 'state/popup/hooks'
 //[ hooks ]
 
-import ICONS from 'constants/popupBox_icons'
+import { ICONS } from 'constants/popupBox_consts'
 //[ constants ]
 
 //=> DOM
@@ -69,30 +70,38 @@ export default () => {
 			//=> 移除载入状态弹窗
 			closePopup(popupId)
 			setTimeout(() => {
-				const DOM = node.current
-				const DOMHeight = DOM.offsetHeight
-				DOM.style.height = '0'
-				setShowDom(true)
-				setTimeout(() => {
-					DOM.style.height = `${DOMHeight}px`
-					DOM.style.opacity = '1'
-				}, 20)
+				fastdom.measure(() => {
+					const DOM = node.current
+					const DOMHeight = DOM.offsetHeight
+					fastdom.mutate(() => {
+						DOM.style.height = '0'
+						setShowDom(true)
+						setTimeout(() => {
+							DOM.style.height = `${DOMHeight}px`
+							DOM.style.opacity = '1'
+						}, 16)
+					})
+				})
 			}, 110)
 		}
 	}, [show])
 
 	//=> 关闭弹窗
 	const Close = () => {
-		const DOM = node.current
-		if (DOM) {
-			DOM.style.height = '0'
-			setTimeout(() => setShowDom(false), 250)
-			setTimeout(() => {
-				DOM.removeAttribute('style')
-				updateLoadId(null, '')
-				updateShow(false)
-			}, 500)
-		}
+		fastdom.measure(() => {
+			const DOM = node.current
+			if (DOM) {
+				fastdom.mutate(() => {
+					DOM.style.height = '0'
+					setTimeout(() => setShowDom(false), 250)
+					setTimeout(() => {
+						DOM.removeAttribute('style')
+						updateLoadId(null, '')
+						updateShow(false)
+					}, 500)
+				})
+			}
+		})
 	}
 
 	return (

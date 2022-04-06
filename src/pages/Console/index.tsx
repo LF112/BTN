@@ -24,7 +24,22 @@ export default () => {
 	let Timer: any = null
 	useEffect(() => {
 		updateApi([
-			['panel', 'version', 'name', 'Pro', 'Ltd', 'Beta', 'time', 'isNew'],
+			[
+				'panel',
+				'version',
+				'name',
+				'Pro',
+				'Ltd',
+				'Beta',
+				'time',
+				'isNew',
+				'betaVersionId',
+				'VersionId',
+				'betaVersionLogs',
+				'VersionLogs',
+				'betaUptime',
+				'Uptime'
+			],
 			['system', 'load', 'os', 'disk']
 		])
 
