@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import { useStatus } from 'state/status/hooks'
 import styled from 'styled-components'
 //[ package ]
 
 //=> DOM
 export default (props: any) => {
-	const { onClick, text, last, first, tag } = props
+	const { onClick, text, last, first, tag, status = -3 } = props
 	const [clicked, updateClicked] = useState<boolean>(false)
 
 	//=> 描边海浪动画
@@ -25,6 +26,40 @@ export default (props: any) => {
 			if (animationTimer !== null) clearTimeout(animationTimer)
 		}
 	}, [clicked])
+
+	//=> 被动按钮动画
+	const [maskReady, setMaskReady] = useState<boolean>(false)
+	const [showMask, setShowMask] = useState<boolean>(false)
+	const [showLoad, setShowLoad] = useState<boolean>(false)
+	const [showSuccess, setShowSuccess] = useState<boolean>(false)
+	const [showError, setShowError] = useState<boolean>(false)
+	useEffect(() => {
+		if (status === -2) setMaskReady(true)
+		if (status === -1) {
+			if (!showMask) setShowMask(true)
+			if (showSuccess) setShowSuccess(false)
+			if (showError) setShowError(false)
+			setShowLoad(true)
+		} else if (status === 1) {
+			if (!showMask) setShowMask(true)
+			if (showLoad) setShowLoad(false)
+			if (showError) setShowError(false)
+			setShowSuccess(true)
+		} else if (status === 0) {
+			if (!showMask) setShowMask(true)
+			if (showLoad) setShowLoad(false)
+			if (showSuccess) setShowSuccess(false)
+			setShowError(true)
+		} else setShowMask(false)
+
+		if (status === 0 || status === 1)
+			setTimeout(() => {
+				setShowMask(false)
+				if (showLoad) setShowLoad(false)
+				if (showError) setShowError(false)
+				if (showSuccess) setShowSuccess(false)
+			}, 1500)
+	}, [status])
 
 	return (
 		<Button
@@ -53,6 +88,19 @@ export default (props: any) => {
 				}}
 				aria-hidden='true'
 			/>
+			<Mask
+				ready={maskReady}
+				style={showMask ? { opacity: 1, pointerEvents: 'auto' } : {}}>
+				<i
+					style={{ opacity: showSuccess ? 1 : 0, color: '#36d7ae' }}
+					className='el-icon-check'
+				/>
+				<i
+					style={{ opacity: showError ? 1 : 0, color: '#ca4a24' }}
+					className='el-icon-close'
+				/>
+				<i style={{ opacity: showLoad ? 1 : 0 }} className='el-icon-loading' />
+			</Mask>
 		</Button>
 	)
 }
@@ -165,5 +213,27 @@ const TagMark = styled.div<{ color: string }>`
 		to {
 			opacity: 0.2;
 		}
+	}
+`
+
+const Mask = styled.div<{ ready: boolean }>`
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #2f353d;
+	border-radius: 4px;
+	opacity: 0;
+	pointer-events: none;
+	display: ${props => (props.ready ? 'flex' : 'none')};
+	align-items: center;
+	justify-content: center;
+	> i {
+		position: absolute;
+		font-size: 18px;
+		font-weight: bold;
+		color: #fff;
+		opacity: 0;
 	}
 `
