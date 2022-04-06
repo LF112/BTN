@@ -33,6 +33,7 @@ export default (props: any) => {
 	const [showLoad, setShowLoad] = useState<boolean>(false)
 	const [showSuccess, setShowSuccess] = useState<boolean>(false)
 	const [showError, setShowError] = useState<boolean>(false)
+	const [lock, setLock] = useState<boolean>(false)
 	useEffect(() => {
 		if (status === -2) setMaskReady(true)
 		if (status === -1) {
@@ -40,17 +41,23 @@ export default (props: any) => {
 			if (showSuccess) setShowSuccess(false)
 			if (showError) setShowError(false)
 			setShowLoad(true)
+			setLock(true)
 		} else if (status === 1) {
 			if (!showMask) setShowMask(true)
 			if (showLoad) setShowLoad(false)
 			if (showError) setShowError(false)
 			setShowSuccess(true)
+			setLock(true)
 		} else if (status === 0) {
 			if (!showMask) setShowMask(true)
 			if (showLoad) setShowLoad(false)
 			if (showSuccess) setShowSuccess(false)
 			setShowError(true)
-		} else setShowMask(false)
+			setLock(true)
+		} else {
+			setShowMask(false)
+			setLock(false)
+		}
 
 		if (status === 0 || status === 1)
 			setTimeout(() => {
@@ -58,15 +65,19 @@ export default (props: any) => {
 				if (showLoad) setShowLoad(false)
 				if (showError) setShowError(false)
 				if (showSuccess) setShowSuccess(false)
+				setLock(false)
 			}, 1500)
 	}, [status])
 
 	return (
 		<Button
 			onClick={(el: any) => {
-				if (onClick) onClick(el.target) as any
-				//=> 触发描边波浪
-				updateClicked(true)
+				if (lock) el.preventDefault()
+				else if (onClick) {
+					onClick(el.target) as any
+					//=> 触发描边波浪
+					updateClicked(true)
+				}
 			}}>
 			{first}
 			<p>{text}</p>
