@@ -24,8 +24,8 @@ import qs from 'qs'
  */
 export function BTFetch(): (
 	url: string,
-	type?: string,
 	param?: any,
+	type?: string,
 	options?: any
 ) => Promise<void> {
 	//=> 读取 CONFIG
@@ -37,7 +37,7 @@ export function BTFetch(): (
 
 	//=> Main
 	return useCallback(
-		async (url, type = 'post', param = {}, options = {}) => {
+		async (url, param = {}, type = 'post', options = {}) => {
 			//=> 使用 API 模式时
 			if (apiUse) {
 				const time = DateTime.now().toFormat('X')

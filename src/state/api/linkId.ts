@@ -12,6 +12,7 @@ export const ID = {
 
 	GetSoftList: 'plugin?action=get_soft_list',
 
-	UpdatePanel: 'ajax?action=UpdatePanel'
+	UpdatePanel: 'ajax?action=UpdatePanel',
+	ReWeb: 'system?action=ReWeb'
 }
 //ReMemory:'/system?action=ReMemory' //清理内存
