@@ -9,10 +9,12 @@ import Button from 'components/reusable/Button'
 //[ components ]
 
 import { BTFetch } from 'state/fetch/hooks'
-import { ID as _NID } from 'state/api/linkId'
 import { useUpdateApi } from 'state/api/hooks'
 import { useAddPopup } from 'state/popup/hooks'
 //[ hooks ]
+
+import ClickHandler from './click'
+//[ click handler ]
 
 //=> DOM
 export default (props: any) => {
@@ -22,6 +24,14 @@ export default (props: any) => {
 	const $fetch = BTFetch()
 	const addPopup = useAddPopup()
 	const [buttonStatus, setButtonStatus] = useState<number>(-2)
+
+	const CLICK = new ClickHandler({
+		$fetch: $fetch,
+		isNew: isNew,
+		setButtonStatus: setButtonStatus,
+		addPopup: addPopup,
+		updateApi: updateApi
+	})
 
 	return (
 		<VersionStatus>
@@ -41,39 +51,7 @@ export default (props: any) => {
 				<Button
 					text={isNew ? '立即更新' : '重新检查'}
 					status={buttonStatus}
-					onClick={async () => {
-						if (isNew) {
-							setButtonStatus(-1)
-							const { msg, status } = (await $fetch(_NID['UpdatePanel'], {
-								toUpdate: true
-							})) as any
-							if (status) {
-								setButtonStatus(1)
-								addPopup(msg, 'success', 1500)
-								if ((await $fetch(_NID['ReWeb'])) as any)
-									window.location.reload()
-							} else {
-								setButtonStatus(0)
-								addPopup(msg, 'warn', 1500)
-							}
-						} else {
-							setButtonStatus(-1)
-							setTimeout(() => {
-								setButtonStatus(1)
-								addPopup('检查完毕', 'success', 1500)
-							}, 500)
-							updateApi([
-								'panel',
-								'isNew',
-								'betaVersionId',
-								'VersionId',
-								'betaVersionLogs',
-								'VersionLogs',
-								'betaUptime',
-								'Uptime'
-							])
-						}
-					}}
+					onClick={() => CLICK.UpdatePanel()}
 				/>
 			</UpdateButton>
 		</VersionStatus>

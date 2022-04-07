@@ -13,6 +13,9 @@ export const ID = {
 	GetSoftList: 'plugin?action=get_soft_list',
 
 	UpdatePanel: 'ajax?action=UpdatePanel',
-	ReWeb: 'system?action=ReWeb'
+
+	ReWeb: 'system?action=ReWeb',
+	to_not_beta: 'ajax?action=to_not_beta',
+	approve_beta: 'ajax?action=apple_beta'
 }
 //ReMemory:'/system?action=ReMemory' //清理内存
