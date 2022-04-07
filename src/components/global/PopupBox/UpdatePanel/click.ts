@@ -4,12 +4,17 @@ import { ID as _NID } from 'state/api/linkId'
  * CLICK HANDLER
  */
 export default class {
-	$fetch: any
-	isNew: boolean
-	Beta: boolean
-	setButtonStatus: (number: number) => void
-	addPopup: (content: string, type: string, callback: any, icon?: any) => void
-	updateApi: (queue: any) => void
+	private $fetch: any
+	private isNew: boolean
+	private Beta: boolean
+	private setButtonStatus: (number: number) => void
+	private addPopup: (
+		content: string,
+		type: string,
+		callback: any,
+		icon?: any
+	) => void
+	private updateApi: (queue: any) => void
 
 	constructor(Fn: any) {
 		const { $fetch, isNew, setButtonStatus, addPopup, updateApi, Beta } = Fn
@@ -99,14 +104,12 @@ export default class {
 
 						//=> 升级面板 | '切换版本只是切换了状态，还需要升级才会更新'
 						setTimeout(async () => {
-							if (await this._UpdatePanel()) {
-								this.setButtonStatus(1)
-								close()
-							} else {
+							if (await this._UpdatePanel()) this.setButtonStatus(1)
+							else {
 								this.addPopup('自动升级失败，请重新升级', 'warn', 1500)
 								this.setButtonStatus(0)
-								close()
 							}
+							close()
 						}, 1000)
 					} else {
 						//=> 版本切换失败
