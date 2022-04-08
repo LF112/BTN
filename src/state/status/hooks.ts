@@ -35,7 +35,7 @@ export function useUpdateStatus(): (
 	type: string,
 	aims?: string,
 	rawJson?: object,
-	aimsJson?: string[]
+	aimsJson?: string
 ) => void {
 	const dispatch = useAppDispatch()
 
@@ -46,7 +46,7 @@ export function useUpdateStatus(): (
 			type: string,
 			aims?: string,
 			rawJson?: object,
-			aimsJson?: string[]
+			aimsJson?: string
 		) =>
 			dispatch(
 				updateStatus({
