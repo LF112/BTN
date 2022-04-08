@@ -136,7 +136,7 @@ const LogsBox = styled.div`
 			user-select: none;
 		}
 		p {
-			font-family: 'Geometos', 'HarmonyOS';
+			font-family: 'Saira', 'Noto Sans SC';
 			font-weight: 400;
 			line-height: 1;
 			font-size: 12px;
