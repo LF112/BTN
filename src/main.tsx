@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 //[ package ]
 
@@ -17,14 +18,14 @@ import App from './App'
 //[ utils ]
 
 //=> Render | 渲染页面
-ReactDOM.render(
+//=> 绑定渲染组件↓
+createRoot(document.getElementById('BTNEXT')).render(
 	<React.StrictMode>
 		{/* REACT REDUX */}
 		<Provider store={store}>
 			<App />
 		</Provider>
-	</React.StrictMode>,
-	document.getElementById('BTNEXT') //=> 绑定渲染组件
+	</React.StrictMode>
 )
 
 //=> 控制台徽章
