@@ -34,6 +34,7 @@ export type state = {
 		limit: number
 		safe: number
 	}
+	webserver: string
 }
 
 //=> State 表初始化 | '是这个 state 的一些默认值'
@@ -63,7 +64,8 @@ export const initialState: state = {
 		max: 0,
 		limit: 0,
 		safe: 0
-	}
+	},
+	webserver: 'nginx'
 }
 
 const { CONFIG, GetConcifInfo, GetNetWork } = ID
@@ -76,6 +78,7 @@ export const stateApiUpdateIndex: any = {
 	disk: [GetNetWork, 'disk'],
 	os: [GetNetWork, 'system'],
 	systemdate: [GetConcifInfo, 'systemdate'],
+	webserver: [GetConcifInfo, 'webserver'],
 	distribution: [CONFIG, 'distribution'],
 	network: [GetNetWork, 'network'],
 	up: [GetNetWork, 'up'],

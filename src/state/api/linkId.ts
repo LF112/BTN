@@ -19,5 +19,7 @@ export const ID = {
 	to_not_beta: 'ajax?action=to_not_beta', // 切换至正式版 [ 需要 check ]
 	approve_beta: 'ajax?action=apple_beta', // 切换至测试版 ( 申请 ) [ 需要 check ]
 	RepairPanel: 'system?action=RepPanel', // 修复面板
-	ReMemory: '/system?action=ReMemory' // 清理系统内存
+	ReMemory: 'system?action=ReMemory', // 清理系统内存
+	ServiceAdmin: 'system?action=ServiceAdmin', // 服务管理
+	RestartServer: 'system?action=RestartServer' // 重启服务器
 }

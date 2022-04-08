@@ -38,6 +38,7 @@ export default (
 	if (!options.headers) options.headers = {}
 	//=> 解决跨域 ?
 	options.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+	options.timeout = 30000 //=> 超时时间
 
 	//=> Main
 	axios[apiUse ? 'post' : type](url, qs.stringify(param), {

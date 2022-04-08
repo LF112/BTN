@@ -1,9 +1,10 @@
 import React from 'react'
 
-import { RocketOutlined } from '@ant-design/icons'
+import { RocketOutlined, ReloadOutlined } from '@ant-design/icons'
 
 export const ICONS = {
-	UpdatePanel: <RocketOutlined />
+	UpdatePanel: <RocketOutlined />,
+	Reboot: <ReloadOutlined />
 }
 
 export const LogColor = {

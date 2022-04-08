@@ -45,7 +45,11 @@ export default () => {
 				text='修复'
 				onClick={() => CLICK.RepairPanel()}
 			/>
-			<Button first={<ReloadOutlined />} text='重启' />
+			<Button
+				first={<ReloadOutlined />}
+				text='重启'
+				onClick={() => updateLoadId('Reboot', '重启')}
+			/>
 		</Main>
 	)
 }

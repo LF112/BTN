@@ -46,7 +46,7 @@ export default () => {
 		const MsgboxComponent = _msgbox[name] // 取出页面
 		return (
 			<Suspense fallback={<></>}>
-				<MsgboxComponent />
+				<MsgboxComponent Close={Close} />
 			</Suspense>
 		)
 	}
