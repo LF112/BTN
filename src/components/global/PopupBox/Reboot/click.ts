@@ -86,7 +86,7 @@ export default class {
 					await this.rebootServer(close) // 发送重启指令
 					this.addPopup('服务器已重启！', 'success', 1500)
 					close()
-					this.Close()
+					setTimeout(() => this.Close(), 2000)
 				} else {
 					//=> 取消重启
 					close()
