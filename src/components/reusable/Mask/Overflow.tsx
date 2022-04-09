@@ -4,27 +4,27 @@ import styled from 'styled-components'
 
 //=> DOM
 export default (props: any) => {
-	const { showMask, color, style } = props
+	const { showMask, color, style, bottom = false } = props
 
 	return (
 		<Overflow
 			color={color}
+			bottom={bottom}
 			style={{ display: showMask ? 'block' : 'none', ...style }}
 		/>
 	)
 }
 
 //=> Style
-const Overflow = styled.main<{ color: string }>`
+const Overflow = styled.main<{ color: string; bottom: boolean }>`
 	position: absolute;
-	width: 30px;
-	height: calc(100% - 16px);
+	width: ${props => (props.bottom ? '100%' : '30px')};
+	height: ${props => (props.bottom ? '30px' : 'calc(100% - 16px)')};
 	background: linear-gradient(
-		269deg,
-		${(props: any) => (props.color ? props.color : '#323842')} 1%,
+		${props => (props.bottom ? '0' : '269')}deg,
+		${props => (props.color ? props.color : '#323842')} 1%,
 		transparent
 	);
-	top: 0;
-	right: 0;
+	${props => (props.bottom ? 'bottom: 0;left: 0;' : 'top: 0;right: 0;')}
 	z-index: 10;
 `
