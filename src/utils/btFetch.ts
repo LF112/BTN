@@ -14,14 +14,13 @@ import { updateStatus } from 'state/status/slice'
  * @param param 参数，默认为 {}
  * @param options 额外参数，默认为 {}
  */
-export default (
+export default async (
 	connectState: any,
-	callback: any,
 	url: string,
 	type = 'get',
 	param = {} as any,
 	options = {} as any
-): any => {
+): Promise<any> => {
 	//=> 读取 CONFIG
 	const { baseUrl, apiUse, apiKey } = connectState
 
@@ -41,33 +40,36 @@ export default (
 	options.timeout = 30000 //=> 超时时间
 
 	//=> Main
-	axios[apiUse ? 'post' : type](url, qs.stringify(param), {
-		baseURL: baseUrl,
-		...options
-	})
-		.then((result: any) => {
-			const { data } = result
-			const { status, msg } = data
+	try {
+		const { data } = await axios[apiUse ? 'post' : type](
+			url,
+			qs.stringify(param),
+			{
+				baseURL: baseUrl,
+				...options
+			}
+		)
 
-			//=> API 请求失败校验
-			if (!status && msg)
-				if (/验证失败,禁止|IP校验失败,您的访问/g.test(msg)) {
-					return callback(
-						updateStatus({
-							data: false,
-							type: 'network',
-							aims: 'apiStatus',
-							rawJson: data,
-							aimsJson: 'msg'
-						}),
-						true
-					)
-				}
+		const { status, msg } = data
 
-			return callback(result.data)
-		})
-		.catch((error: any) => {
-			callback(
+		//=> API 请求失败校验
+		if (!status && msg)
+			if (/验证失败,禁止|IP校验失败,您的访问/g.test(msg))
+				return [
+					updateStatus({
+						data: false,
+						type: 'network',
+						aims: 'apiStatus',
+						rawJson: data,
+						aimsJson: 'msg'
+					}),
+					true
+				]
+
+		return [data]
+	} catch (error) {
+		if (error.message !== 'repeat')
+			return [
 				updateStatus({
 					data: false,
 					type: 'network',
@@ -76,6 +78,7 @@ export default (
 					aimsJson: 'msg'
 				}),
 				true
-			)
-		})
+			]
+		else return null
+	}
 }

@@ -35,7 +35,7 @@ export function useApiState(aims: string): any {
 /**
  * 更新 state
  * @returns ({...}) => void | ↓
- *  @param queue 更新索引 | ↓
+ * @param queue 更新索引 | ↓
  * 更新多个 => [[{ type }, ...{ child }], [{ type }, ...{ child }]] / 更新一个 => [{ type }, ...{ child }]
  */
 export function useUpdateApi(): (queue: any) => void {
@@ -91,9 +91,9 @@ const FitRequestQueue = (aims: any, args: any): [any, any] => {
 	args.forEach((arg: string) => {
 		const update = apiIndexUpdater[aims][arg]
 		if (update !== undefined) {
-			const [URL, updateParamArr] = update
+			const [URL, updateParamQuery] = update
 			if (!fetchUpdateParam[URL]) fetchUpdateParam[URL] = {}
-			fetchUpdateParam[URL][arg] = updateParamArr
+			fetchUpdateParam[URL][arg] = updateParamQuery
 			fetchParamArr[arg] = aims
 		}
 	})
@@ -114,27 +114,24 @@ const sendRequest = (
 	aims: any
 ) => {
 	const queryAims = typeof aims === 'object' ? true : false
-	Object.keys(fitRequestQueue).forEach((URL: string) => {
-		$fetch(
-			connect,
-			(data: any, pureDispatch: boolean = false) => {
-				if (!pureDispatch) {
-					const fetchParamArr = fitRequestQueue[URL]
-					const aimsObj = Object.keys(fetchParamArr)
-					aimsObj.forEach((isAims: string) => {
-						//=> 索引对应值并 dispatch 更新 state
-						dispatch(
-							updater[!queryAims ? aims : aims[isAims]].update({
-								apiType: isAims,
-								value: _.get(data, fetchParamArr[isAims])
-							})
-						)
-						// '此处可合并 action，对于相同的 API 类型，可以合并到一起再发送，节省 action 开销。'
-					})
-					//console.log(data)
-				} else dispatch(data)
-			},
-			URL
-		)
+	Object.keys(fitRequestQueue).forEach(async (URL: string) => {
+		const resultArr = await $fetch(connect, URL)
+		if (resultArr) {
+			const [result, pureDispatch] = resultArr
+			if (!pureDispatch) {
+				const fetchParamArr = fitRequestQueue[URL]
+				const aimsObj = Object.keys(fetchParamArr)
+				aimsObj.forEach((isAims: string) => {
+					//=> 索引对应值并 dispatch 更新 state
+					dispatch(
+						updater[!queryAims ? aims : aims[isAims]].update({
+							apiType: isAims,
+							value: _.get(result, fetchParamArr[isAims])
+						})
+					)
+					// '此处可合并 action，对于相同的 API 类型，可以合并到一起再发送，节省 action 开销。'
+				})
+			} else dispatch(result)
+		}
 	})
 }

@@ -14,7 +14,7 @@ import store from 'state'
 import App from './App'
 //[ pages ]
 
-//import 'utils/requestDecrypt' //=> AXIOS | '解密宝塔请求' '宝塔疑似移除'
+import 'utils/fetchAnit' //=> AXIOS | '流程拦截器'
 //[ utils ]
 
 //=> Render | 渲染页面

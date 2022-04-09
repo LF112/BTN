@@ -2,9 +2,58 @@ import axios from 'axios'
 import CryptoJS from 'crypto-js'
 
 /**
+ * 拦截重复请求
+ */
+const CancelToken = axios.CancelToken
+let requestQueue = []
+const HandleRequest = ({ config }) => {
+	const { url, method, data = {}, params = {} } = config
+
+	const StringData = JSON.stringify(data)
+	const StringParams = JSON.stringify(params)
+
+	const panding = requestQueue.filter(
+		v =>
+			v.url === url &&
+			v.method === method &&
+			v.data === StringData &&
+			v.params === StringParams
+	)
+
+	if (panding.length) config.cancelToken = new CancelToken(c => c('repeat'))
+	else
+		requestQueue.push({
+			url,
+			data: StringData,
+			params: StringParams,
+			method
+		})
+}
+
+const HandleResponse = ({ config }) => {
+	const { url, data = JSON.stringify({}), params = JSON.stringify({}) } = config
+	const reqQueue = requestQueue.filter(
+		v => v.url !== url && v.data !== data && v.params !== params
+	)
+	requestQueue = reqQueue
+}
+
+// 请求拦截
+axios.interceptors.request.use(config => {
+	HandleRequest({ config })
+	return config
+})
+
+// 响应拦截器
+axios.interceptors.response.use(response => {
+	HandleResponse({ config: response.config })
+	return response
+})
+
+/**
  * @description 处理宝塔请求
  */
-axios.interceptors.response.use(
+/*axios.interceptors.response.use(
 	res => {
 		//=> 从 res 中取出 data
 		const { data = '' } = res
@@ -43,3 +92,4 @@ axios.interceptors.response.use(
 	},
 	error => Promise.reject(error)
 )
+*/
