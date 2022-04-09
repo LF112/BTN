@@ -21,6 +21,18 @@ export type state = {
 			inodes: string[]
 		}
 	]
+	iostat: {
+		[propName: string]: {
+			read_bytes: number
+			read_count: number
+			read_merged_count: number
+			read_time: number
+			write_bytes: number
+			write_count: number
+			write_merged_count: number
+			write_time: number
+		}
+	}
 	network: object
 	up: number
 	down: number
@@ -52,6 +64,18 @@ export const initialState: state = {
 			inodes: ['-', '-', '-', '-']
 		}
 	],
+	iostat: {
+		ALL: {
+			read_bytes: 0,
+			read_count: 0,
+			read_merged_count: 0,
+			read_time: 0,
+			write_bytes: 0,
+			write_count: 0,
+			write_merged_count: 0,
+			write_time: 0
+		}
+	},
 	network: {},
 	up: 0,
 	down: 0,
@@ -76,6 +100,7 @@ const { CONFIG, GetConcifInfo, GetNetWork } = ID
  */
 export const stateApiUpdateIndex: any = {
 	disk: [GetNetWork, 'disk'],
+	iostat: [GetNetWork, 'iostat'],
 	os: [GetNetWork, 'system'],
 	systemdate: [GetConcifInfo, 'systemdate'],
 	webserver: [GetConcifInfo, 'webserver'],

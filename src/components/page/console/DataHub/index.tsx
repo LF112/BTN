@@ -3,15 +3,18 @@ import styled from 'styled-components'
 //[ package ]
 
 import Network from './Network'
+import Iostat from './Iostat'
+//[ component ]
 
 import { useApiState } from 'state/api/hooks'
 //[ hooks ]
 
 import { bytesToSize } from 'utils/useTools'
+//[ utils ]
 
 //=> DOM
 export default () => {
-	const { up, down, upTotal, downTotal } = useApiState('system')
+	const { up, down, upTotal, downTotal, iostat } = useApiState('system')
 
 	return (
 		<Main>
@@ -21,6 +24,7 @@ export default () => {
 				upTotal={bytesToSize(upTotal)}
 				downTotal={bytesToSize(downTotal)}
 			/>
+			<Iostat data={iostat} />
 		</Main>
 	)
 }

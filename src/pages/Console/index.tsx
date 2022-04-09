@@ -51,7 +51,16 @@ export default () => {
 			Timer = setRafInterval(() => {
 				if (_apiStatus)
 					updateApi([
-						['system', 'load', 'disk', 'up', 'down', 'upTotal', 'downTotal'],
+						[
+							'system',
+							'load',
+							'disk',
+							'up',
+							'down',
+							'upTotal',
+							'downTotal',
+							'iostat'
+						],
 						['cpu', 'cpu'],
 						['memory', 'mem']
 					])
