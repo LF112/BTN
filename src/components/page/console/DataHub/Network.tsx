@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import { DefaultCard } from 'components/reusable/Card'
 import LegendCard from 'components/reusable/LegendCard'
-import Chart from './Chart'
+import Chart from 'components/reusable/Chart'
 //[ components ]
 
 //=> DOM
@@ -45,7 +45,7 @@ export default (props: any) => {
 				</LegendContainer>
 			</Left>
 			<Right>
-				<Chart up={up} down={down} />
+				<Chart up={up} down={down} defSuffix={'Kb'} />
 			</Right>
 		</Main>
 	)

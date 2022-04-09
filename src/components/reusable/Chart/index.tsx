@@ -13,7 +13,15 @@ import {
 
 //=> DOM
 export default (props: any) => {
-	const { up, down } = props
+	const {
+		up,
+		down,
+		other = [],
+		color = ['#d3d336', '#36d1aa'],
+		areaColor = ['211, 211, 54', '54, 215, 174'],
+		defSuffix = '',
+		tipsWidth = '145px'
+	} = props
 
 	//=> Chart DOM
 	const node = useRef<HTMLDivElement>(null) as any
@@ -71,7 +79,7 @@ export default (props: any) => {
 				ref={node}
 				echarts={echarts}
 				option={{
-					color: ['#d3d336', '#36d1aa'],
+					color: color,
 					grid: { top: 8, right: 8, bottom: 24, left: 36 },
 					xAxis: {
 						type: 'category',
@@ -127,8 +135,8 @@ export default (props: any) => {
 									0,
 									1,
 									[
-										{ offset: 0, color: 'rgba(211, 211, 54,.6)' },
-										{ offset: 1, color: 'rgba(211, 211, 54,.2)' }
+										{ offset: 0, color: `rgba(${areaColor[0]},.6)` },
+										{ offset: 1, color: `rgba(${areaColor[0]},.2)` }
 									],
 									false
 								)
@@ -151,8 +159,8 @@ export default (props: any) => {
 									0,
 									1,
 									[
-										{ offset: 0, color: 'rgba(54, 215, 174,.6)' },
-										{ offset: 1, color: 'rgba(54, 215, 174,.2)' }
+										{ offset: 0, color: `rgba(${areaColor[1]},.6)` },
+										{ offset: 1, color: `rgba(${areaColor[1]},.2)` }
 									],
 									false
 								)
@@ -160,17 +168,17 @@ export default (props: any) => {
 						}
 					],
 					formatter: (config: any) => {
-						let DOM =
-							'<div style="width: 145px;display: flex;flex-direction: column;justify-content: space-evenly;">'
+						let DOM = `<div style="width: ${tipsWidth};display: flex;flex-direction: column;justify-content: space-evenly;">`
+						config = [...config, ...other]
 						for (var i = 0; i < config.length; i++) {
 							if (typeof config[i].data == 'undefined') return false
 							DOM += `<div style="width: 100%;height: 18px;padding: 2px 0;display: flex;justify-content: space-between;align-items: center;"><div style="display: flex;align-items: center;"><div style="width: 8px;height:8px;background:${
 								config[i].color
-							};border-radius: 50%;"></div><p style="font-family: 'Geometos';line-height: 1;color: #79869c;font-size: 12px;margin-left: 4px;">${
+							};border-radius: 50%;"></div><p style="font-family: 'Geometos','HarmonyOS';line-height: 1;color: #79869c;font-size: 12px;margin-left: 4px;">${
 								config[i].seriesName
 							}</p></div><p style="font-family: 'Geometos';line-height: 1;color: #95a6c0;font-size: 12px">${parseFloat(
 								config[i].data
-							).toFixed(2)} Kb/s</p></div>`
+							).toFixed(2)} ${defSuffix}/s</p></div>`
 						}
 						DOM += '</div>'
 
