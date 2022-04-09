@@ -33,4 +33,5 @@ export default () => {
 const Main = styled.main`
 	width: 100%;
 	height: calc(100% - 202px);
+	overflow-y: auto;
 `
