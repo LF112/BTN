@@ -56,7 +56,9 @@ export default () => {
 						['memory', 'mem']
 					])
 			}, 2000)
-		return () => clearRafInterval(Timer)
+		return () => {
+			if (Timer) clearRafInterval(Timer)
+		}
 	}, [_apiStatus])
 
 	return (
