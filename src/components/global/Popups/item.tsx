@@ -97,22 +97,27 @@ export default memo((props: any) => {
 
 		//=> 关闭弹窗动画
 		fastdom.measure(() => {
-			const el = document.getElementById(popupId).style
-			setTimeout(() => {
-				fastdom.mutate(() => {
-					el.paddingLeft = '102%'
-					el.opacity = '0'
-					setTimeout(() => {
-						el.height = '0px'
-						el.marginBottom = '0px'
-
-						//=> 移除弹窗
+			const el = document.getElementById(popupId)
+			// 此处因严格模式下会被 React 反复执行两次，关闭操作组件闪现属于正常现象
+			// console.log(popupId, el)
+			if (el) {
+				const { style } = el
+				setTimeout(() => {
+					fastdom.mutate(() => {
+						style.paddingLeft = '102%'
+						style.opacity = '0'
 						setTimeout(() => {
-							removePopup(popupId)
-						}, 501)
-					}, 500)
-				})
-			}, 550)
+							style.height = '0px'
+							style.marginBottom = '0px'
+
+							//=> 移除弹窗
+							setTimeout(() => {
+								removePopup(popupId)
+							}, 501)
+						}, 500)
+					})
+				}, 550)
+			}
 		})
 	}
 
@@ -131,16 +136,14 @@ export default memo((props: any) => {
 								onClick={() => {
 									updateChooseState(true)
 									triggerChoose(popupId, true, Close)
-								}}
-							>
+								}}>
 								<i className='el-icon-check' />
 							</div>
 							<div
 								onClick={() => {
 									updateChooseState(false)
 									triggerChoose(popupId, false, Close)
-								}}
-							>
+								}}>
 								<i className='el-icon-close' />
 							</div>
 						</ChooseButtom>
@@ -148,8 +151,7 @@ export default memo((props: any) => {
 						<></>
 					)}
 					<StateMask
-						style={chooseState !== null ? { opacity: 1, zIndex: 10 } : {}}
-					>
+						style={chooseState !== null ? { opacity: 1, zIndex: 10 } : {}}>
 						<div
 							style={
 								chooseOk
@@ -159,8 +161,7 @@ export default memo((props: any) => {
 						/>
 						<i
 							style={chooseOk ? {} : { opacity: 0 }}
-							className={`el-icon-${chooseState ? 'check' : 'close'}`}
-						></i>
+							className={`el-icon-${chooseState ? 'check' : 'close'}`}></i>
 					</StateMask>
 				</Main>
 			</div>
