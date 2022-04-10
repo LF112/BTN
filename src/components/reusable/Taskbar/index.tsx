@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
-import Highlight from 'react-highlight'
+import hljs from 'highlight.js'
 import _ from 'lodash'
+import prettier from 'prettier'
+import parserBabel from 'prettier/parser-babel'
 //[ package ]
 
 import './oneDark.less'
@@ -20,23 +22,40 @@ export default (props: any) => {
 
 	const node = useRef<HTMLElement>()
 	const [FoldHeight, updateFoldHeight] = useState<number>(-1)
+	const [text, setText] = useState<string>('')
 	useEffect(() => {
+		const { value } = hljs.highlight(
+			'json',
+			prettier.format(JSON.stringify(rawJson), {
+				parser: 'json',
+				plugins: [parserBabel]
+			})
+		)
+		setText(value)
 		if (FoldHeight !== -1) {
-			node.current.style.height = 'auto'
+			node.current.style.height = 'unset'
 			setTimeout(() => {
 				const DOM = node.current
 				updateFoldHeight(DOM.clientHeight + 4)
 				DOM.style.height = '0'
-			})
+			}, 16)
 		}
 	}, [UpdateNow])
 
 	useEffect(() => {
+		const { value } = hljs.highlight(
+			'json',
+			prettier.format(JSON.stringify(rawJson), {
+				parser: 'json',
+				plugins: [parserBabel]
+			})
+		)
+		setText(value)
 		setTimeout(() => {
 			const DOM = node.current
 			updateFoldHeight(DOM.clientHeight + 4)
 			DOM.style.height = '0'
-		})
+		}, 16)
 	}, [node])
 
 	useEffect(() => {
@@ -55,9 +74,9 @@ export default (props: any) => {
 					<p>{_.get(rawJson, aimsJson) || '-'}</p>
 				</Context>
 				<Fold ref={node as any}>
-					<PackageHighlight className='json'>
-						{JSON.stringify(rawJson)}
-					</PackageHighlight>
+					<pre className='hljs'>
+						<code dangerouslySetInnerHTML={{ __html: text }} />
+					</pre>
 				</Fold>
 			</div>
 		</Main>
@@ -114,11 +133,10 @@ const Fold = styled.div`
 	width: 100%;
 	overflow: hidden;
 	cursor: auto;
-`
-
-const PackageHighlight = styled(Highlight)`
-	background: #282c34;
-	border-radius: 5px;
-	padding: 8px 18px;
-	margin-top: 5px;
+	> pre {
+		background: #282c34;
+		border-radius: 5px;
+		padding: 8px 18px;
+		margin-top: 5px;
+	}
 `
