@@ -1,5 +1,10 @@
 import { ID as _NID } from 'state/api/linkId'
 
+import { BTFetch } from 'state/fetch/hooks'
+import { useUpdateApi } from 'state/api/hooks'
+import { useAddPopup } from 'state/popup/hooks'
+//[ hooks ]
+
 /**
  * CLICK HANDLER
  */
@@ -17,7 +22,12 @@ export default class {
 	private updateApi: (queue: any) => void
 
 	constructor(Fn: any) {
-		const { $fetch, isNew, setButtonStatus, addPopup, updateApi, Beta } = Fn
+		const { setButtonStatus, Beta, isNew } = Fn
+
+		const updateApi = useUpdateApi()
+		const $fetch = BTFetch()
+		const addPopup = useAddPopup()
+
 		this.$fetch = $fetch // BT FETCH 网络请求
 		this.isNew = isNew // 是否有新版本
 		this.Beta = Beta // 是否为测试版

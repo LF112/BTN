@@ -8,11 +8,6 @@ import { ReactComponent as UpdateIcon } from 'assets/svg/global_update.svg'
 import Button from 'components/reusable/Button'
 //[ components ]
 
-import { BTFetch } from 'state/fetch/hooks'
-import { useUpdateApi } from 'state/api/hooks'
-import { useAddPopup } from 'state/popup/hooks'
-//[ hooks ]
-
 import ClickHandler from './click'
 //[ click handler ]
 
@@ -20,17 +15,11 @@ import ClickHandler from './click'
 export default (props: any) => {
 	const { isNew, Beta, UpdateTime } = props
 
-	const updateApi = useUpdateApi()
-	const $fetch = BTFetch()
-	const addPopup = useAddPopup()
 	const [buttonStatus, setButtonStatus] = useState<number>(-2)
 
 	const CLICK = new ClickHandler({
-		$fetch: $fetch,
 		isNew: isNew,
-		setButtonStatus: setButtonStatus,
-		addPopup: addPopup,
-		updateApi: updateApi
+		setButtonStatus: setButtonStatus
 	})
 
 	return (

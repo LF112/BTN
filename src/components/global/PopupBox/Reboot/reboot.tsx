@@ -9,18 +9,12 @@ import { ReactComponent as Running_ICON } from 'assets/svg/global_running.svg'
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
 //[ components ]
 
-import { useAddPopup } from 'state/popup/hooks'
-//[ hooks ]
-
 import ClickHandler from './click'
-import { BTFetch } from 'state/fetch/hooks'
 //[ click handler ]
 
 //=> DOM
 export default (props: any) => {
 	const { show, webserver, Close } = props
-	const addPopup = useAddPopup()
-	const $fetch = BTFetch()
 
 	const [taskList, setTaskList] = useState<any[]>([
 		{ task: '停止 Web 服务', run: -2 },
@@ -31,12 +25,10 @@ export default (props: any) => {
 	const [buttonStatus, setButtonStatus] = useState<number>(-2)
 
 	const CLICK = new ClickHandler({
-		addPopup: addPopup,
-		$fetch: $fetch,
 		setServerButtonStatus: setButtonStatus,
 		SetTaskArr: setTaskList,
-		TaskList: taskList,
 		setLight: setLight,
+		TaskList: taskList,
 		webserver: webserver,
 		Close: Close
 	})

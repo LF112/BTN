@@ -8,8 +8,6 @@ import Reboot from './reboot'
 //[ components ]
 
 import { useUpdateShow } from 'state/popupbox/hooks'
-import { useAddPopup } from 'state/popup/hooks'
-import { BTFetch } from 'state/fetch/hooks'
 import { useUpdateApi, useApiState } from 'state/api/hooks'
 //[ hooks ]
 
@@ -22,8 +20,6 @@ import ClickHandler from './click'
 export default (props: any) => {
 	const { Close } = props
 	const updateShow = useUpdateShow()
-	const addPopup = useAddPopup()
-	const $fetch = BTFetch()
 	const updateApi = useUpdateApi()
 	const { webserver } = useApiState('system')
 
@@ -38,8 +34,6 @@ export default (props: any) => {
 	const [serverButtonStatus, setServerButtonStatus] = useState<number>(-2)
 
 	const CLICK = new ClickHandler({
-		addPopup: addPopup,
-		$fetch: $fetch,
 		setPanelButtonStatus: setPanelButtonStatus,
 		setServerButtonStatus: setServerButtonStatus
 	})
