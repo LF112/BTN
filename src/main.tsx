@@ -1,26 +1,31 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 //[ package ]
 
-import './index.css'
+import './index.less'
+import 'assets/element-ui-icon/index.css'
 //[ style ]
 
 import store from 'state'
 //[ store ]
 
-import App from './App.tsx'
+import App from './App'
 //[ pages ]
 
+import 'utils/fetchAnit' //=> AXIOS | '流程拦截器'
+//[ utils ]
+
 //=> Render | 渲染页面
-ReactDOM.render(
+//=> 绑定渲染组件↓
+createRoot(document.getElementById('BTNEXT')).render(
 	<React.StrictMode>
 		{/* REACT REDUX */}
 		<Provider store={store}>
 			<App />
 		</Provider>
-	</React.StrictMode>,
-	document.getElementById('BTNEXT') //=> 绑定渲染组件
+	</React.StrictMode>
 )
 
 //=> 控制台徽章

@@ -1,24 +1,60 @@
 import React from 'react'
 import styled from 'styled-components'
+import { HashRouter as Router } from 'react-router-dom'
+//[ package ]
+
+import Sidebar from 'components/global/Sidebar'
+import Footer from 'components/global/Footer'
+import Popups from 'components/global/Popups'
+import Pages from 'pages'
+import RipplesMask from 'components/global/RipplesMask'
+import NetworkWarnPane from 'components/global/WarnPane/network'
+import PopupBox from 'components/global/PopupBox'
+//[ Components ]
 
 //=> Main Component
 export default () => {
 	return (
-		<Main>
-			<h1>你好，BTN！</h1>
-		</Main>
+		<BtnMain>
+			<div>
+				<Main>
+					<Popups />
+					<PopupBox />
+					<RipplesMask child={<NetworkWarnPane />} />
+					<Router>
+						<Sidebar />
+						<Pages />
+					</Router>
+				</Main>
+				<Footer />
+			</div>
+		</BtnMain>
 	)
 }
 
 //=> Style Component
-const Main = styled.main`
+const BtnMain = styled.div`
 	width: 100vw;
 	height: 100vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	> h1 {
-		font-size: 50px;
-		font-weight: bold;
+	padding: 25px;
+	> div {
+		max-width: 1440px;
+		width: 100%;
+		height: 100%;
+		border-radius: 8px;
+		background: #323842;
+		box-shadow: 0px 4px 8px rgba(0, 0, 0, 15%);
 	}
+`
+
+const Main = styled.main`
+	position: relative;
+	width: 100%;
+	height: calc(100% - 42px);
+	padding: 5px;
+	display: flex;
+	align-items: center;
 `
