@@ -83,7 +83,7 @@ export const bytesToSize = (
  */
 export const strLogsToArr = (str: string): any[] => {
 	const Pretreatment = str
-		.split(/^【(.*)】(.*)/gim)
+		.split(/^【(.{1,2})】(.*)<br>/gm)
 		.filter((v: string) => v !== '')
 		.map((v: string) => v.replace('<br>', ''))
 
