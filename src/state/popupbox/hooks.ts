@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react'
 import { AppState } from 'state'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
-import { updateAims, updateShow } from './slice'
+import { updateAims, updateShow, addLoaded } from './slice'
 //[ package ]
 
 /***
@@ -52,6 +52,28 @@ export function useUpdateShow(): (show: boolean) => void {
 	//=> MAIN
 	return useCallback(
 		(show: boolean) => dispatch(updateShow({ show: show })),
+		[dispatch]
+	)
+}
+
+//=> 获取已加载的弹窗
+export function getLoaded() {
+	//=> READ STATE
+	const state = useAppSelector(
+		(state: AppState) => state.popupbox /* state name */
+	)
+
+	//=> MAIN
+	return useMemo(() => state.loaded, [state])
+}
+
+//=> 显示弹窗
+export function useAddLoaded(): (id: string) => void {
+	const dispatch = useAppDispatch()
+
+	//=> MAIN
+	return useCallback(
+		(id: string) => dispatch(addLoaded({ id: id })),
 		[dispatch]
 	)
 }

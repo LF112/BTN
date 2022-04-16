@@ -6,13 +6,15 @@ export type PopupBoxState = {
 	aims: string
 	title: string
 	show: boolean
+	loaded: string[]
 }
 
 //=> State 表初始化 | '是这个 state 的一些默认值'
 export const initialState: PopupBoxState = {
 	aims: null,
 	title: '',
-	show: false
+	show: false,
+	loaded: []
 }
 
 //=> SLICE
@@ -34,11 +36,16 @@ export const popupBoxSlice = createSlice({
 			const { show } = action.payload
 			//=> 更新 state
 			state.show = show
+		},
+		addLoaded: (state, action: PayloadAction<{ id: string }>) => {
+			const { id } = action.payload
+			//=> 更新 state
+			if (!state.loaded.includes(id)) state.loaded.push(id)
 		}
 	}
 })
 
 //=> 导出 Slice | '一般直接填写注册的 FUNCTIONS'
-export const { updateAims, updateShow } = popupBoxSlice.actions
+export const { updateAims, updateShow, addLoaded } = popupBoxSlice.actions
 //=> export reducer
 export default popupBoxSlice.reducer

@@ -10,7 +10,9 @@ import {
 	useLoadId,
 	useShow,
 	useUpdateLoadId,
-	useUpdateShow
+	useUpdateShow,
+	getLoaded,
+	useAddLoaded
 } from 'state/popupbox/hooks'
 import { useAddPopup, useClosePopup } from 'state/popup/hooks'
 //[ hooks ]
@@ -26,6 +28,8 @@ export default () => {
 	const closePopup = useClosePopup()
 	const updateLoadId = useUpdateLoadId()
 	const updateShow = useUpdateShow()
+	const Loaded = getLoaded()
+	const addLoaded = useAddLoaded()
 
 	const [showDom, setShowDom] = useState<boolean>(false) //=> 显示弹窗动画
 	const [popupId, setPopupId] = useState<string>(null) //=> Popup ID
@@ -58,7 +62,8 @@ export default () => {
 		}
 		if (loadId) {
 			//=> 显示载入状态弹窗
-			setPopupId(addPopup('正在加载中...', 'load', -1) as string)
+			if (!Loaded.includes(loadId))
+				setPopupId(addPopup('正在加载中...', 'load', -1) as string)
 			//=> 绑定 ESC 关闭弹窗快捷键
 			document.addEventListener('keydown', escKey)
 		}
@@ -68,7 +73,8 @@ export default () => {
 	useEffect(() => {
 		if (show) {
 			//=> 移除载入状态弹窗
-			closePopup(popupId)
+			if (!Loaded.includes(loadId)) closePopup(popupId)
+			addLoaded(loadId)
 			setTimeout(() => {
 				fastdom.measure(() => {
 					const DOM = node.current
@@ -159,6 +165,7 @@ const CloseMask = styled.div`
 	width: 100%;
 	height: 100%;
 	border-radius: 8px 8px 0 0;
+	backdrop-filter: blur(2px);
 	background: linear-gradient(18deg, rgb(8 20 53 / 25%), rgb(32 33 34 / 90%)),
 		linear-gradient(333deg, rgba(39, 52, 64, 0.3), rgba(180, 255, 217, 0.08)),
 		radial-gradient(
