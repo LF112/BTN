@@ -15,7 +15,7 @@
     "bugs": {
         "url": "https://github.com/btnext/BTN/issues"
     },
-    "proxy": "http://localhost:30240",
+    "type": "module",
     "homepage": "https://github.com/btnext/BTN#readme",
     "dependencies": {
         "@ant-design/icons": "^4.7.0",
