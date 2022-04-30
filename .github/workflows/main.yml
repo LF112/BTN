@@ -33,8 +33,8 @@ jobs:
           echo "---------- MAIN ----------"
           echo ' 正在安装依赖...';
           npm i child_process;
-          echo ' 正在更新版本号...';
-          node ./script/autoUpdateVersion.js COMMIT="$(git rev-parse --short HEAD)";
+          echo ' 正在执行更新脚本...';
+          node ./script/autoUpdateVersion.js COMMIT="$(git rev-parse --short HEAD)" BRANCH="$(git rev-parse --abbrev-ref HEAD)";
           echo 'Auto Update Version DONE!';
 
       - name: 获取 GIT 权限
