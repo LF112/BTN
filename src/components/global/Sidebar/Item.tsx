@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
+import { useUpdatePageLoadStatus } from 'state/animation/hooks'
 //[ package ]
 
 //=> Component
@@ -8,12 +9,16 @@ export default (props: any) => {
 	const { text, icon, path, location } = props.data
 
 	const navigate = useNavigate()
+	const setPageLoad = useUpdatePageLoadStatus()
 
 	const clicked = location === path
 	return (
 		<MenuItem
 			style={clicked ? { background: '#21242c', pointerEvents: 'none' } : {}}
-			onClick={() => navigate(path)}>
+			onClick={() => {
+				setPageLoad(false)
+				setTimeout(() => navigate(path), 250)
+			}}>
 			<FrameStrip style={{ opacity: clicked ? 1 : 0 }} />
 			<div>
 				<Icon>{icon}</Icon>

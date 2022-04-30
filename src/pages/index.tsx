@@ -65,4 +65,7 @@ const LoadMaskMain = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	opacity: 0;
+	animation: FadeIn 0.5s forwards;
+	animation-delay: 0.25s;
 `

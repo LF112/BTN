@@ -40,6 +40,7 @@ export default () => {
 const Sidebar = styled.nav`
 	position: relative;
 	width: 198px;
+	min-width: 198px;
 	height: calc(100% - 20px);
 	display: flex;
 	justify-content: center;
