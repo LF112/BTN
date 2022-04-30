@@ -7,6 +7,7 @@ import Sidebar from 'components/global/Sidebar'
 import Footer from 'components/global/Footer'
 import Popups from 'components/global/Popups'
 import Pages from 'pages'
+import Loading from 'pages/Loading'
 import RipplesMask from 'components/global/RipplesMask'
 import NetworkWarnPane from 'components/global/WarnPane/network'
 import PopupBox from 'components/global/PopupBox'
@@ -24,6 +25,7 @@ export default () => {
 					<Router>
 						<Sidebar />
 						<Pages />
+						<Loading />
 					</Router>
 				</Main>
 				<Footer />

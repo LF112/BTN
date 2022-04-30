@@ -4,9 +4,6 @@ import { Route, Routes } from 'react-router-dom'
 import { useNavigate, useLocation } from 'react-router-dom'
 //[ package ]
 
-import Loader from 'components/reusable/Loading/HalfFilled'
-//[ Components ]
-
 //=> DOM
 export default () => {
 	//=> LazyLoad
@@ -23,12 +20,7 @@ export default () => {
 	const PAGE = (name: string) => {
 		const PageComponent = _page[name] // 取出页面
 		return (
-			<Suspense
-				fallback={
-					<LoadMaskMain>
-						<Loader speed={1.2} lineSpeed={1.4} width={4} size={50} />
-					</LoadMaskMain>
-				}>
+			<Suspense fallback={<></>}>
 				<PageComponent />
 			</Suspense>
 		)
@@ -58,14 +50,3 @@ export default () => {
 		</Routes>
 	)
 }
-
-const LoadMaskMain = styled.div`
-	width: calc(100% - 218px);
-	height: 500px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	opacity: 0;
-	animation: FadeIn 0.5s forwards;
-	animation-delay: 0.25s;
-`
