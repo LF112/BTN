@@ -1,5 +1,4 @@
 import React, { Suspense, useEffect } from 'react'
-import styled from 'styled-components'
 import { Route, Routes } from 'react-router-dom'
 import { useNavigate, useLocation } from 'react-router-dom'
 //[ package ]
