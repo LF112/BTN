@@ -39,6 +39,7 @@ const Main = styled(DefaultCard)`
 	padding: 8px;
 	display: flex;
 	align-items: center;
+	margin-bottom: 10px;
 	> svg {
 		width: 65px;
 		height: 65px;

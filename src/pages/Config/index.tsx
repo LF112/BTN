@@ -3,6 +3,7 @@ import styled from 'styled-components'
 //[ package ]
 
 import BTN from 'components/page/config/BTN'
+import Navigation from 'components/page/config/Navigation'
 //[ components ]
 
 import {
@@ -33,6 +34,7 @@ export default () => {
 			}>
 			<Left>
 				<BTN />
+				<Navigation />
 			</Left>
 			<Right></Right>
 		</Main>
