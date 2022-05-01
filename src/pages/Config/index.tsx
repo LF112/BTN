@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+
 //[ package ]
 
 import BTN from 'components/page/config/BTN'
 import Navigation from 'components/page/config/Navigation'
-//[ components ]
+import Page from './Page'
+//[ Components ]
 
 import {
 	useUpdatePageLoadStatus,
@@ -15,8 +17,9 @@ import {
 //=> DOM
 export default () => {
 	const setPageLoad = useUpdatePageLoadStatus()
-
 	const pageLoad = usePageLoadStatus()
+
+	const [togglePage, setTogglePage] = useState<string>('panel')
 
 	//=> MAIN EFFECTS
 	const [SHOW, setSHOW] = useState<Boolean>(false)
@@ -34,9 +37,11 @@ export default () => {
 			}>
 			<Left>
 				<BTN />
-				<Navigation />
+				<Navigation togglePage={togglePage} setTogglePage={setTogglePage} />
 			</Left>
-			<Right></Right>
+			<Right>
+				<Page page={togglePage} />
+			</Right>
 		</Main>
 	)
 }
