@@ -58,6 +58,9 @@ const Main = styled(DefaultCard)`
 	height: 142px;
 	min-height: 148px;
 	margin-top: 10px;
+	opacity: 0;
+	animation: ScaleIn 0.25s forwards;
+	animation-delay: 299ms;
 `
 const FooInfo = styled.div`
 	width: 100%;

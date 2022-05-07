@@ -4,9 +4,9 @@ import styled from 'styled-components'
 
 //=> DOM
 export default (props: any) => {
-	const { icon, text } = props
+	const { icon, text, style = {} } = props
 	return (
-		<BadgeIcon>
+		<BadgeIcon style={style}>
 			{icon}
 			<Text>{text}</Text>
 		</BadgeIcon>

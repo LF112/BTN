@@ -38,17 +38,32 @@ export default () => {
 				first={<RocketOutlined />}
 				text='更新'
 				onClick={() => updateLoadId('UpdatePanel', '更新面板')}
+				style={{
+					opacity: 0,
+					animation: 'ScaleIn 0.25s forwards',
+					animationDelay: '48ms'
+				}}
 			/>
 			<Button
 				first={<ToolOutlined />}
 				status={buttonStatus}
 				text='修复'
 				onClick={() => CLICK.RepairPanel()}
+				style={{
+					opacity: 0,
+					animation: 'ScaleIn 0.25s forwards',
+					animationDelay: '64ms'
+				}}
 			/>
 			<Button
 				first={<ReloadOutlined />}
 				text='重启'
 				onClick={() => updateLoadId('Reboot', '重启')}
+				style={{
+					opacity: 0,
+					animation: 'ScaleIn 0.25s forwards',
+					animationDelay: '80ms'
+				}}
 			/>
 		</Main>
 	)
@@ -66,4 +81,7 @@ const Main = styled.header`
 	align-items: center;
 	justify-content: space-around;
 	padding: 5px 10px;
+	opacity: 0;
+	animation: FadeIn 0.25s forwards;
+	animation-delay: 32ms;
 `

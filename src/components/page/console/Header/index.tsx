@@ -38,8 +38,21 @@ export default () => {
 					text={
 						$panel.Pro > 0 ? '专业版' : $panel.Ltd > 0 ? '企业版' : '免费版'
 					}
+					style={{
+						opacity: 0,
+						animation: 'ScaleIn 0.25s forwards',
+						animationDelay: '226ms'
+					}}
 				/>
-				<BadgeIcon icon={<i className='el-icon-time' />} text={$panel.time} />
+				<BadgeIcon
+					icon={<i className='el-icon-time' />}
+					text={$panel.time}
+					style={{
+						opacity: 0,
+						animation: 'ScaleIn 0.25s forwards',
+						animationDelay: '258ms'
+					}}
+				/>
 			</BadgeList>
 		</Main>
 	)
@@ -57,6 +70,8 @@ const Main = styled.header`
 	align-items: center;
 	justify-content: space-between;
 	padding: 5px 10px;
+	opacity: 0;
+	animation: FadeIn 0.25s forwards;
 `
 
 const BadgeList = styled.div`
@@ -83,6 +98,9 @@ const HightTEXT = styled.h1`
 	font-size: 20px;
 	line-height: 1;
 	margin-top: -4px;
+	opacity: 0;
+	animation: FadeIn 0.25s forwards;
+	animation-delay: 41ms;
 `
 
 const Line = styled.hr`
@@ -91,4 +109,7 @@ const Line = styled.hr`
 	border-radius: 5px;
 	background: #b2b7c2;
 	margin: 0 15px;
+	opacity: 0;
+	animation: HeightIn 0.25s, FadeIn 0.25s forwards;
+	animation-delay: 98ms;
 `

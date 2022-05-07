@@ -74,6 +74,11 @@ export default () => {
 					value={$load || 0}
 					valueColor={$loadStatus.color}
 					icon={'el-icon-odometer'}
+					style={{
+						opacity: 0,
+						animation: 'ScaleIn 0.25s forwards',
+						animationDelay: '299ms'
+					}}
 				/>
 				<StatusCard
 					title={'CPU 使用率'}
@@ -81,6 +86,11 @@ export default () => {
 					value={cpu[0] || 0}
 					valueColor={$cpuColor}
 					icon={'el-icon-cpu'}
+					style={{
+						opacity: 0,
+						animation: 'ScaleIn 0.25s forwards',
+						animationDelay: '340ms'
+					}}
 				/>
 				<StatusCard
 					title={'内存使用率'}
@@ -88,6 +98,11 @@ export default () => {
 					value={$mem || 0}
 					valueColor={$memColor}
 					icon={'el-icon-files'}
+					style={{
+						opacity: 0,
+						animation: 'ScaleIn 0.25s forwards',
+						animationDelay: '381ms'
+					}}
 				/>
 			</CardBox>
 			<OverflowMask showMask={showMask} />

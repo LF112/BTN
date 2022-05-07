@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { useStatus } from 'state/status/hooks'
 import styled from 'styled-components'
 //[ package ]
 
 //=> DOM
 export default (props: any) => {
-	const { onClick, text, last, first, tag, status = -3 } = props
+	const { onClick, text, last, first, tag, status = -3, style = {} } = props
 	const [clicked, updateClicked] = useState<boolean>(false)
 
 	//=> 描边海浪动画
@@ -71,6 +70,7 @@ export default (props: any) => {
 
 	return (
 		<Button
+			style={style}
 			onClick={(el: any) => {
 				if (lock) el.preventDefault()
 				else if (onClick) {

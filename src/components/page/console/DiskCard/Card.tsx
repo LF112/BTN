@@ -13,7 +13,7 @@ import { ReactComponent as DriveIcon } from 'assets/svg/global_drive.svg'
 
 //=> DOM
 export default (props: any) => {
-	const { data } = props
+	const { data, style } = props
 
 	const {
 		path,
@@ -34,7 +34,7 @@ export default (props: any) => {
 	}, [titleBoxNode, type])
 
 	return (
-		<Card>
+		<Card style={style}>
 			<Icon>
 				<DriveIcon />
 				<div>
@@ -89,6 +89,8 @@ const Card = styled(DefaultCard)`
 	display: flex;
 	align-items: center;
 	padding: 10px;
+	opacity: 0;
+	animation: FadeIn_Bottom 0.25s forwards;
 `
 
 const Icon = styled.div`

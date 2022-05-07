@@ -33,7 +33,7 @@ export default () => {
 	return (
 		<Main
 			style={
-				SHOW && !pageLoad ? { animation: 'pageFadeOut 0.5s forwards' } : {}
+				SHOW && !pageLoad ? { animation: 'FadeOut_Left 0.5s forwards' } : {}
 			}>
 			<Left>
 				<BTN />
@@ -53,7 +53,7 @@ const Main = styled.main`
 	height: calc(100% - 20px);
 	margin: 10px 10px 10px auto;
 	display: flex;
-	animation: pageFadeIn 0.25s forwards;
+	animation: FadeIn_Left 0.25s forwards;
 `
 
 const Left = styled.div`

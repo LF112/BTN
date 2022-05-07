@@ -60,6 +60,9 @@ const Main = styled(DefaultCard)`
 	padding: 15px;
 	user-select: none;
 	display: flex;
+	opacity: 0;
+	animation: ScaleIn 0.25s forwards;
+	animation-delay: 422ms;
 `
 
 const Text = styled.h1`

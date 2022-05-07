@@ -33,6 +33,9 @@ const VersionTEXT = styled.h2`
 	font-size: 20px;
 	display: flex;
 	align-items: center;
+	opacity: 0;
+	animation: ScaleIn 0.25s forwards;
+	animation-delay: 130ms;
 	> svg {
 		width: 18px;
 		height: 18px;
@@ -49,4 +52,7 @@ const Releases = styled.h2`
 	line-height: 1;
 	font-family: 'HarmonyOS';
 	margin-left: 8px;
+	opacity: 0;
+	animation: ScaleIn 0.25s forwards;
+	animation-delay: 194ms;
 `

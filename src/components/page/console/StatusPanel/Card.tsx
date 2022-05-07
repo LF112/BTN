@@ -8,10 +8,18 @@ import Progress from 'components/reusable/Progress'
 
 //=> DOM
 export default (props: any) => {
-	const { title, tips, value, valueTips = '%', valueColor = null, icon } = props
+	const {
+		title,
+		tips,
+		value,
+		valueTips = '%',
+		valueColor = null,
+		icon,
+		style = {}
+	} = props
 
 	return (
-		<Main>
+		<Main style={style}>
 			<Information>
 				<InfoTitle>
 					<h2>{title}</h2>

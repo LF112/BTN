@@ -15,7 +15,11 @@ export default () => {
 	return (
 		<DiskCardList>
 			{disk.map((item: any, index: number) => (
-				<Card key={index} data={item} />
+				<Card
+					key={index}
+					data={item}
+					style={{ animationDelay: `${340 + 25 * index}ms` }}
+				/>
 			))}
 		</DiskCardList>
 	)
