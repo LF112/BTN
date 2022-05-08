@@ -6,6 +6,7 @@ import Menu from 'components/reusable/Menu/Breadboard'
 //[ components ]
 
 import { settingChooseList } from 'constants/setting_consts'
+//[ constants ]
 
 //=> DOM
 export default (props: any) => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import styled from 'styled-components'
 
 //[ package ]
@@ -21,6 +21,8 @@ export default () => {
 
 	const [togglePage, setTogglePage] = useState<string>('panel')
 
+	const pageNode = useRef<HTMLDivElement>(null)
+
 	//=> MAIN EFFECTS
 	const [SHOW, setSHOW] = useState<Boolean>(false)
 	useEffect(() => {
@@ -37,9 +39,21 @@ export default () => {
 			}>
 			<Left>
 				<BTN />
-				<Navigation togglePage={togglePage} setTogglePage={setTogglePage} />
+				<Navigation
+					togglePage={togglePage}
+					setTogglePage={(nextPage: string) => {
+						const { style } = pageNode.current
+						style.animation = 'FadeOut_Left 0.25s forwards'
+						setTimeout(() => {
+							setTogglePage(nextPage)
+							setTimeout(() => {
+								style.animation = ''
+							}, 116)
+						}, 250)
+					}}
+				/>
 			</Left>
-			<Right>
+			<Right ref={pageNode}>
 				<Page page={togglePage} />
 			</Right>
 		</Main>
