@@ -92,6 +92,7 @@ const Item = styled.h1`
 	line-height: 1;
 	font-family: 'HarmonyOS';
 	cursor: pointer;
+	user-select: none;
 	:hover {
 		color: #6e788e;
 		font-size: 16px;

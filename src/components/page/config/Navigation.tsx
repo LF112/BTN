@@ -105,6 +105,7 @@ const PageItem = styled.div`
 			line-height: 1;
 			font-family: 'HarmonyOS';
 			margin-left: 20px;
+			user-select: none;
 		}
 	}
 	&:hover {

@@ -136,6 +136,7 @@ const Button = styled.button`
 		font-size: 14px;
 		font-family: 'HarmonyOS';
 		margin: 0 8px;
+		user-select: none;
 	}
 
 	svg {
