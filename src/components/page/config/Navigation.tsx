@@ -37,11 +37,12 @@ export default (props: any) => {
 						const clicked = togglePage === path
 						return (
 							<PageItem
-								style={
-									clicked
+								style={{
+									animationDelay: `${123 + 25 * index}ms`,
+									...(clicked
 										? { background: '#21242c', pointerEvents: 'none' }
-										: {}
-								}
+										: {})
+								}}
 								key={index}
 								onClick={() => setTogglePage(path)}>
 								<FrameStrip style={{ opacity: clicked ? 1 : 0 }} />
@@ -63,6 +64,9 @@ const Main = styled.main`
 	width: 100%;
 	min-width: 230px;
 	margin-bottom: 10px;
+	opacity: 0;
+	animation: ScaleIn 0.25s forwards;
+	animation-delay: 82ms;
 	> main {
 		width: 100%;
 		min-width: 230px;
@@ -97,6 +101,8 @@ const PageItem = styled.div`
 	display: flex;
 	align-items: center;
 	cursor: pointer;
+	opacity: 0;
+	animation: FadeIn_Bottom 0.25s forwards;
 	> div {
 		display: flex;
 		align-items: center;

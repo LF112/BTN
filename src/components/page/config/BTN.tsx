@@ -40,10 +40,15 @@ const Main = styled(DefaultCard)`
 	display: flex;
 	align-items: center;
 	margin-bottom: 10px;
+	opacity: 0;
+	animation: FadeIn 0.25s forwards;
 	> svg {
 		width: 65px;
 		height: 65px;
 		z-index: 5;
+		opacity: 0;
+		animation: ScaleIn 0.25s forwards;
+		animation-delay: 82ms;
 	}
 `
 
@@ -63,6 +68,9 @@ const VersionInfo = styled.div`
 		font-weight: 400;
 		line-height: 1;
 		font-size: 20px;
+		opacity: 0;
+		animation: FadeIn_Top 0.25s forwards;
+		animation-delay: 123ms;
 	}
 	> p {
 		background: linear-gradient(90deg, #c7cacf 0, #abb2bf 100%);
@@ -74,6 +82,9 @@ const VersionInfo = styled.div`
 		font-weight: bold;
 		line-height: 1;
 		margin-top: 5px;
+		opacity: 0;
+		animation: FadeIn_Bottom 0.25s forwards;
+		animation-delay: 164ms;
 		> a:hover {
 			color: #7a808a;
 		}
@@ -85,6 +96,9 @@ const VersionInfo = styled.div`
 		height: 68%;
 		border-radius: 5px 0 0 5px;
 		background: #444b58;
+		opacity: 0;
+		animation: FadeIn_Right 0.25s forwards;
+		animation-delay: 205ms;
 	}
 `
 
@@ -97,4 +111,7 @@ const IconBackground = styled.div`
 	z-index: 0;
 	left: -30px;
 	box-shadow: 0 1px 3px rgba(26, 26, 26, 45%);
+	opacity: 0;
+	animation: FadeIn_Left 0.25s forwards;
+	animation-delay: 41ms;
 `
