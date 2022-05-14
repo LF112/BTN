@@ -18,6 +18,7 @@ import { useAddPopup, useClosePopup } from 'state/popup/hooks'
 //[ hooks ]
 
 import { ICONS } from 'constants/popupBox_consts'
+import SmallButton from 'components/reusable/Button/small'
 //[ constants ]
 
 //=> DOM
@@ -124,9 +125,7 @@ export default () => {
 						{ICONS.hasOwnProperty(loadId) ? ICONS[loadId] : <></>}
 						<h1>{title}</h1>
 					</Title>
-					<CloseButton onClick={Close}>
-						<i className='el-icon-close' />
-					</CloseButton>
+					<SmallButton onClick={Close} icon={<i className='el-icon-close' />} />
 				</Header>
 				{useMemo(() => {
 					return loadId ? MSGBOX(loadId) : <></>
