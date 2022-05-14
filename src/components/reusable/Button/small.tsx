@@ -4,10 +4,10 @@ import styled from 'styled-components'
 
 //=> DOM
 export default (props: any) => {
-	const { onClick, icon, style = {} } = props
+	const { onClick, icon, style = {}, onMouseLeave } = props
 
 	return (
-		<Main style={style} onClick={onClick}>
+		<Main style={style} onClick={onClick} onMouseLeave={onMouseLeave}>
 			{icon}
 		</Main>
 	)
