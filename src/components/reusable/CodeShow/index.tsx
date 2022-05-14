@@ -38,7 +38,7 @@ export default (props: any) => {
 			<SmallButton
 				onClick={() => {
 					setCopied(true)
-					copy(text)
+					copy(rawCode)
 				}}
 				onMouseLeave={() => setCopied(false)}
 				icon={
