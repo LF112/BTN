@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import Switch from 'components/reusable/Switch'
 import {
+	Main,
 	SetUpMain,
 	SetUpTitle,
 	SetUpDescription
@@ -13,20 +14,22 @@ import {
 //=> DOM
 export default () => {
 	return (
-		<Main>
-			<div>
-				<Switch />
-				<SetUpTitle>面板 IPv6 访问支持</SetUpTitle>
-			</div>
-			<SetUpDescription>
-				启用后，面板服务将监听 IPv6 地址，不支持 IPv6 请不要开启！
-			</SetUpDescription>
-		</Main>
+		<SetMain>
+			<SetUpMain>
+				<div>
+					<Switch />
+					<SetUpTitle>面板 IPv6 访问支持</SetUpTitle>
+				</div>
+				<SetUpDescription>
+					启用后，面板服务将监听 IPv6 地址，不支持 IPv6 请不要开启！
+				</SetUpDescription>
+			</SetUpMain>
+		</SetMain>
 	)
 }
 
 //=> Style
-const Main = styled(SetUpMain)`
+const SetMain = styled(Main)`
 	opacity: 0;
 	animation: FadeIn_Bottom 0.25s forwards;
 	animation-delay: 41ms;

@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import Switch from 'components/reusable/Switch'
 import {
+	Main,
 	SetUpMain,
 	SetUpTitle,
 	SetUpDescription
@@ -13,20 +14,22 @@ import {
 //=> DOM
 export default () => {
 	return (
-		<Main>
-			<div>
-				<Switch />
-				<SetUpTitle>离线模式</SetUpTitle>
-			</div>
-			<SetUpDescription>
-				离线模式下，面板更新、插件安装等联网服务将无法使用
-			</SetUpDescription>
-		</Main>
+		<SetMain>
+			<SetUpMain>
+				<div>
+					<Switch />
+					<SetUpTitle>离线模式</SetUpTitle>
+				</div>
+				<SetUpDescription>
+					离线模式下，面板更新、插件安装等联网服务将无法使用
+				</SetUpDescription>
+			</SetUpMain>
+		</SetMain>
 	)
 }
 
 //=> Style
-const Main = styled(SetUpMain)`
+const SetMain = styled(Main)`
 	opacity: 0;
 	animation: FadeIn_Bottom 0.25s forwards;
 	animation-delay: 66ms;

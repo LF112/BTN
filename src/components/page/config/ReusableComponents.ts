@@ -4,7 +4,15 @@ import styled from 'styled-components'
 import { DefaultCard } from 'components/reusable/Card'
 //[ components ]
 
-export const SetUpMain = styled(DefaultCard)`
+export const Main = styled(DefaultCard)`
+	width: 100%;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+`
+
+export const SetUpMain = styled.div`
+	position: relative;
 	width: 100%;
 	padding: 15px 10px;
 	display: flex;
