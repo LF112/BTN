@@ -6,11 +6,8 @@ import { RocketOutlined, ToolOutlined, ReloadOutlined } from '@ant-design/icons'
 import Button from 'components/reusable/Button'
 //[ components ]
 
-import { useAddPopup } from 'state/popup/hooks'
 import { useApiState } from 'state/api/hooks'
 import { useUpdateLoadId } from 'state/popupbox/hooks'
-import { BTFetch } from 'state/fetch/hooks'
-
 //[ hooks ]
 
 import ClickHandler from './click'
@@ -20,14 +17,10 @@ import ClickHandler from './click'
 export default () => {
 	const $panel = useApiState('panel')
 	const updateLoadId = useUpdateLoadId()
-	const $fetch = BTFetch()
-	const addPopup = useAddPopup()
 
 	const [buttonStatus, setButtonStatus] = useState<number>(-2)
 
 	const CLICK = new ClickHandler({
-		$fetch: $fetch,
-		addPopup: addPopup,
 		setButtonStatus: setButtonStatus
 	})
 

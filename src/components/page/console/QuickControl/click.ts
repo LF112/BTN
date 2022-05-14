@@ -1,5 +1,9 @@
 import { ID as _NID } from 'state/api/linkId'
 
+import { useAddPopup } from 'state/popup/hooks'
+import { BTFetch } from 'state/fetch/hooks'
+//[ hooks ]
+
 /**
  * CLICK HANDLER
  */
@@ -9,7 +13,10 @@ export default class {
 	private addPopup: any
 	private setButtonStatus: any
 	constructor(Fn: any) {
-		const { $fetch, addPopup, setButtonStatus } = Fn
+		const { setButtonStatus } = Fn
+
+		const addPopup = useAddPopup()
+		const $fetch = BTFetch()
 
 		this.$fetch = $fetch
 		this.addPopup = addPopup
