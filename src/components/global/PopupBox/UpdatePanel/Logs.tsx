@@ -53,7 +53,7 @@ export default (props: any) => {
 				</h1>
 				<Button
 					text={`查看${!Switch ? '测试版' : '正式版'}`}
-					onClick={toggle}
+					onClick={() => toggle()}
 				/>
 			</LtFi1t1l2e>
 			<Container>
