@@ -31,7 +31,7 @@ export function BTFetch(): (
 	//=> 读取 CONFIG
 	const {
 		connect: { baseUrl, apiUse, apiKey }
-	} = useAppSelector((state: AppState) => state.config /* state name */)
+	} = useAppSelector((state: AppState) => state.btnconfig /* state name */)
 
 	const dispatch = useAppDispatch()
 

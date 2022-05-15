@@ -4,7 +4,7 @@ import { configureStore } from '@reduxjs/toolkit'
 //
 import animation from './animation/slice'
 import popup from './popup/slice'
-import config from './config/slice'
+import btnconfig from './btnconfig/slice'
 import api from './api'
 import status from './status/slice'
 import popupbox from './popupbox/slice'
@@ -20,7 +20,7 @@ const store = configureStore({
 	reducer: {
 		animation,
 		popup,
-		config,
+		btnconfig,
 		status,
 		popupbox,
 		...(api as any)

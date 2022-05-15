@@ -7,6 +7,10 @@ import {
 } from './system' //=> 系统 STATE
 import { initialState as _panel, stateApiUpdateIndex as $_panel } from './panel' //=> 面板 STATE
 import {
+	initialState as _config,
+	stateApiUpdateIndex as $_config
+} from './config' //=> CONFIG
+import {
 	initialState as _cpu,
 	stateApiUpdateIndex as $_cpu
 } from './system/cpu/' //=> CPU信息
@@ -21,7 +25,8 @@ const sliceQueue: any[] = [
 	['system', _system, $_system],
 	['panel', _panel, $_panel],
 	['cpu', _cpu, $_cpu],
-	['memory', _memory, $_memory]
+	['memory', _memory, $_memory],
+	['config', _config, $_config]
 ]
 
 //=> Create SLICE ARR

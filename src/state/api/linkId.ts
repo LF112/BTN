@@ -5,6 +5,7 @@
 
 export const ID = {
 	CONFIG: 'config?action=get_config', // 获取面板配置
+	GetIPv6Status: 'config?action=get_ipv6_listen', // 获取 IPv6 监听状态
 
 	GetNetWork: 'system?action=GetNetWork', // 获取面板动态数据 [ 网络/磁盘/内存/CPU/... ]
 	GetConcifInfo: 'system?action=GetConcifInfo', // 获取面板配置
@@ -22,5 +23,6 @@ export const ID = {
 	ReMemory: 'system?action=ReMemory', // 清理系统内存
 	ServiceAdmin: 'system?action=ServiceAdmin', // 服务管理
 	RestartServer: 'system?action=RestartServer', // 重启服务器
-	ClosePanel: 'config?action=ClosePanel' // 关闭面板
+	ClosePanel: 'config?action=ClosePanel', // 关闭面板
+	ListenIPv6: 'config?action=set_ipv6_status' // 监听 IPv6
 }

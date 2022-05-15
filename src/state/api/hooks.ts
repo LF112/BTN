@@ -43,7 +43,7 @@ export function useUpdateApi(): (queue: any) => void {
 
 	//=> READ CONFIG | '此处仅供给 BtFetch 工具使用'
 	const STATE = useAppSelector((state: AppState) => state)
-	const { connect } = STATE.config
+	const { connect } = STATE.btnconfig
 
 	//=> MAIN
 	//=> 当 API 未被限制可用时
@@ -126,7 +126,10 @@ const sendRequest = (
 					dispatch(
 						updater[!queryAims ? aims : aims[isAims]].update({
 							apiType: isAims,
-							value: _.get(result, fetchParamArr[isAims])
+							value:
+								fetchParamArr[isAims] === ''
+									? result
+									: _.get(result, fetchParamArr[isAims])
 						})
 					)
 					// '此处可合并 action，对于相同的 API 类型，可以合并到一起再发送，节省 action 开销。'
