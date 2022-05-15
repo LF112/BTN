@@ -21,7 +21,7 @@ export const initialState: ConfigState = {
 
 //=> SLICE
 export const configSlice = createSlice({
-	name: 'config', //=> State name | '一般为 state 名字'
+	name: 'btnconfig', //=> State name | '一般为 state 名字'
 	initialState,
 	reducers: {
 		//=> FUNCTIONS | 'state hooks 的一些处理方法 CRUD 等'

@@ -16,7 +16,9 @@ export function useConfig(type: string, page?: string): object {
 	//=> READ STATE
 	const state = useAppSelector(
 		(state: AppState) =>
-			!page ? state.config[type] : state.config[type][page] /* state name */
+			!page
+				? state.btnconfig[type]
+				: state.btnconfig[type][page] /* state name */
 	)
 
 	//=> MAIN
