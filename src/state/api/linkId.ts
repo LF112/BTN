@@ -21,5 +21,6 @@ export const ID = {
 	RepairPanel: 'system?action=RepPanel', // 修复面板
 	ReMemory: 'system?action=ReMemory', // 清理系统内存
 	ServiceAdmin: 'system?action=ServiceAdmin', // 服务管理
-	RestartServer: 'system?action=RestartServer' // 重启服务器
+	RestartServer: 'system?action=RestartServer', // 重启服务器
+	ClosePanel: 'config?action=ClosePanel' // 关闭面板
 }
