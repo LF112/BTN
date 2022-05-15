@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 //[ package ]
 
@@ -7,8 +7,17 @@ import IPv6Support from 'components/page/config/settingPage/IPv6Support'
 import OfflineMode from 'components/page/config/settingPage/OfflineMode'
 //[ components ]
 
+import { useUpdateApi } from 'state/api/hooks'
+//[ hooks ]
+
 //=> DOM
 export default () => {
+	const updateApi = useUpdateApi()
+
+	useEffect(() => {
+		updateApi(['config', 'ipv6'])
+	}, [''])
+
 	return (
 		<Main>
 			<ClosePanel />

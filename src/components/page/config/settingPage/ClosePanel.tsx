@@ -30,10 +30,10 @@ export default () => {
 						toggleSwitch={(
 							Switch: boolean,
 							Toggle: (specify?: boolean) => void,
-							setLock: (specify?: boolean) => void
+							setLoading: (specify: boolean) => void
 						) => {
 							// 直接在组件中处理 | '我觉得这个代码很短，没必要多建个文件放到里面的样子'
-							setLock(true)
+							setLoading(true)
 							addPopup(
 								'关闭面板将无法访问面板，是否继续',
 								'choose',
@@ -45,16 +45,16 @@ export default () => {
 										)) as any
 										if (status) {
 											close()
-											setLock(false)
+											setLoading(false)
 											addPopup('面板已关闭', 'success', 1500)
 										} else {
 											addPopup(msg, 'warn', 1500)
-											setLock(false)
+											setLoading(false)
 										}
 									} else {
 										//=> 取消关闭
 										close()
-										setLock(false)
+										setLoading(false)
 										Toggle(false)
 									}
 								}

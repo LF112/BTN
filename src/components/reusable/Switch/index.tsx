@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import { LoadingOutlined } from '@ant-design/icons'
 //[ package ]
 
 import useToggle from 'utils/useToggle'
@@ -10,17 +11,21 @@ export default (props: any) => {
 	const { toggleSwitch = () => {}, Default = false } = props
 
 	const [Switch, toggle] = useToggle(Default)
-	const [locked, setLock] = useToggle()
+	const [loading, setLoading] = useState<boolean>(false)
 
 	useEffect(() => toggle(Default), [Default])
 
 	return (
 		<Main
-			click={!locked ? Switch : null}
+			click={!loading ? Switch : null}
 			onClick={() => {
-				toggle()
-				toggleSwitch(!Switch, toggle, setLock)
-			}}></Main>
+				if (!loading) {
+					toggle()
+					toggleSwitch(!Switch, toggle, setLoading)
+				}
+			}}>
+			<LoadingOutlined style={{ opacity: loading ? 1 : 0 }} />
+		</Main>
 	)
 }
 
@@ -36,6 +41,9 @@ const Main = styled.div<{ click: boolean }>`
 	cursor: pointer;
 	transition: border-color 0.3s, background-color 0.3s;
 	box-shadow: 0 1px 3px rgba(26, 26, 26, 45%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	&:after {
 		position: absolute;
 		top: 1px;
@@ -53,5 +61,13 @@ const Main = styled.div<{ click: boolean }>`
 			opacity: 0.9;
 			transform: scale(0.9);
 		}
+	}
+	> span {
+		position: absolute;
+		z-index: 1;
+		font-size: 14px;
+		color: #fff;
+		margin-left: ${(props: any) => (props.click ? '28px' : '-28px')};
+		pointer-events: none;
 	}
 `
