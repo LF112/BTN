@@ -17,6 +17,7 @@ export default (props: any) => {
 
 	return (
 		<Main
+			style={{ pointerEvents: loading ? 'none' : 'auto' }}
 			click={!loading ? Switch : null}
 			onClick={() => {
 				if (!loading) {

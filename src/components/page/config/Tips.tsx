@@ -39,11 +39,9 @@ const Main = styled.div`
 			margin-left: 8px;
 			font-size: 14px;
 		}
-		> pre {
-			background: #282c34;
-			border-radius: 5px;
-			padding: 8px 18px;
-			margin-top: 5px;
-		}
+	}
+
+	> div + div {
+		margin-left: 10px;
 	}
 `

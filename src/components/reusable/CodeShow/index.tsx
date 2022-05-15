@@ -62,6 +62,7 @@ const Main = styled.main`
 	padding: 8px 18px;
 	box-shadow: 0 1px 3px rgba(26, 26, 26, 45%);
 	> pre {
+		max-width: 300px;
 		margin-right: 18px;
 		> span {
 			user-select: none;
