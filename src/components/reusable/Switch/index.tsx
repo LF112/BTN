@@ -10,13 +10,14 @@ export default (props: any) => {
 	const { toggleSwitch = () => {} } = props
 
 	const [Switch, toggle] = useToggle()
+	const [locked, setLock] = useToggle()
 
 	return (
 		<Main
-			click={Switch}
+			click={!locked ? Switch : null}
 			onClick={() => {
 				toggle()
-				toggleSwitch(Switch)
+				toggleSwitch(!Switch, toggle, setLock)
 			}}></Main>
 	)
 }
