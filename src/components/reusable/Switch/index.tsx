@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 //[ package ]
 
@@ -7,10 +7,12 @@ import useToggle from 'utils/useToggle'
 
 //=> DOM
 export default (props: any) => {
-	const { toggleSwitch = () => {} } = props
+	const { toggleSwitch = () => {}, Default = false } = props
 
-	const [Switch, toggle] = useToggle()
+	const [Switch, toggle] = useToggle(Default)
 	const [locked, setLock] = useToggle()
+
+	useEffect(() => toggle(Default), [Default])
 
 	return (
 		<Main
