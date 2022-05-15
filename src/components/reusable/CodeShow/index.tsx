@@ -91,6 +91,6 @@ const CopyTips = styled.div`
 		font-size: 12px;
 		color: #c5c5c5;
 		line-height: 1;
-		margin-top: 2px;
+		margin-top: 1px;
 	}
 `

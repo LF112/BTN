@@ -34,6 +34,7 @@ const Main = styled.button`
 		color: #c5c5c5;
 		font-size: 14px;
 		line-height: 1;
+		margin-top: 3px;
 	}
 	&:hover {
 		transform: scale(0.96);
