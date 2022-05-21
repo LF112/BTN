@@ -18,13 +18,15 @@ export default (props: any) => {
 
 	useEffect(() => {
 		const { value } = hljs.highlight(
-			codeType,
 			!noFormat
 				? prettier.format(rawCode, {
 						parser: codeType,
 						plugins: [parserBabel]
 				  })
-				: rawCode
+				: rawCode,
+			{
+				language: codeType
+			}
 		)
 		setText(value)
 	})

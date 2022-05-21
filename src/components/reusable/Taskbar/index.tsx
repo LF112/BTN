@@ -25,11 +25,13 @@ export default (props: any) => {
 	const [text, setText] = useState<string>('')
 	useEffect(() => {
 		const { value } = hljs.highlight(
-			'json',
 			prettier.format(JSON.stringify(rawJson), {
 				parser: 'json',
 				plugins: [parserBabel]
-			})
+			}),
+			{
+				language: 'json'
+			}
 		)
 		setText(value)
 		if (FoldHeight !== -1) {
@@ -44,11 +46,13 @@ export default (props: any) => {
 
 	useEffect(() => {
 		const { value } = hljs.highlight(
-			'json',
 			prettier.format(JSON.stringify(rawJson), {
 				parser: 'json',
 				plugins: [parserBabel]
-			})
+			}),
+			{
+				language: 'json'
+			}
 		)
 		setText(value)
 		setTimeout(() => {
