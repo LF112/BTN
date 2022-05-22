@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import styled from 'styled-components'
+import BScroll from '@better-scroll/core'
+import MouseWheel from '@better-scroll/mouse-wheel'
 //[ package ]
 
 import StatusCard from 'components/page/console/StatusPanel/Card'
@@ -10,6 +12,7 @@ import { useApiState } from 'state/api/hooks'
 //[ hooks ]
 
 import { getStatusDisplay } from 'utils/useTools'
+//[ utils ]
 
 //=> DOM
 export default () => {
@@ -61,51 +64,67 @@ export default () => {
 	useEffect(() => {
 		if (cardBoxNode) {
 			const DOM = cardBoxNode.current
-			if (DOM.scrollWidth > DOM.clientWidth) updateShowMask(!showMask)
+			if (DOM.scrollWidth > DOM.clientWidth) {
+				updateShowMask(!showMask)
+
+				//=> 装载 BetterScroll
+				BScroll.use(MouseWheel)
+				setTimeout(
+					() =>
+						new BScroll(DOM, {
+							scrollX: true,
+							scrollY: false,
+							mouseWheel: true
+						}),
+					516
+				)
+			}
 		}
 	}, [cardBoxNode])
 
 	return (
 		<Main>
 			<CardBox ref={cardBoxNode} showMask={showMask}>
-				<StatusCard
-					title={'负载状态'}
-					tips={$loadStatus.title}
-					value={$load || 0}
-					valueColor={$loadStatus.color}
-					icon={'el-icon-odometer'}
-					style={{
-						opacity: 0,
-						animation: 'ScaleIn 0.25s forwards',
-						animationDelay: '299ms'
-					}}
-				/>
-				<StatusCard
-					title={'CPU 使用率'}
-					tips={`${cpu[1]} 核心`}
-					value={cpu[0] || 0}
-					valueColor={$cpuColor}
-					icon={'el-icon-cpu'}
-					style={{
-						opacity: 0,
-						animation: 'ScaleIn 0.25s forwards',
-						animationDelay: '340ms'
-					}}
-				/>
-				<StatusCard
-					title={'内存使用率'}
-					tips={`${memRealUsed} / ${memTotal} MB`}
-					value={$mem || 0}
-					valueColor={$memColor}
-					icon={'el-icon-files'}
-					style={{
-						opacity: 0,
-						animation: 'ScaleIn 0.25s forwards',
-						animationDelay: '381ms'
-					}}
-				/>
+				<div style={{ width: showMask ? `${3 * 272 + 35}px` : '100%' }}>
+					<StatusCard
+						title={'负载状态'}
+						tips={$loadStatus.title}
+						value={$load || 0}
+						valueColor={$loadStatus.color}
+						icon={'el-icon-odometer'}
+						style={{
+							opacity: 0,
+							animation: 'ScaleIn 0.25s forwards',
+							animationDelay: '299ms'
+						}}
+					/>
+					<StatusCard
+						title={'CPU 使用率'}
+						tips={`${cpu[1]} 核心`}
+						value={cpu[0] || 0}
+						valueColor={$cpuColor}
+						icon={'el-icon-cpu'}
+						style={{
+							opacity: 0,
+							animation: 'ScaleIn 0.25s forwards',
+							animationDelay: '340ms'
+						}}
+					/>
+					<StatusCard
+						title={'内存使用率'}
+						tips={`${memRealUsed} / ${memTotal} MB`}
+						value={$mem || 0}
+						valueColor={$memColor}
+						icon={'el-icon-files'}
+						style={{
+							opacity: 0,
+							animation: 'ScaleIn 0.25s forwards',
+							animationDelay: '381ms'
+						}}
+					/>
+				</div>
+				<OverflowMask showMask={showMask} />
 			</CardBox>
-			<OverflowMask showMask={showMask} />
 		</Main>
 	)
 }
@@ -121,13 +140,17 @@ const Main = styled.main`
 const CardBox = styled.div<{ showMask: boolean }>`
 	width: 100%;
 	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	overflow-x: auto;
+	overflow: hidden;
+	white-space: nowrap;
 	padding-bottom: 5px;
-	${(props: any) => (props.showMask ? 'padding-right: 30px;' : '')}
-	> main + main {
-		margin-left: 10px;
+	> div {
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		${(props: any) => (props.showMask ? 'padding-right: 35px' : '')};
+		> main + main {
+			margin-left: 10px;
+		}
 	}
 `

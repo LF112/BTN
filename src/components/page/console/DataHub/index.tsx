@@ -1,5 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react'
 import styled from 'styled-components'
+import BScroll from '@better-scroll/core'
+import MouseWheel from '@better-scroll/mouse-wheel'
 //[ package ]
 
 import Network from './Network'
@@ -23,20 +25,35 @@ export default () => {
 	useEffect(() => {
 		if (cardBoxNode) {
 			const DOM = cardBoxNode.current
-			if (DOM.scrollHeight > DOM.clientHeight) updateShowMask(!showMask)
+			if (DOM.scrollHeight > DOM.clientHeight) {
+				updateShowMask(!showMask)
+				//=> 装载 BetterScroll
+				BScroll.use(MouseWheel)
+				setTimeout(
+					() =>
+						new BScroll(DOM, {
+							scrollX: false,
+							scrollY: true,
+							mouseWheel: true
+						}),
+					516
+				)
+			}
 		}
 	}, [cardBoxNode])
 
 	return (
 		<Main showMask={showMask}>
 			<nav ref={cardBoxNode}>
-				<Network
-					up={up}
-					down={down}
-					upTotal={bytesToSize(upTotal)}
-					downTotal={bytesToSize(downTotal)}
-				/>
-				<Iostat data={iostat} />
+				<div>
+					<Network
+						up={up}
+						down={down}
+						upTotal={bytesToSize(upTotal)}
+						downTotal={bytesToSize(downTotal)}
+					/>
+					<Iostat data={iostat} />
+				</div>
 			</nav>
 			<OverflowMask showMask={showMask} bottom={true} />
 		</Main>
@@ -48,11 +65,14 @@ const Main = styled.main<{ showMask: boolean }>`
 	position: relative;
 	width: 100%;
 	height: calc(100% - 202px);
-	overflow: auto;
+	margin-top: 8px;
 	> nav {
 		width: 100%;
 		height: 100%;
-		overflow-y: auto;
-		${(props: any) => (props.showMask ? 'padding-bottom: 30px;' : '')}
+		overflow: hidden;
+		> div {
+			width: 100%;
+			${(props: any) => (props.showMask ? 'padding-bottom: 35px' : '')};
+		}
 	}
 `

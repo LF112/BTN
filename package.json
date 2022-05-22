@@ -19,6 +19,8 @@
     "homepage": "https://github.com/btnext/BTN#readme",
     "dependencies": {
         "@ant-design/icons": "^4.7.0",
+        "@better-scroll/core": "^2.4.2",
+        "@better-scroll/mouse-wheel": "^2.4.2",
         "@reduxjs/toolkit": "^1.8.1",
         "@types/crypto-js": "^4.1.1",
         "@types/date-and-time": "^0.13.0",
@@ -62,5 +64,13 @@
     },
     "devDependencies": {
         "typescript": "^4.6.3"
+    },
+    "peerDependencies": {
+        "react": "16"
+    },
+    "peerDependenciesMeta": {
+        "react": {
+            "optional": true
+        }
     }
 }

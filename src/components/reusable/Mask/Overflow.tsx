@@ -19,7 +19,7 @@ export default (props: any) => {
 const Overflow = styled.main<{ color: string; bottom: boolean }>`
 	position: absolute;
 	width: ${props => (props.bottom ? '100%' : '30px')};
-	height: ${props => (props.bottom ? '30px' : 'calc(100% - 16px)')};
+	height: ${props => (props.bottom ? '30px' : '100%')};
 	background: linear-gradient(
 		${props => (props.bottom ? '0' : '269')}deg,
 		${props => (props.color ? props.color : '#323842')} 1%,
