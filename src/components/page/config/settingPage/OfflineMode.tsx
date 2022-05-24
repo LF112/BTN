@@ -18,13 +18,38 @@ import {
 } from 'components/page/config/ReusableComponents'
 //[ Components ]
 
+import { ID as _NID } from 'state/api/linkId'
+import { useAddPopup } from 'state/popup/hooks'
+import { BTFetch } from 'state/fetch/hooks'
+//[ hooks ]
+
 //=> DOM
 export default () => {
+	const $fetch = BTFetch()
+	const addPopup = useAddPopup()
+
+	//TODO: 此处通过插件实现离线模式状态返回
 	return (
 		<SetMain>
 			<SetUpMain>
 				<div>
-					<Switch />
+					<Switch
+						toggleSwitch={async (
+							Switch: boolean,
+							Toggle: (specify?: boolean) => void,
+							setLoading: (specify: boolean) => void
+						) => {
+							setLoading(true)
+							const { msg, status } = (await $fetch(_NID['SetLocal'])) as any
+							if (status) {
+								setLoading(false)
+								addPopup(msg, 'success', 1500)
+							} else {
+								addPopup(msg, 'warn', 1500)
+								setLoading(false)
+							}
+						}}
+					/>
 					<SetUpTitle>离线模式</SetUpTitle>
 				</div>
 				<SetUpDescription>
