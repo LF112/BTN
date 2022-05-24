@@ -12,6 +12,7 @@ import styled from 'styled-components'
 import ClosePanel from 'components/page/config/settingPage/ClosePanel'
 import IPv6Support from 'components/page/config/settingPage/IPv6Support'
 import OfflineMode from 'components/page/config/settingPage/OfflineMode'
+import DevMode from 'components/page/config/settingPage/DevMode'
 //[ components ]
 
 import { useUpdateApi } from 'state/api/hooks'
@@ -30,6 +31,7 @@ export default () => {
 			<ClosePanel />
 			<IPv6Support />
 			<OfflineMode />
+			<DevMode />
 		</Main>
 	)
 }
