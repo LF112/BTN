@@ -20,7 +20,7 @@ import Tips from 'components/page/config/Tips'
 //[ Components ]
 
 import { ID as _NID } from 'state/api/linkId'
-import { useAddPopup, useClosePopup } from 'state/popup/hooks'
+import { useAddPopup } from 'state/popup/hooks'
 import { BTFetch } from 'state/fetch/hooks'
 import { useApiState, useUpdateApi } from 'state/api/hooks'
 //[ hooks ]
@@ -30,7 +30,6 @@ import { useApiState, useUpdateApi } from 'state/api/hooks'
 export default () => {
 	const $fetch = BTFetch()
 	const addPopup = useAddPopup()
-	const closePopup = useClosePopup()
 	const updateApi = useUpdateApi()
 
 	const { ipv6 } = useApiState('config')
