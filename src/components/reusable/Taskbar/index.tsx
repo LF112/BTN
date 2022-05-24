@@ -77,8 +77,8 @@ export default (props: any) => {
 	return (
 		<Main
 			style={{ padding: Unfold ? '10px' : '5px 10px' }}
-			onMouseEnter={() => toggle}
-			onMouseLeave={() => toggle}>
+			onMouseEnter={() => toggle()}
+			onMouseLeave={() => toggle()}>
 			<div>
 				<Context>
 					<ICON_Triangle />
@@ -140,7 +140,7 @@ const Context = styled.div`
 	}
 `
 
-const Fold = styled.div`
+const Fold = styled.main`
 	width: 100%;
 	overflow: hidden;
 	cursor: auto;
