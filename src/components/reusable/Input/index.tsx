@@ -26,6 +26,7 @@ export default () => {
 	const [update, setUpdate] = useState<boolean>(false)
 	const [updated, setUpdated] = useState<boolean>(false)
 	const [showSuccess, setShowSuccess] = useState<boolean>(false)
+	const [typingLock, setTypingLock] = useState<boolean>(false)
 
 	useEffect(() => {
 		const textLen = [...text].length
@@ -52,9 +53,19 @@ export default () => {
 			else {
 				setTimeout(() => {
 					isUpdated()
-				}, 2000)
+				}, 500)
 			}
 	}, [update])
+
+	//=> 解决中文输入
+	const handleComposition = (event: any) => {
+		if (event.type === 'compositionupdate' || event.type === 'compositionstart')
+			setTypingLock(true)
+		if (event.type === 'compositionend') {
+			setTypingLock(false)
+			StopTyping()
+		}
+	}
 
 	const isUpdated = () => {
 		setUpdate(false)
@@ -77,10 +88,13 @@ export default () => {
 				onChange={el => {
 					setText(el.target.value)
 					if (focus && !typing) setTyping(true)
-					StopTyping()
+					if (!typingLock) StopTyping()
 				}}
 				onFocus={() => setFocus(true)}
 				onBlur={() => setFocus(false)}
+				onCompositionStart={handleComposition}
+				onCompositionEnd={handleComposition}
+				onCompositionUpdate={handleComposition}
 				disabled={update}
 			/>
 			<CheckOutMask show={showSuccess}>
