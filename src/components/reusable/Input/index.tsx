@@ -3,7 +3,8 @@ import styled from 'styled-components'
 import {
 	CloseCircleOutlined,
 	CheckOutlined,
-	LoadingOutlined
+	LoadingOutlined,
+	CloseOutlined
 } from '@ant-design/icons'
 import _ from 'lodash'
 //[ package ]
@@ -16,7 +17,7 @@ import { clearText } from 'utils/useTools'
 
 //=> DOM
 export default (props: any) => {
-	const { defaultValue = '', tips } = props
+	const { defaultValue = '', tips, handleNext = () => {} } = props
 	const node = useRef<HTMLElement>(null) as any
 
 	const [text, setText] = useState<string>(defaultValue)
@@ -26,7 +27,7 @@ export default (props: any) => {
 	const [typing, setTyping] = useState<boolean>(false)
 	const [update, setUpdate] = useState<boolean>(false)
 	const [updated, setUpdated] = useState<boolean>(false)
-	const [showSuccess, setShowSuccess] = useState<boolean>(false)
+	const [showSuccess, setShowSuccess] = useState<number>(0)
 	const [typingLock, setTypingLock] = useState<boolean>(false)
 
 	useEffect(() => {
@@ -55,11 +56,7 @@ export default (props: any) => {
 			if (textLength === 0)
 				//=> 防止上传前输入框被清空 | '基于防抖函数问题，无法在函数内直接阻止状态改变，此方法有概率不生效'
 				setUpdate(false)
-			else {
-				setTimeout(() => {
-					isUpdated()
-				}, 500)
-			}
+			else handleNext(text, isUpdated)
 	}, [update])
 
 	//=> 解决中文输入
@@ -72,13 +69,13 @@ export default (props: any) => {
 		}
 	}
 
-	const isUpdated = () => {
+	const isUpdated = (status: boolean = true) => {
 		setUpdate(false)
 		setTyping(false)
 		setUpdated(true)
-		setTimeout(() => setShowSuccess(true), 150)
+		setTimeout(() => setShowSuccess(status ? 1 : -1), 150)
 		setTimeout(() => {
-			setShowSuccess(false)
+			setShowSuccess(0)
 			setTimeout(() => {
 				setUpdated(false)
 			}, 500)
@@ -104,7 +101,12 @@ export default (props: any) => {
 				placeholder={tips}
 			/>
 			<CheckOutMask show={showSuccess}>
-				<CheckOutlined />
+				<CheckOutlined
+					style={{ display: showSuccess > -1 ? 'block' : 'none' }}
+				/>
+				<CloseOutlined
+					style={{ display: showSuccess === -1 ? 'block' : 'none' }}
+				/>
 			</CheckOutMask>
 			<InputPrompt hide={focus || update}>
 				<nav
@@ -204,7 +206,7 @@ const InputPrompt = styled.div<{ hide: boolean }>`
 	}
 `
 
-const CheckOutMask = styled.div<{ show: boolean }>`
+const CheckOutMask = styled.div<{ show: number }>`
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -212,10 +214,10 @@ const CheckOutMask = styled.div<{ show: boolean }>`
 	align-items: center;
 	justify-content: center;
 	z-index: 100;
-	pointer-events: ${({ show }) => (show ? 'auto' : 'none')};
-	opacity: ${({ show }) => (show ? 1 : 0)};
+	pointer-events: ${({ show }) => (show === 0 ? 'none' : 'auto')};
+	opacity: ${({ show }) => (show === 0 ? 0 : 1)};
 	> span {
-		color: #36d7ae;
+		color: ${({ show }) => (show === 1 ? '#36d7ae' : '#c53825')};
 		font-size: 16px;
 	}
 `
