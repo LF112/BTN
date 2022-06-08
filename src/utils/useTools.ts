@@ -113,3 +113,14 @@ export const strLogsToArr = (str: string): any[] => {
 	}
 	return LogsArr
 }
+
+/**
+ * 文本逐个清除
+ * @param next 文本
+ */
+export const clearText = (next: string, setText: (text: string) => void) => {
+	if ([...next].length > 0) {
+		setText(next)
+		setTimeout(() => clearText(next.slice(0, -1), setText), 10)
+	} else setText('')
+}
