@@ -15,10 +15,11 @@ import { clearText } from 'utils/useTools'
 //[ utils ]
 
 //=> DOM
-export default () => {
+export default (props: any) => {
+	const { defaultValue = '', tips } = props
 	const node = useRef<HTMLElement>(null) as any
 
-	const [text, setText] = useState<string>('')
+	const [text, setText] = useState<string>(defaultValue)
 	const [textLength, setTextLength] = useState<number>(0)
 	const [cleanIcon, showCleanIcon] = useState<boolean>(true)
 	const [focus, setFocus] = useState<boolean>(false)
@@ -37,6 +38,10 @@ export default () => {
 			setUpdate(false)
 		}
 	}, [text])
+
+	useEffect(() => {
+		setText(defaultValue)
+	}, [defaultValue])
 
 	const StopTyping = useCallback(
 		_.debounce(() => {
@@ -81,7 +86,7 @@ export default () => {
 	}
 
 	return (
-		<Main updated={updated}>
+		<Main updated={updated} focus={focus || update}>
 			<input
 				ref={node}
 				value={text}
@@ -96,6 +101,7 @@ export default () => {
 				onCompositionEnd={handleComposition}
 				onCompositionUpdate={handleComposition}
 				disabled={update}
+				placeholder={tips}
 			/>
 			<CheckOutMask show={showSuccess}>
 				<CheckOutlined />
@@ -133,7 +139,7 @@ export default () => {
 }
 
 //=> Style
-const Main = styled.main<{ updated: boolean }>`
+const Main = styled.main<{ updated: boolean; focus: boolean }>`
 	position: relative;
 	width: 258px;
 	height: 40px;
@@ -158,7 +164,7 @@ const Main = styled.main<{ updated: boolean }>`
 		font-family: 'HarmonyOS';
 		color: #abb2bf;
 		caret-color: #528bff;
-		padding: 0 30px;
+		padding: 0 30px 0 ${({ focus }) => (focus ? '32px' : '12px')};
 		z-index: 10;
 	}
 	> button {
