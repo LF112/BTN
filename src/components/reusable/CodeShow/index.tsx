@@ -11,7 +11,7 @@ import hljs from 'highlight.js'
 import prettier from 'prettier'
 import parserBabel from 'prettier/parser-babel'
 import { CopyFilled, CopyOutlined } from '@ant-design/icons'
-import * as copy from 'copy-to-clipboard'
+import copy from 'copy-to-clipboard'
 //[ package ]
 
 import SmallButton from 'components/reusable/Button/small'

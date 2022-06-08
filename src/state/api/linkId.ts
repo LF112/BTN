@@ -16,6 +16,7 @@ export const ID = {
 	ListenIPv6: 'config?action=set_ipv6_status', // 监听 IPv6
 	SetLocal: 'config?action=set_local', // 设置离线模式
 	SetDevMode: 'config?action=set_debug', // 设置开发者模式
+	SetPanel: 'config?action=setPanel', // 设置面板信息
 
 	GetNetWork: 'system?action=GetNetWork', // 获取面板动态数据 [ 网络/磁盘/内存/CPU/... ]
 	GetConcifInfo: 'system?action=GetConcifInfo', // 获取面板配置
