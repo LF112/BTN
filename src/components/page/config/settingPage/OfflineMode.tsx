@@ -21,19 +21,21 @@ import {
 import { ID as _NID } from 'state/api/linkId'
 import { useAddPopup } from 'state/popup/hooks'
 import { BTFetch } from 'state/fetch/hooks'
+import { useApiState } from 'state/api/hooks'
 //[ hooks ]
 
 //=> DOM
 export default () => {
 	const $fetch = BTFetch()
+	const { Local } = useApiState('panel')
 	const addPopup = useAddPopup()
 
-	//TODO: 此处通过插件实现离线模式状态返回
 	return (
 		<SetMain>
 			<SetUpMain>
 				<div>
 					<Switch
+						Default={Local}
 						toggleSwitch={async (
 							Switch: boolean,
 							Toggle: (specify?: boolean) => void,

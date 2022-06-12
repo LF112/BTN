@@ -34,8 +34,7 @@ export default () => {
 							text: string,
 							done: (status?: boolean) => void
 						) => {
-							//TODO: 此处请求会返回错误，宝塔并没有对此 API 参数解耦，待以插件形式解决
-							const { msg, status } = (await $fetch(_NID['SetPanel'], {
+							const { msg, status } = (await $fetch(_NID['SetPanelTitle'], {
 								webname: text
 							})) as any
 							if (status) {

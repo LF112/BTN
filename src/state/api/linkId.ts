@@ -12,6 +12,9 @@
 export const ID = {
 	OverTime: 'plugin?name=btnext&action=a&s=getOverTime', // 获取面板登录状态过期时间
 	SetOverTime: 'plugin?name=btnext&action=a&s=setOverTime', // 设置面板登录状态过期时间
+	SetPanelTitle: 'plugin?name=btnext&action=a&s=setPanelTitle', // 设置面板标题
+	GetPanelLocal: 'plugin?name=btnext&action=a&s=getPanelLocal', // 获取面板离线模式状态
+	GetDevMode: 'plugin?name=btnext&action=a&s=getPanelDevMode', // 获取面板开发者模式状态
 
 	CONFIG: 'config?action=get_config', // 获取面板配置
 	GetIPv6Status: 'config?action=get_ipv6_listen', // 获取 IPv6 监听状态

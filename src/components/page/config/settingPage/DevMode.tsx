@@ -16,6 +16,7 @@ import {
 	SetUpTitle,
 	SetUpDescription
 } from 'components/page/config/ReusableComponents'
+import { useApiState } from 'state/api/hooks'
 //[ Components ]
 
 import { ID as _NID } from 'state/api/linkId'
@@ -26,14 +27,15 @@ import { BTFetch } from 'state/fetch/hooks'
 //=> DOM
 export default () => {
 	const $fetch = BTFetch()
+	const { DevMode } = useApiState('panel')
 	const addPopup = useAddPopup()
 
-	//TODO: 此处通过插件实现开发者模式状态返回
 	return (
 		<SetMain>
 			<SetUpMain>
 				<div>
 					<Switch
+						Default={DevMode}
 						toggleSwitch={async (
 							Switch: boolean,
 							Toggle: (specify?: boolean) => void,

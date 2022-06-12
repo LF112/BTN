@@ -25,7 +25,13 @@ export default () => {
 	const updateApi = useUpdateApi()
 
 	useEffect(() => {
-		updateApi(['config.ipv6', 'panel.name', 'config.overTime'])
+		updateApi([
+			'config.ipv6',
+			'panel.name',
+			'config.overTime',
+			'panel.Local',
+			'panel.DevMode'
+		])
 	}, [''])
 
 	return (

@@ -34,6 +34,8 @@ export type state = {
 	VersionLogs: string //    正式版更新日志
 	betaUptime: string //     测试版更新时间
 	Uptime: string //         正式版更新时间
+	Local: boolean //         面板离线模式
+	DevMode: boolean //       面板开发模式
 }
 
 //=> State 表初始化 | '是这个 state 的一些默认值'
@@ -56,10 +58,19 @@ export const initialState: state = {
 	betaVersionLogs: '',
 	VersionLogs: '',
 	betaUptime: '-',
-	Uptime: '-'
+	Uptime: '-',
+	Local: false,
+	DevMode: false
 }
 
-const { CONFIG, GetNetWork, GetSoftList, UpdatePanel } = ID
+const {
+	CONFIG,
+	GetNetWork,
+	GetSoftList,
+	UpdatePanel,
+	GetPanelLocal,
+	GetDevMode
+} = ID
 /**
  * API 更新索引表
  * { state name }: [{ ↑ API ID }, [...{ API Callback JSON }]]
@@ -83,5 +94,7 @@ export const stateApiUpdateIndex: any = {
 	betaVersionLogs: [UpdatePanel, 'msg.beta.updateMsg'],
 	VersionLogs: [UpdatePanel, 'msg.updateMsg'],
 	betaUptime: [UpdatePanel, 'msg.beta.uptime'],
-	Uptime: [UpdatePanel, 'msg.uptime']
+	Uptime: [UpdatePanel, 'msg.uptime'],
+	Local: [GetPanelLocal, 'msg'],
+	DevMode: [GetDevMode, 'msg']
 }
