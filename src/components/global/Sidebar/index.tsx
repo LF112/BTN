@@ -26,7 +26,7 @@ export default () => {
 	const updateApi = useUpdateApi()
 
 	useEffect(() => {
-		updateApi(['panel', 'serverIP'])
+		//updateApi(['panel', 'serverIP'])
 	}, [''])
 
 	return (

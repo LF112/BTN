@@ -49,7 +49,7 @@ export default () => {
 							setLoading(true)
 							const { msg, status } = (await $fetch(_NID['ListenIPv6'])) as any
 							if (status) {
-								updateApi(['config', 'ipv6'])
+								updateApi(['config.ipv6'])
 								setLoading(false)
 								addPopup(`已${ipv6 ? '禁用' : '启用'} IPv6 ！`, 'success', 1500)
 							} else {

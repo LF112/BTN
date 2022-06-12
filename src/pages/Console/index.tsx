@@ -47,23 +47,22 @@ export default () => {
 	let Timer: any = null
 	useEffect(() => {
 		updateApi([
-			[
-				'panel',
-				'version',
-				'name',
-				'Pro',
-				'Ltd',
-				'Beta',
-				'time',
-				'isNew',
-				'betaVersionId',
-				'VersionId',
-				'betaVersionLogs',
-				'VersionLogs',
-				'betaUptime',
-				'Uptime'
-			],
-			['system', 'load', 'os', 'disk']
+			'panel.version',
+			'panel.name',
+			'panel.Pro',
+			'panel.Ltd',
+			'panel.Beta',
+			'panel.time',
+			'panel.isNew',
+			'panel.betaVersionId',
+			'panel.VersionId',
+			'panel.betaVersionLogs',
+			'panel.VersionLogs',
+			'panel.betaUptime',
+			'panel.Uptime',
+			'system.load',
+			'system.os',
+			'system.disk'
 		])
 
 		//=> 持续获取面板状态
@@ -74,18 +73,15 @@ export default () => {
 			Timer = setRafInterval(() => {
 				if (_apiStatus)
 					updateApi([
-						[
-							'system',
-							'load',
-							'disk',
-							'up',
-							'down',
-							'upTotal',
-							'downTotal',
-							'iostat'
-						],
-						['cpu', 'cpu'],
-						['memory', 'mem']
+						'system.load',
+						'system.disk',
+						'system.up',
+						'system.down',
+						'system.upTotal',
+						'system.downTotal',
+						'system.iostat',
+						'cpu.cpu',
+						'memory.mem'
 					])
 			}, 2000)
 		return () => {

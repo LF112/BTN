@@ -6,6 +6,7 @@
  * 请注意，本项目使用 AGPL v3 开源协议开源，请严格依照开源协议进行不限于编辑、分发等操作。详见 https://www.chinasona.org/gnu/agpl-3.0-cn.html
  */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import _ from 'lodash'
 //[ package ]
 
 import {
@@ -40,6 +41,7 @@ const sliceQueue: any[] = [
 const exportArr = {} // 导出 SLICE 列表
 const updateArr = {} // 导出 SLICE update 列表
 const apiUpdateIndexArr = {} // 导出 slice fetch 列表
+const urlMapping = {} // 导出 Url 映射表
 //=> 遍历 SLICE 队列，创建 SLICE
 sliceQueue.forEach((sliceObj: any[]) => {
 	const [name, initialState, fetchUpdate] = sliceObj
@@ -65,12 +67,21 @@ sliceQueue.forEach((sliceObj: any[]) => {
 	//=> 推入导出队列
 	updateArr[name] = SLICE.actions
 	exportArr[name] = SLICE.reducer
-	apiUpdateIndexArr[name] = fetchUpdate
+
+	Object.keys(fetchUpdate).forEach((key: string) => {
+		const [URL, updateParamQuery] = fetchUpdate[key]
+
+		apiUpdateIndexArr[`${name}.${key}`] = URL
+		if (!urlMapping[URL]) urlMapping[URL] = [[updateParamQuery, name, key]]
+		else urlMapping[URL].push([updateParamQuery, name, key])
+	})
 })
 
 //=> 导出 Slice Arr
 export const updater = updateArr
 //=> 导出 Api Update Index Arr
 export const apiIndexUpdater = apiUpdateIndexArr
+//=> 导出 Url 映射表
+export const urlMappingTable = urlMapping
 //=> 导出 reducer Arr
 export default { ...exportArr }

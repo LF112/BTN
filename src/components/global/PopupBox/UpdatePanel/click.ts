@@ -62,14 +62,13 @@ export default class {
 			}, 500)
 			//=> 刷新数据
 			this.updateApi([
-				'panel',
-				'isNew',
-				'betaVersionId',
-				'VersionId',
-				'betaVersionLogs',
-				'VersionLogs',
-				'betaUptime',
-				'Uptime'
+				'panel.isNew',
+				'panel.betaVersionId',
+				'panel.VersionId',
+				'panel.betaVersionLogs',
+				'panel.VersionLogs',
+				'panel.betaUptime',
+				'panel.Uptime'
 			])
 		}
 	}

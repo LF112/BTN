@@ -29,14 +29,13 @@ export default () => {
 		updateShow(true)
 		//=> 更新版本信息
 		updateApi([
-			'panel',
-			'isNew',
-			'betaVersionId',
-			'VersionId',
-			'betaVersionLogs',
-			'VersionLogs',
-			'betaUptime',
-			'Uptime'
+			'panel.isNew',
+			'panel.betaVersionId',
+			'panel.VersionId',
+			'panel.betaVersionLogs',
+			'panel.VersionLogs',
+			'panel.betaUptime',
+			'panel.Uptime'
 		])
 	}, [''])
 

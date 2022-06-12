@@ -33,7 +33,7 @@ export default (props: any) => {
 	useEffect(() => {
 		//=> 显示弹窗 | '通知父组件子组件成功装载'
 		updateShow(true)
-		updateApi(['system', 'webserver'])
+		updateApi(['system.webserver'])
 	}, [''])
 
 	const [showReboot, toggleShowReboot] = useToggle()

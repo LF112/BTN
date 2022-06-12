@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 //[ package ]
 
@@ -13,7 +13,7 @@ import Input from 'components/reusable/Input'
 
 import { ID as _NID } from 'state/api/linkId'
 import { BTFetch } from 'state/fetch/hooks'
-import { useApiState, useUpdateApi } from 'state/api/hooks'
+import { useApiState } from 'state/api/hooks'
 import { useAddPopup } from 'state/popup/hooks'
 //[ hooks ]
 
@@ -21,12 +21,7 @@ import { useAddPopup } from 'state/popup/hooks'
 export default () => {
 	const $fetch = BTFetch()
 	const { name } = useApiState('panel')
-	const updateApi = useUpdateApi()
 	const addPopup = useAddPopup()
-
-	useEffect(() => {
-		updateApi(['panel', 'name'])
-	}, [''])
 
 	return (
 		<SetMain>
