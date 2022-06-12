@@ -17,7 +17,14 @@ import { clearText } from 'utils/useTools'
 
 //=> DOM
 export default (props: any) => {
-	const { defaultValue = '', tips, handleNext = () => {} } = props
+	const {
+		defaultValue = '',
+		tips,
+		handleNext = () => {},
+		type = 'text',
+		max = 0,
+		min = 0
+	} = props
 	const node = useRef<HTMLElement>(null) as any
 
 	const [text, setText] = useState<string>(defaultValue)
@@ -99,6 +106,9 @@ export default (props: any) => {
 				onCompositionUpdate={handleComposition}
 				disabled={update}
 				placeholder={tips}
+				type={type}
+				max={max}
+				min={min}
 			/>
 			<CheckOutMask show={showSuccess}>
 				<CheckOutlined
@@ -168,6 +178,13 @@ const Main = styled.main<{ updated: boolean; focus: boolean }>`
 		caret-color: #528bff;
 		padding: 0 30px 0 ${({ focus }) => (focus ? '32px' : '12px')};
 		z-index: 10;
+	}
+	> input::-webkit-inner-spin-button {
+		-webkit-appearance: none !important;
+		margin: 0;
+	}
+	> input[type='number'] {
+		-moz-appearance: textfield;
 	}
 	> button {
 		position: absolute;

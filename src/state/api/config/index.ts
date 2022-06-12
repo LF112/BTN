@@ -17,20 +17,23 @@ import { ID } from 'state/api/linkId'
 // { state name }: { state type }
 export type state = {
 	ipv6: boolean // IPv6 监听状态
+	overTime: number // 面板登录状态过期时间
 }
 
 //=> State 表初始化 | '是这个 state 的一些默认值'
 // { state name }: { state default value }
 export const initialState: state = {
-	ipv6: false
+	ipv6: false,
+	overTime: 0
 }
 
-const { CONFIG, GetIPv6Status } = ID
+const { OverTime, GetIPv6Status } = ID
 /**
  * API 更新索引表
  * { state name }: [{ ↑ API ID }, [...{ API Callback JSON }]]
  *   STATA 名字       API ID (url)    参数对应的 API JSON 索引
  */
 export const stateApiUpdateIndex: any = {
-	ipv6: [GetIPv6Status, '']
+	ipv6: [GetIPv6Status, ''],
+	overTime: [OverTime, 'data']
 }

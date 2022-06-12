@@ -14,6 +14,7 @@ import IPv6Support from 'components/page/config/settingPage/IPv6Support'
 import OfflineMode from 'components/page/config/settingPage/OfflineMode'
 import DevMode from 'components/page/config/settingPage/DevMode'
 import PanelName from 'components/page/config/settingPage/PanelName'
+import Overtime from 'components/page/config/settingPage/Overtime'
 //[ components ]
 
 import { useUpdateApi } from 'state/api/hooks'
@@ -24,7 +25,7 @@ export default () => {
 	const updateApi = useUpdateApi()
 
 	useEffect(() => {
-		updateApi(['config.ipv6', 'panel.name'])
+		updateApi(['config.ipv6', 'panel.name', 'config.overTime'])
 	}, [''])
 
 	return (
@@ -34,6 +35,7 @@ export default () => {
 			<OfflineMode />
 			<DevMode />
 			<PanelName />
+			<Overtime />
 		</Main>
 	)
 }
