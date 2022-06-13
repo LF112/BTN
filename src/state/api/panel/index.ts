@@ -36,6 +36,7 @@ export type state = {
 	Uptime: string //         正式版更新时间
 	Local: boolean //         面板离线模式
 	DevMode: boolean //       面板开发模式
+	LocalIP: string //        服务器本地 IP
 }
 
 //=> State 表初始化 | '是这个 state 的一些默认值'
@@ -60,7 +61,8 @@ export const initialState: state = {
 	betaUptime: '-',
 	Uptime: '-',
 	Local: false,
-	DevMode: false
+	DevMode: false,
+	LocalIP: '-'
 }
 
 const {
@@ -69,7 +71,8 @@ const {
 	GetSoftList,
 	UpdatePanel,
 	GetPanelLocal,
-	GetDevMode
+	GetDevMode,
+	GetServerLocalIP
 } = ID
 /**
  * API 更新索引表
@@ -78,7 +81,7 @@ const {
  */
 export const stateApiUpdateIndex: any = {
 	name: [GetNetWork, 'title'],
-	serverIP: [GetSoftList, 'ip'],
+	serverIP: [GetServerLocalIP, 'data'],
 	version: [GetNetWork, 'version'],
 	port: [CONFIG, 'panel.port'],
 	secPath: [CONFIG, 'panel.admin_path'],

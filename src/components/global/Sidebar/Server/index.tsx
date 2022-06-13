@@ -5,17 +5,22 @@
  * Copyright (c) 2022 LF112 (futiwolf), All Rights Reserved.
  * 请注意，本项目使用 AGPL v3 开源协议开源，请严格依照开源协议进行不限于编辑、分发等操作。详见 https://www.chinasona.org/gnu/agpl-3.0-cn.html
  */
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { CloudServerOutlined } from '@ant-design/icons'
 //[ package ]
 
-import { useApiState } from 'state/api/hooks'
+import { useApiState, useUpdateApi } from 'state/api/hooks'
 //[ hooks ]
 
 //=> Component
 export default () => {
+	const updateApi = useUpdateApi()
 	const $panel = useApiState('panel')
+
+	useEffect(() => {
+		updateApi(['panel.serverIP'])
+	}, [''])
 
 	return (
 		<Server>

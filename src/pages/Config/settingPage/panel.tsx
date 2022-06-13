@@ -15,6 +15,7 @@ import OfflineMode from 'components/page/config/settingPage/OfflineMode'
 import DevMode from 'components/page/config/settingPage/DevMode'
 import PanelName from 'components/page/config/settingPage/PanelName'
 import Overtime from 'components/page/config/settingPage/Overtime'
+import ServerIP from 'components/page/config/settingPage/ServerIP'
 //[ components ]
 
 import { useUpdateApi } from 'state/api/hooks'
@@ -30,7 +31,8 @@ export default () => {
 			'panel.name',
 			'config.overTime',
 			'panel.Local',
-			'panel.DevMode'
+			'panel.DevMode',
+			'panel.serverIP'
 		])
 	}, [''])
 
@@ -42,6 +44,7 @@ export default () => {
 			<DevMode />
 			<PanelName />
 			<Overtime />
+			<ServerIP />
 		</Main>
 	)
 }
