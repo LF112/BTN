@@ -17,6 +17,7 @@ export const ID = {
 	GetDevMode: 'plugin?name=btnext&action=a&s=getPanelDevMode', // 获取面板开发者模式状态
 	SetServerLocalIP: 'plugin?name=btnext&action=a&s=setServerIP', // 设置面板服务器 IP
 	GetServerLocalIP: 'plugin?name=btnext&action=a&s=getPanelServerIP', // 获取面板服务器离线模式状态
+	GetSystemInfo: 'plugin?name=btnext&action=a&s=getSystemInfo', // 获取系统信息
 
 	CONFIG: 'config?action=get_config', // 获取面板配置
 	GetIPv6Status: 'config?action=get_ipv6_listen', // 获取 IPv6 监听状态

@@ -17,6 +17,9 @@ import { ID } from 'state/api/linkId'
 // { state name }: { state type }
 export type state = {
 	os: string
+	osVersion: string
+	osArch: string
+	pythonVersion: string
 	systemdate: string
 	distribution: string
 	disk: [
@@ -60,6 +63,9 @@ export type state = {
 // { state name }: { state default value }
 export const initialState: state = {
 	os: '-',
+	osVersion: '-',
+	osArch: '-',
+	pythonVersion: '-',
 	systemdate: '-',
 	distribution: '-',
 	disk: [
@@ -99,7 +105,7 @@ export const initialState: state = {
 	webserver: 'nginx'
 }
 
-const { CONFIG, GetConcifInfo, GetNetWork } = ID
+const { CONFIG, GetConcifInfo, GetNetWork, GetSystemInfo } = ID
 /**
  * API 更新索引表
  * { state name }: [{ ↑ API ID }, [...{ API Callback JSON }]]
@@ -108,7 +114,10 @@ const { CONFIG, GetConcifInfo, GetNetWork } = ID
 export const stateApiUpdateIndex: any = {
 	disk: [GetNetWork, 'disk'],
 	iostat: [GetNetWork, 'iostat'],
-	os: [GetNetWork, 'system'],
+	os: [GetSystemInfo, 'data.core'],
+	osVersion: [GetSystemInfo, 'data.version'],
+	osArch: [GetSystemInfo, 'data.architecture'],
+	pythonVersion: [GetSystemInfo, 'data.py'],
 	systemdate: [GetConcifInfo, 'systemdate'],
 	webserver: [GetConcifInfo, 'webserver'],
 	distribution: [CONFIG, 'distribution'],

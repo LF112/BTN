@@ -20,22 +20,8 @@ import { useApiState } from 'state/api/hooks'
 
 //=> DOM
 export default () => {
-	const { os, systemdate } = useApiState('system')
-
-	const [OS, setOS] = useState('Linux')
-	const [OSVersion, setOSVersion] = useState('-.-.-')
-	const [OSArch, setOSArch] = useState('x-')
-	const [isPanelArch, setPanelArch] = useState('-')
-	useEffect(() => {
-		if (os !== '-') {
-			const [osName, osVersion, FitArch] = os.split(' ').filter((v: any) => v)
-			setOS(osName) //=> 系统名称
-			setOSVersion(osVersion) //=> 系统版本
-			const [osArch, pyVersion] = FitArch.split('(')
-			if (pyVersion) setPanelArch(`独立 ${pyVersion.replace(')', '')} 版`)
-			setOSArch(osArch) //=> 系统架构
-		}
-	}, [os])
+	const { os, osVersion, osArch, pythonVersion, systemdate } =
+		useApiState('system')
 
 	const [SysTime, setSysTime] = useState<string>('---- -- -- --:--:--')
 	useEffect(() => {
@@ -46,10 +32,10 @@ export default () => {
 	return (
 		<Main>
 			<SystemCard
-				OS={OS}
-				OSVersion={OSVersion}
-				OSArch={OSArch}
-				isPanelArch={isPanelArch}
+				OS={os}
+				OSVersion={osVersion}
+				OSArch={osArch}
+				isPanelArch={`独立 PY${pythonVersion} 版`}
 			/>
 			<FooInfo>
 				<FieldTimeOutlined />

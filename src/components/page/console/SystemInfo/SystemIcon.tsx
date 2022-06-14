@@ -18,7 +18,7 @@ export default (props: any) => {
 
 	return (
 		<SysIcon>
-			{SystemIcon[OS]}
+			{SystemIcon[OS.replace(/[0-9]/g, '').toLowerCase()]}
 			<div>{OSArch}</div>
 		</SysIcon>
 	)

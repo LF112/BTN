@@ -54,10 +54,14 @@ const InfoCard = styled.div`
 		font-size: 22px;
 	}
 	> span {
+		width: 184px;
 		font-family: 'HarmonyOS';
 		line-height: 1;
 		font-size: 14px;
 		color: #79869c;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
 	}
 `
 
