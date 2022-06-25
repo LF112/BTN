@@ -17,17 +17,9 @@ import Item from './Item'
 import sidebarConsts from 'constants/sidebar_consts'
 //[ constants ]
 
-import { useUpdateApi } from 'state/api/hooks'
-//[ hooks ]
-
 //=> Component
 export default () => {
 	const { pathname } = useLocation()
-	const updateApi = useUpdateApi()
-
-	useEffect(() => {
-		//updateApi(['panel', 'serverIP'])
-	}, [''])
 
 	return (
 		<Sidebar>

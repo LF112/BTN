@@ -36,8 +36,8 @@ export default () => {
 	const navigate = useNavigate()
 	const location = useLocation()
 	useEffect(() => {
-		const { key } = location
-		if (key === 'default') navigate('/')
+		const { key, pathname } = location
+		if (key === 'default' && pathname === '/') navigate('/')
 	}, [location.key])
 
 	return (
