@@ -13,6 +13,7 @@ import { FieldTimeOutlined } from '@ant-design/icons'
 
 import { DefaultCard } from 'components/reusable/Card'
 import SystemCard from './SystemCard'
+import Security from './Security'
 //[ components ]
 
 import { useApiState } from 'state/api/hooks'
@@ -20,14 +21,7 @@ import { useApiState } from 'state/api/hooks'
 
 //=> DOM
 export default () => {
-	const { os, osVersion, osArch, pythonVersion, systemdate } =
-		useApiState('system')
-
-	const [SysTime, setSysTime] = useState<string>('---- -- -- --:--:--')
-	useEffect(() => {
-		if (systemdate !== '-')
-			setSysTime(date.format(new Date(systemdate), 'YYYY-MM-DD HH:mm:ss'))
-	}, [systemdate])
+	const { os, osVersion, osArch, pythonVersion } = useApiState('system')
 
 	return (
 		<Main>
@@ -38,8 +32,7 @@ export default () => {
 				isPanelArch={`独立 PY${pythonVersion} 版`}
 			/>
 			<FooInfo>
-				<FieldTimeOutlined />
-				<h1>系统时间 {SysTime}</h1>
+				<Security />
 			</FooInfo>
 		</Main>
 	)

@@ -62,7 +62,8 @@ export default () => {
 			'panel.Uptime',
 			'system.load',
 			'system.os',
-			'system.disk'
+			'system.disk',
+			'security.risk'
 		])
 
 		//=> 持续获取面板状态
