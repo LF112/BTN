@@ -6,12 +6,17 @@
  * 请注意，本项目使用 AGPL v3 开源协议开源，请严格依照开源协议进行不限于编辑、分发等操作。详见 https://www.chinasona.org/gnu/agpl-3.0-cn.html
  */
 import React from 'react'
-import { RocketOutlined, ReloadOutlined } from '@ant-design/icons'
+import {
+	RocketOutlined,
+	ReloadOutlined,
+	SafetyCertificateOutlined
+} from '@ant-design/icons'
 //[ package ]
 
 export const ICONS = {
 	UpdatePanel: <RocketOutlined />,
-	Reboot: <ReloadOutlined />
+	Reboot: <ReloadOutlined />,
+	SecurityPanel: <SafetyCertificateOutlined />
 }
 
 export const LogColor = {
