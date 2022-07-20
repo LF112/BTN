@@ -26,6 +26,7 @@ export default (props: any) => {
 	const { Close } = props
 	const updateShow = useUpdateShow()
 	const updateApi = useUpdateApi()
+	const $security = useApiState('security')
 
 	const _list = [
 		{ name: '风险项', to: 'risk' },
@@ -45,7 +46,7 @@ export default (props: any) => {
 	return (
 		<Main>
 			<Breadcubes list={_list} choose={choose} setChoose={setChoose} />
-			<List />
+			<List data={$security} choose={choose} />
 		</Main>
 	)
 }
@@ -54,6 +55,9 @@ export default (props: any) => {
 const Main = styled.main`
 	position: relative;
 	width: 515px;
-	height: 315px;
+	height: 350px;
 	padding: 0 15px 8px;
+	> main + main {
+		margin-top: 10px;
+	}
 `
