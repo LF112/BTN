@@ -13,7 +13,7 @@ import prettier from 'prettier'
 import parserBabel from 'prettier/parser-babel'
 //[ package ]
 
-import './oneDark.less'
+import './oneDark.css'
 //[ css ]
 
 import { ReactComponent as ICON_Triangle } from 'assets/svg/global_triangle.svg'

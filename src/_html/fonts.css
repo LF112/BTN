@@ -1,0 +1,28 @@
+/* 字体 */
+@font-face {
+    font-family: 'consola';
+    src: url('./src/assets/fonts/consola.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'MiSans';
+    src: url('./src/assets/fonts/MiSans.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'HarmonyOS';
+    src: url('./src/assets/fonts/HarmonyOS.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Geometos';
+    src: url('./src/assets/fonts/geometos.woff') format('truetype');
+}
+
+@font-face {
+    font-family: 'element-icons';
+    src: url('./src/assets/fonts/element-icons.woff') format('woff'),
+        url('./src/assets/fonts/element-icons.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

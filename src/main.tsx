@@ -10,8 +10,7 @@ import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 //[ package ]
 
-import './index.less'
-import 'assets/element-ui-icon/index.css'
+import { GlobalStyle } from './_html/style'
 //[ style ]
 
 import store from 'state'
@@ -27,6 +26,8 @@ import 'utils/fetchAnit' //=> AXIOS | '流程拦截器'
 //=> 绑定渲染组件↓
 createRoot(document.getElementById('BTNEXT')).render(
 	<React.StrictMode>
+		{/* 引用全局样式 */}
+		<GlobalStyle />
 		{/* REACT REDUX */}
 		<Provider store={store}>
 			<App />

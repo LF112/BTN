@@ -45,7 +45,6 @@
         "echarts-for-react": "^3.0.2",
         "fastdom": "^1.0.10",
         "highlight.js": "^11.5.0",
-        "less": "^4.1.2",
         "lodash": "^4.17.21",
         "luxon": "^2.3.1",
         "prettier": "^2.6.2",

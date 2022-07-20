@@ -1,13 +1,24 @@
 /*
- * MAIN CSS
- *'是的，整个 APP 应该就只有这一个 css 其他均由 styled-components 定义'
- *
  * @Author: LF112 (futiwolf) <lf@lf112.net>
  * @License: GNU Affero General Public License v3.0
- * 
+ *
  * Copyright (c) 2022 LF112 (futiwolf), All Rights Reserved.
  * 请注意，本项目使用 AGPL v3 开源协议开源，请严格依照开源协议进行不限于编辑、分发等操作。详见 https://www.chinasona.org/gnu/agpl-3.0-cn.html
  */
+import { createGlobalStyle } from 'styled-components'
+//[ package ]
+
+import { AnimationCSS } from './animation'
+import './fonts.css'
+import ElementCSS from 'assets/element-ui-icon/index.css'
+//[ css ]
+
+//=> Style | '全局样式'
+export const GlobalStyle = createGlobalStyle`
+/* 引入其他 CSS */
+${AnimationCSS}
+${ElementCSS}
+
 *,
 body,
 html {
@@ -39,38 +50,8 @@ span {
 }
 
 :not(body) {
-	transition: all 0.5s cubic-bezier(0.22, 0.58, 0.12, 0.98);
-	/* transition: all 0.5s cubic-bezier(0.66, 0.09, 0.49, 1.21); */
-}
-
-/* 字体 */
-
-@font-face {
-	font-family: 'consola';
-	src: url('./assets/fonts/consola.ttf') format('truetype');
-}
-
-@font-face {
-	font-family: 'MiSans';
-	src: url('./assets/fonts/MiSans.ttf') format('truetype');
-}
-
-@font-face {
-	font-family: 'HarmonyOS';
-	src: url('./assets/fonts/HarmonyOS.ttf') format('truetype');
-}
-
-@font-face {
-	font-family: 'Geometos';
-	src: url('./assets/fonts/geometos.woff') format('truetype');
-}
-
-@font-face {
-	font-family: 'element-icons';
-	src: url('./assets/fonts/element-icons.woff') format('woff'),
-		url('./assets/fonts/element-icons.ttf') format('truetype');
-	font-weight: normal;
-	font-style: normal;
+	/* transition: all 0.5s cubic-bezier(0.22, 0.58, 0.12, 0.98); *//* 全局线性 */
+	transition: all 0.5s cubic-bezier(0.66, 0.09, 0.49, 1.21);/* 全局非线性 */
 }
 
 /* 滚动条 & 选中 */
@@ -127,3 +108,4 @@ span {
 	color: #597db7;
 	border-radius: 2px;
 }
+`

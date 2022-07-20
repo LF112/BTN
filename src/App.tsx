@@ -10,9 +10,6 @@ import styled from 'styled-components'
 import { HashRouter as Router } from 'react-router-dom'
 //[ package ]
 
-import './animation.less'
-//[ style ]
-
 import Sidebar from 'components/global/Sidebar'
 import Footer from 'components/global/Footer'
 import Popups from 'components/global/Popups'
