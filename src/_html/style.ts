@@ -50,8 +50,8 @@ span {
 }
 
 :not(body) {
-	/* transition: all 0.5s cubic-bezier(0.22, 0.58, 0.12, 0.98); *//* 全局线性 */
-	transition: all 0.5s cubic-bezier(0.66, 0.09, 0.49, 1.21);/* 全局非线性 */
+	transition: all 0.5s cubic-bezier(0.22, 0.58, 0.12, 0.98); /* 全局线性 */
+    /* transition: all 0.5s cubic-bezier(0.66, 0.09, 0.49, 1.21);*//* 全局非线性 */
 }
 
 /* 滚动条 & 选中 */
