@@ -9,6 +9,9 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 //[ package ]
 
+import { AimOutlined } from '@ant-design/icons'
+//[ assets ]
+
 import Button from 'components/reusable/Button'
 import Breadcubes from 'components/reusable/Menu/Breadcubes'
 import List from './List'
@@ -41,11 +44,22 @@ export default (props: any) => {
 		updateApi(['security.risk'])
 	}, [''])
 
-	const CLICK = new ClickHandler({})
+	const [buttonStatus, setButtonStatus] = useState<number>(-2)
+	const CLICK = new ClickHandler({
+		setButtonStatus: setButtonStatus
+	})
 
 	return (
 		<Main>
-			<Breadcubes list={_list} choose={choose} setChoose={setChoose} />
+			<div>
+				<Breadcubes list={_list} choose={choose} setChoose={setChoose} />
+				<Button
+					text='重新检测'
+					first={<AimOutlined />}
+					status={buttonStatus}
+					onClick={() => CLICK.SecurityCheck()}
+				/>
+			</div>
 			<List data={$security} choose={choose} />
 		</Main>
 	)
@@ -57,7 +71,10 @@ const Main = styled.main`
 	width: 515px;
 	height: 350px;
 	padding: 0 15px 8px;
-	> main + main {
-		margin-top: 10px;
+	> div {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 10px;
 	}
 `

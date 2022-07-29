@@ -5,43 +5,48 @@
  * Copyright (c) 2022 LF112 (futiwolf), All Rights Reserved.
  * 请注意，本项目使用 AGPL v3 开源协议开源，请严格依照开源协议进行不限于编辑、分发等操作。详见 https://www.chinasona.org/gnu/agpl-3.0-cn.html
  */
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 //[ package ]
 
-import Button from 'components/reusable/Button/small'
+import Button from 'components/reusable/Button'
 //[ components ]
+
+import ClickHandler from './../../click'
+//[ click handler ]
 
 //=> DOM
 export default (props: any) => {
-	const { checkTime } = props
+	const { checkTime, ignore, m_name, title } = props
+
+	const [DetailButtonStatus, setDetailButtonStatus] = useState<number>(-2)
+	const [IgnoreButtonStatus, setIgnoreButtonStatus] = useState<number>(-2)
+	const [ReCheckButtonStatus, setReCheckButtonStatus] = useState<number>(-2)
+	const CLICK = new ClickHandler({
+		setDetailButtonStatus: setDetailButtonStatus,
+		setIgnoreButtonStatus: setIgnoreButtonStatus,
+		setReCheckButtonStatus: setReCheckButtonStatus
+	})
+
 	return (
 		<Main>
 			<p>检测时间：{checkTime}</p>
 			<div>
 				<Button
-					icon={
-						<>
-							<i className='el-icon-warning-outline' />
-							<span>详情</span>
-						</>
-					}
+					first={<i className='el-icon-warning-outline' />}
+					text={'详情'}
+					status={DetailButtonStatus}
 				/>
 				<Button
-					icon={
-						<>
-							<i className='el-icon-magic-stick' />
-							<span>忽略</span>
-						</>
-					}
+					onClick={() => CLICK.SaladForked(m_name, title, ignore)}
+					first={<i className='el-icon-magic-stick' />}
+					text={`${ignore ? '取消' : ''}忽略`}
+					status={IgnoreButtonStatus}
 				/>
 				<Button
-					icon={
-						<>
-							<i className='el-icon-aim' />
-							<span>重新检测</span>
-						</>
-					}
+					first={<i className='el-icon-aim' />}
+					text={'重新检测'}
+					status={ReCheckButtonStatus}
 				/>
 			</div>
 		</Main>
@@ -66,11 +71,14 @@ const Main = styled.footer`
 		display: flex;
 		> button {
 			background: #353c44;
-			padding: 2px 5px;
-			> span {
+			padding: 4px 0 4px 8px;
+			> p {
 				font-size: 12px;
 				margin-top: 0;
 				margin-left: 4px;
+			}
+			i {
+				color: #fff;
 			}
 		}
 		> button + button {

@@ -41,5 +41,6 @@ export const ID = {
 	UpdatePanel: 'ajax?action=UpdatePanel', // 获取面板更新
 	to_not_beta: 'ajax?action=to_not_beta', // 切换至正式版 [ 需要 check ]
 	approve_beta: 'ajax?action=apple_beta', // 切换至测试版 ( 申请 ) [ 需要 check ]
-	GetWarningList: 'warning?action=get_list' // 获取安全警告列表
+	GetWarningList: 'warning?action=get_list', // 获取安全警告列表
+	SetWaringIgnore: 'warning?action=set_ignore' // 安全警告条目忽略处理
 }

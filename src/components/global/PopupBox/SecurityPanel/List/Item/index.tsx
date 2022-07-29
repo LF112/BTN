@@ -19,7 +19,7 @@ import { simplifyTime } from 'utils/useTools'
 export default (props: any) => {
 	const { data } = props
 
-	const { title, taking, level, check_time } = data
+	const { title, taking, level, check_time, ignore, m_name } = data
 
 	return (
 		<Main>
@@ -32,7 +32,12 @@ export default (props: any) => {
 						: (taking * 1000).toFixed(2) + 'ms'
 				}
 			/>
-			<Bottom checkTime={simplifyTime(check_time)} />
+			<Bottom
+				checkTime={simplifyTime(check_time)}
+				ignore={ignore}
+				m_name={m_name}
+				title={title}
+			/>
 		</Main>
 	)
 }
