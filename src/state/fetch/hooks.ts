@@ -8,7 +8,7 @@
 import { useCallback } from 'react'
 import { AppState } from 'state'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
-import { updateStatus } from 'state/status/slice'
+import { setNetwork } from 'state2/status'
 
 import { DateTime } from 'luxon'
 import axios from 'axios'
@@ -76,30 +76,26 @@ export function BTFetch(): (
 				//=> API 请求失败校验
 				if (!status && msg)
 					if (/验证失败,禁止|IP校验失败,您的访问/g.test(msg)) {
-						dispatch(
-							updateStatus({
-								data: false,
-								type: 'network',
-								aims: 'apiStatus',
-								rawJson: data,
-								aimsJson: 'msg'
-							})
-						)
+						setNetwork({
+							data: false,
+							type: 'network',
+							aims: 'apiStatus',
+							rawJson: data,
+							aimsJson: 'msg'
+						})
 						return null
 					}
 
 				//=> 打回数据
 				return data
 			} else {
-				dispatch(
-					updateStatus({
-						data: false,
-						type: 'network',
-						aims: 'apiStatus',
-						rawJson: { status: false, msg: err.message },
-						aimsJson: 'msg'
-					})
-				)
+				setNetwork({
+					data: false,
+					type: 'network',
+					aims: 'apiStatus',
+					rawJson: { status: false, msg: err.message },
+					aimsJson: 'msg'
+				})
 				return { status: false, msg: err.message }
 			}
 		},

@@ -11,7 +11,7 @@ import { DateTime } from 'luxon'
 import axios from 'axios'
 import { MD5 } from 'crypto-js'
 import qs from 'qs'
-import { updateStatus } from 'state/status/slice'
+import { setNetwork } from 'state2/status'
 //[ package ]
 
 /**
@@ -65,7 +65,7 @@ export default async (
 		if (!status && msg)
 			if (/验证失败,禁止|IP校验失败,您的访问/g.test(msg))
 				return [
-					updateStatus({
+					setNetwork({
 						data: false,
 						type: 'network',
 						aims: 'apiStatus',
@@ -79,7 +79,7 @@ export default async (
 	} catch (error) {
 		if (error.message !== 'repeat')
 			return [
-				updateStatus({
+				setNetwork({
 					data: false,
 					type: 'network',
 					aims: 'apiStatus',

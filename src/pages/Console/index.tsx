@@ -20,7 +20,7 @@ import DataHub from 'components/page/console/DataHub'
 //[ components ]
 
 import { useUpdateApi } from 'state/api/hooks'
-import { useStatus } from 'state/status/hooks'
+import { _network } from 'state2/status'
 import { setPageLoad, _pageLoad } from 'state2/animation'
 //[ hooks ]
 
@@ -28,7 +28,7 @@ import { setPageLoad, _pageLoad } from 'state2/animation'
 export default () => {
 	const updateApi = useUpdateApi()
 
-	const _apiStatus = useStatus('network', 'apiStatus')
+	const { apiStatus } = useStore(_network)
 
 	//=> MAIN EFFECTS
 	const [SHOW, setSHOW] = useState<Boolean>(false)
@@ -64,12 +64,12 @@ export default () => {
 		])
 
 		//=> 持续获取面板状态
-		if (!_apiStatus) {
+		if (!apiStatus) {
 			//=> 当 API 被限制时，且 Timer 已定义
 			if (typeof Timer === 'function') clearRafInterval(Timer)
 		} else
 			Timer = setRafInterval(() => {
-				if (_apiStatus)
+				if (apiStatus)
 					updateApi([
 						'system.load',
 						'system.disk',
@@ -85,7 +85,7 @@ export default () => {
 		return () => {
 			if (Timer) clearRafInterval(Timer)
 		}
-	}, [_apiStatus])
+	}, [apiStatus])
 
 	return (
 		<Main

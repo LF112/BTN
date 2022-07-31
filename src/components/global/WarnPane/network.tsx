@@ -8,6 +8,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import fastdom from 'fastdom'
+import { useStore } from '@nanostores/react'
 //[ package ]
 
 import WarnPane from 'components/reusable/WarnPane'
@@ -16,13 +17,13 @@ import Taskbar from 'components/reusable/Taskbar'
 
 import { ReactComponent as ICON_HeartRate } from 'assets/svg/global_heartrate.svg'
 
-import { useStatus } from 'state/status/hooks'
+import { _network } from 'state2/status'
 import { setRipplesMask } from 'state2/animation'
 //[ hooks ]
 
 //=> DOM
 export default () => {
-	const { rawJson, aimsJson, ...$network } = useStatus('network') as any
+	const { rawJson, aimsJson, ...$network } = useStore(_network)
 
 	const node = useRef<HTMLElement>()
 
