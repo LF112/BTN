@@ -12,7 +12,7 @@ import Input from 'components/reusable/Input'
 //[ Components ]
 
 import { ID as _NID } from 'state/api/linkId'
-import { BTFetch } from 'state/fetch/hooks'
+import { BTFetch } from 'state2/fetch'
 import { useApiState } from 'state/api/hooks'
 import { useAddPopup } from 'state/popup/hooks'
 //[ hooks ]

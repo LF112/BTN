@@ -21,7 +21,7 @@ import { useApiState } from 'state/api/hooks'
 
 import { ID as _NID } from 'state/api/linkId'
 import { useAddPopup } from 'state/popup/hooks'
-import { BTFetch } from 'state/fetch/hooks'
+import { BTFetch } from 'state2/fetch'
 //[ hooks ]
 
 //=> DOM

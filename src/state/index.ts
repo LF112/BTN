@@ -10,7 +10,6 @@ import { configureStore } from '@reduxjs/toolkit'
 
 //
 import popup from './popup/slice'
-import btnconfig from './btnconfig/slice'
 import api from './api'
 import popupbox from './popupbox/slice'
 //[ 导入 state ]
@@ -24,7 +23,6 @@ const store = configureStore({
 	//=> 绑定 state
 	reducer: {
 		popup,
-		btnconfig,
 		popupbox,
 		...(api as any)
 	}
