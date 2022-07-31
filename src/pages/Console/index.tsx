@@ -8,6 +8,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { setRafInterval, clearRafInterval } from 'setRafTimeout'
+import { useStore } from '@nanostores/react'
 //[ package ]
 
 import Header from 'components/page/console/Header'
@@ -20,22 +21,18 @@ import DataHub from 'components/page/console/DataHub'
 
 import { useUpdateApi } from 'state/api/hooks'
 import { useStatus } from 'state/status/hooks'
-import {
-	useUpdatePageLoadStatus,
-	usePageLoadStatus
-} from 'state/animation/hooks'
+import { setPageLoad, _pageLoad } from 'state2/animation'
 //[ hooks ]
 
 //=> DOM
 export default () => {
 	const updateApi = useUpdateApi()
-	const setPageLoad = useUpdatePageLoadStatus()
 
 	const _apiStatus = useStatus('network', 'apiStatus')
-	const pageLoad = usePageLoadStatus()
 
 	//=> MAIN EFFECTS
 	const [SHOW, setSHOW] = useState<Boolean>(false)
+	const pageLoad = useStore(_pageLoad)
 	useEffect(() => {
 		if (!pageLoad) {
 			setPageLoad(true)

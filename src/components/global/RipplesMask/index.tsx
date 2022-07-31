@@ -7,15 +7,16 @@
  */
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import { useStore } from '@nanostores/react'
 //[ package ]
 
-import { useRipplesMask } from 'state/animation/hooks'
+import { _ripplesMask } from 'state2/animation'
 //[ hooks ]
 
 //=> DOM
 export default (props: any) => {
 	const { child } = props
-	const [show, x, y] = useRipplesMask()
+	const { show, x, y } = useStore(_ripplesMask)
 	const [_style, updateStyle] = useState<object>({})
 
 	useEffect(() => {

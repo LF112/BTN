@@ -17,13 +17,12 @@ import Taskbar from 'components/reusable/Taskbar'
 import { ReactComponent as ICON_HeartRate } from 'assets/svg/global_heartrate.svg'
 
 import { useStatus } from 'state/status/hooks'
-import { useToggleFloatTips } from 'state/animation/hooks'
+import { setRipplesMask } from 'state2/animation'
 //[ hooks ]
 
 //=> DOM
 export default () => {
 	const { rawJson, aimsJson, ...$network } = useStatus('network') as any
-	const useFloatTips = useToggleFloatTips()
 
 	const node = useRef<HTMLElement>()
 
@@ -38,7 +37,7 @@ export default () => {
 				const { style } = DOM
 
 				//=> 展开遮罩 | '此处可做成根据鼠标位置展开，暂未实现'
-				useFloatTips(true, DOM)
+				setRipplesMask(true, DOM)
 
 				setTimeout(() => {
 					style.opacity = '1'

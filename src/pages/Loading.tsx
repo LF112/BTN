@@ -7,18 +7,18 @@
  */
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import { useStore } from '@nanostores/react'
 //[ package ]
 
 import Loader from 'components/reusable/Loading/HalfFilled'
 //[ Components ]
 
-import { usePageLoadStatus } from 'state/animation/hooks'
+import { _pageLoad } from 'state2/animation'
 //[ state ]
 
 //=> DOM
 export default () => {
-	const pageLoad = usePageLoadStatus()
-
+	const pageLoad = useStore(_pageLoad)
 	const [hide, sethide] = useState<boolean>(true)
 
 	useEffect(() => {

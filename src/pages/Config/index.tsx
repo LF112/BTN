@@ -7,6 +7,7 @@
  */
 import React, { useEffect, useState, useRef } from 'react'
 import styled from 'styled-components'
+import { useStore } from '@nanostores/react'
 //[ package ]
 
 import BTN from 'components/page/config/BTN'
@@ -14,23 +15,18 @@ import Navigation from 'components/page/config/Navigation'
 import Page from './Page'
 //[ Components ]
 
-import {
-	useUpdatePageLoadStatus,
-	usePageLoadStatus
-} from 'state/animation/hooks'
+import { setPageLoad, _pageLoad } from 'state2/animation'
 //[ state ]
 
 //=> DOM
 export default () => {
-	const setPageLoad = useUpdatePageLoadStatus()
-	const pageLoad = usePageLoadStatus()
-
 	const [togglePage, setTogglePage] = useState<string>('panel')
 
 	const pageNode = useRef<HTMLDivElement>(null)
 
 	//=> MAIN EFFECTS
 	const [SHOW, setSHOW] = useState<Boolean>(false)
+	const pageLoad = useStore(_pageLoad)
 	useEffect(() => {
 		if (!pageLoad) {
 			setPageLoad(true)

@@ -9,7 +9,6 @@ import { configureStore } from '@reduxjs/toolkit'
 //[ package ]
 
 //
-import animation from './animation/slice'
 import popup from './popup/slice'
 import btnconfig from './btnconfig/slice'
 import api from './api'
@@ -25,7 +24,6 @@ import popupbox from './popupbox/slice'
 const store = configureStore({
 	//=> 绑定 state
 	reducer: {
-		animation,
 		popup,
 		btnconfig,
 		status,
