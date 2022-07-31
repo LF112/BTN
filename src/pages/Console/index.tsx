@@ -20,7 +20,7 @@ import DataHub from 'components/page/console/DataHub'
 //[ components ]
 
 import { useUpdateApi } from 'state/api/hooks'
-import { _network } from 'state2/status'
+import { _apiStatus } from 'state2/status'
 import { setPageLoad, _pageLoad } from 'state2/animation'
 //[ hooks ]
 
@@ -28,7 +28,7 @@ import { setPageLoad, _pageLoad } from 'state2/animation'
 export default () => {
 	const updateApi = useUpdateApi()
 
-	const { apiStatus } = useStore(_network)
+	const apiStatus = useStore(_apiStatus)
 
 	//=> MAIN EFFECTS
 	const [SHOW, setSHOW] = useState<Boolean>(false)

@@ -17,13 +17,15 @@ import Taskbar from 'components/reusable/Taskbar'
 
 import { ReactComponent as ICON_HeartRate } from 'assets/svg/global_heartrate.svg'
 
-import { _network } from 'state2/status'
+import { _apiStatus, _aimsJson, _rawJson } from 'state2/status'
 import { setRipplesMask } from 'state2/animation'
 //[ hooks ]
 
 //=> DOM
 export default () => {
-	const { rawJson, aimsJson, ...$network } = useStore(_network)
+	const apiStatus = useStore(_apiStatus)
+	const aimsJson = useStore(_aimsJson)
+	const rawJson = useStore(_rawJson)
 
 	const node = useRef<HTMLElement>()
 
@@ -31,7 +33,6 @@ export default () => {
 
 	//=> API 请求异常时
 	useEffect(() => {
-		const { apiStatus } = $network
 		if (!apiStatus) {
 			fastdom.measure(() => {
 				const DOM = node.current
@@ -47,7 +48,7 @@ export default () => {
 			})
 		}
 		setUpdateNow(apiStatus)
-	}, [$network])
+	}, [apiStatus])
 
 	return (
 		<Main>

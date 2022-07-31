@@ -77,9 +77,7 @@ export function BTFetch(): (
 				if (!status && msg)
 					if (/验证失败,禁止|IP校验失败,您的访问/g.test(msg)) {
 						setNetwork({
-							data: false,
-							type: 'network',
-							aims: 'apiStatus',
+							status: false,
 							rawJson: data,
 							aimsJson: 'msg'
 						})
@@ -90,9 +88,7 @@ export function BTFetch(): (
 				return data
 			} else {
 				setNetwork({
-					data: false,
-					type: 'network',
-					aims: 'apiStatus',
+					status: false,
 					rawJson: { status: false, msg: err.message },
 					aimsJson: 'msg'
 				})

@@ -10,28 +10,18 @@ import { atom } from 'nanostores'
 
 //=> STORE
 // 网络状态
-export const _network = atom<$network>({
-	apiStatus: true,
-	rawJson: {},
-	aimsJson: ''
-})
+export const _apiStatus = atom<boolean>(false)
+export const _aimsJson = atom<string>('')
+export const _rawJson = atom<object>({})
 
 //=> FUNCTIONS
 // 更新网络状态
 export const setNetwork = (network: $setNetwork): void => {
-	const { data, type, aims, rawJson, aimsJson } = network
-	const state = _network.get()
+	const { status, rawJson, aimsJson } = network
 
-	if (rawJson) state[type].rawJson = rawJson
-	if (aimsJson) state[type].aimsJson = aimsJson
-	if (!aims)
-		//=> 第一层 | '指 state 对象深度'
-		state[type] = data
-	//=> 第二层
-	else state[type][aims] = data
-	// '你在哪一层？'
-
-	_network.set(state)
+	if (rawJson) _rawJson.set(rawJson)
+	if (aimsJson) _aimsJson.set(aimsJson)
+	if (status) _apiStatus.set(status)
 }
 
 //=> Types
@@ -41,9 +31,7 @@ export type $network = {
 	aimsJson: string
 }
 export type $setNetwork = {
-	data: string | boolean | number
-	type: string
-	aims?: string
+	status: boolean
 	rawJson?: object
-	aimsJson: string
+	aimsJson?: string
 }
