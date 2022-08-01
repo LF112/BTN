@@ -57,9 +57,10 @@ export const useUpdateApi = (): ((queue: any) => void) => {
 //=> 预处理
 const apiUpdateIndexArr = {} // fetch 表
 const urlMapping = {} // Url 映射表
+const interceptorArr = {} // 数据拦截器表
 Object.keys(_API).forEach((aimsApi: string) => {
 	//=> 抽取 URL 索引
-	const { stateApiUpdateIndex } = _API[aimsApi]
+	const { stateApiUpdateIndex, Interceptor } = _API[aimsApi]
 
 	//=> 遍历索引，拟合 URL 映射表
 	Object.keys(stateApiUpdateIndex).forEach((key: string) => {
@@ -69,6 +70,14 @@ Object.keys(_API).forEach((aimsApi: string) => {
 		if (!urlMapping[URL]) urlMapping[URL] = [[updateParamQuery, aimsApi, key]]
 		else urlMapping[URL].push([updateParamQuery, aimsApi, key])
 	})
+
+	//=> 遍历拦截器，拟合拦截器表
+	if (Interceptor)
+		Object.keys(Interceptor).forEach((key: string) => {
+			const InterceptorName = `${aimsApi}.${key}`
+			if (!interceptorArr.hasOwnProperty(InterceptorName))
+				interceptorArr[InterceptorName] = Interceptor[key]
+		})
 })
 
 /**
@@ -94,9 +103,12 @@ const sendRequest = (connect: any, FitRequestQueue: any[]) => {
 		if (result)
 			urlMapping[URL].forEach(([apiQuery, updaterName, updaterAims]) => {
 				//=> UPDATE!
-				_API[updaterName][updaterAims].set(
-					apiQuery === '' ? result : _.get(result, apiQuery)
-				)
+				const DATA = apiQuery === '' ? result : _.get(result, apiQuery)
+				//=> 是否使用拦截器
+				const InterceptorName = `${updaterName}.${updaterAims}`
+				if (interceptorArr.hasOwnProperty(InterceptorName))
+					interceptorArr[InterceptorName](DATA)
+				else _API[updaterName][updaterAims].set(DATA)
 			})
 	})
 }

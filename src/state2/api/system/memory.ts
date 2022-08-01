@@ -27,3 +27,13 @@ export const stateApiUpdateIndex: any = {
 }
 
 //=> TODO
+export const Interceptor = {
+	mem: (data: any) => {
+		const { memBuffers, memCached, memFree, memRealUsed, memTotal } = data
+		memoryTotal.set(memTotal)
+		memoryFree.set(memFree)
+		memoryBuffers.set(memBuffers)
+		memoryCached.set(memCached)
+		memoryRealUsed.set(memRealUsed)
+	}
+}
