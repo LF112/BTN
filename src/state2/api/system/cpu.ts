@@ -8,20 +8,15 @@
 import { atom } from 'nanostores'
 //[ package ]
 
-//=> STORE
-// 网络状态
-export const _apiStatus = atom<boolean>(true)
-export const _aimsJson = atom<string>('')
-export const _rawJson = atom<object>({})
+import { ID } from 'state2/api/linkId'
+//[ API ID ]
 
-//=> FUNCTIONS
-// 更新网络状态
-export const setNetwork = (
-	status: boolean,
-	rawJson: object,
-	aimsJson: string
-): void => {
-	_rawJson.set(rawJson)
-	_aimsJson.set(aimsJson)
-	_apiStatus.set(status)
+//=> STORES
+//export const network = atom<object>({}) // 网络列表
+
+//=> INDEX
+const { _NetWork } = ID
+export const stateApiUpdateIndex: any = {
+	cpu: [_NetWork, 'cpu'],
+	cpu_times: [_NetWork, 'cpu_times']
 }

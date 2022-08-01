@@ -8,20 +8,16 @@
 import { atom } from 'nanostores'
 //[ package ]
 
-//=> STORE
-// 网络状态
-export const _apiStatus = atom<boolean>(true)
-export const _aimsJson = atom<string>('')
-export const _rawJson = atom<object>({})
+import { ID } from 'state2/api/linkId'
+//[ API ID ]
 
-//=> FUNCTIONS
-// 更新网络状态
-export const setNetwork = (
-	status: boolean,
-	rawJson: object,
-	aimsJson: string
-): void => {
-	_rawJson.set(rawJson)
-	_aimsJson.set(aimsJson)
-	_apiStatus.set(status)
+//=> STORES
+export const pythonVersion = atom<string>('-') // Python 版本
+export const webServer = atom<string>('-') // Web 服务器
+
+//=> INDEX
+const { _ConfigInfo, _SystemInfo } = ID
+export const stateApiUpdateIndex: any = {
+	pythonVersion: [_SystemInfo, 'data.py'],
+	webServer: [_ConfigInfo, 'webserver']
 }

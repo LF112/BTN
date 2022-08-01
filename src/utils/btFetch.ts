@@ -64,23 +64,13 @@ export default async (
 		//=> API 请求失败校验
 		if (!status && msg)
 			if (/验证失败,禁止|IP校验失败,您的访问/g.test(msg)) {
-				setNetwork({
-					status: false,
-					rawJson: data,
-					aimsJson: 'msg'
-				})
+				setNetwork(false, data, 'msg')
 				return null
 			}
 
-		return [data]
+		return data
 	} catch (error) {
-		if (error.message !== 'repeat') {
-			setNetwork({
-				status: false,
-				rawJson: { status: false, msg: error.message },
-				aimsJson: 'msg'
-			})
-			return null
-		} else return null
+		if (error.message !== 'repeat')
+			setNetwork(false, { status: false, msg: error.message }, 'msg')
 	}
 }

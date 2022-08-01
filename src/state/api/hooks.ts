@@ -14,6 +14,8 @@ import _ from 'lodash'
 import { updater, apiIndexUpdater, urlMappingTable } from './index'
 //[ state / hooks ]
 
+import { _connect } from 'state2/btnconfig'
+
 import $fetch from 'utils/btFetch'
 //[ utils ]
 
@@ -50,7 +52,7 @@ export function useUpdateApi(): (queue: any) => void {
 
 	//=> READ CONFIG | '此处仅供给 BtFetch 工具使用'
 	const STATE = useAppSelector((state: AppState) => state)
-	const { connect } = STATE.btnconfig
+	const connect = _connect.get()
 
 	//=> MAIN
 	//=> 当 API 未被限制可用时
@@ -78,23 +80,17 @@ const FitRequestQueue = (queue: string[]): any[] => {
  */
 const sendRequest = (connect: any, dispatch: any, FitRequestQueue: any[]) => {
 	//console.log(FitRequestQueue)
-	FitRequestQueue.forEach(async (URL: string) => {
-		const resultArr = await $fetch(connect, URL)
-		if (resultArr) {
-			const [result, pureDispatch] = resultArr //=> 取出请求返回数据
-			if (!pureDispatch) {
-				//=> 取出 Url 映射 dispatch 表
-				urlMappingTable[URL].forEach(([apiQuery, updaterName, updaterAims]) => {
-					//=> 索引对应值并 dispatch 更新 state
-					dispatch(
-						updater[updaterName].update({
-							apiType: updaterAims,
-							value: apiQuery === '' ? result : _.get(result, apiQuery)
-						})
-					)
-				})
-				// '此处可合并 action，对于相同的 API 类型，可以合并到一起再发送，节省 action 开销。'
-			} else dispatch(result) //=> 直接打回 dispatch
-		}
-	})
+	// FitRequestQueue.forEach(async (URL: string) => {
+	// 	const result = await $fetch(connect, URL)
+	// 	//=> 取出 Url 映射 dispatch 表
+	// 	urlMappingTable[URL].forEach(([apiQuery, updaterName, updaterAims]) => {
+	// 		//=> 索引对应值并 dispatch 更新 state
+	// 		dispatch(
+	// 			updater[updaterName].update({
+	// 				apiType: updaterAims,
+	// 				value: apiQuery === '' ? result : _.get(result, apiQuery)
+	// 			})
+	// 		)
+	// 	})
+	// })
 }

@@ -8,20 +8,16 @@
 import { atom } from 'nanostores'
 //[ package ]
 
-//=> STORE
-// 网络状态
-export const _apiStatus = atom<boolean>(true)
-export const _aimsJson = atom<string>('')
-export const _rawJson = atom<object>({})
+import { ID } from 'state2/api/linkId'
+//[ API ID ]
 
-//=> FUNCTIONS
-// 更新网络状态
-export const setNetwork = (
-	status: boolean,
-	rawJson: object,
-	aimsJson: string
-): void => {
-	_rawJson.set(rawJson)
-	_aimsJson.set(aimsJson)
-	_apiStatus.set(status)
+//=> STORES
+export const ipv6 = atom<boolean>(false) // IPv6 监听状态
+export const overTime = atom<number>(0) // 面板登录状态过期时间
+
+//=> INDEX
+const { _OverTime, _IPv6Status } = ID
+export const stateApiUpdateIndex: any = {
+	ipv6: [_IPv6Status, ''],
+	overTime: [_OverTime, 'data']
 }
