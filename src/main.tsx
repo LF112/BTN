@@ -7,14 +7,10 @@
  */
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-import { Provider } from 'react-redux'
 //[ package ]
 
 import { GlobalStyle } from './_html/style'
 //[ style ]
-
-import store from 'state'
-//[ store ]
 
 import App from './App'
 //[ pages ]
@@ -28,10 +24,7 @@ createRoot(document.getElementById('BTNEXT')).render(
 	<React.StrictMode>
 		{/* 引用全局样式 */}
 		<GlobalStyle />
-		{/* REACT REDUX */}
-		<Provider store={store}>
-			<App />
-		</Provider>
+		<App />
 	</React.StrictMode>
 )
 
