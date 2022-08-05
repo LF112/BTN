@@ -17,7 +17,7 @@ import Breadcubes from 'components/reusable/Menu/Breadcubes'
 import List from './List'
 //[ components ]
 
-import { useUpdateShow } from 'state/popupbox/hooks'
+import { updateShow } from 'store/popupbox'
 import { useUpdateApi, useApiState, $ } from 'store/api'
 //[ hooks ]
 
@@ -27,7 +27,6 @@ import ClickHandler from './click'
 //=> DOM
 export default (props: any) => {
 	const { Close } = props
-	const updateShow = useUpdateShow()
 	const updateApi = useUpdateApi()
 	const { riskList, securityList, ignoreList } = useApiState('security')
 

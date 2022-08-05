@@ -8,19 +8,21 @@
 import React, { Suspense, useEffect, useState, useRef, useMemo } from 'react'
 import styled from 'styled-components'
 import fastdom from 'fastdom'
+import { useStore } from '@nanostores/react'
 //[ package ]
 
 import { DefaultCard } from 'components/reusable/Card'
 //[ Components ]
 
 import {
-	useLoadId,
-	useShow,
-	useUpdateLoadId,
-	useUpdateShow,
-	getLoaded,
-	useAddLoaded
-} from 'state/popupbox/hooks'
+	popupAims,
+	popupTitle,
+	popupShow,
+	popupLoaded,
+	updateShow,
+	popupOpen,
+	addLoaded
+} from 'store/popupbox'
 import { useAddPopup, useClosePopup } from 'state/popup/hooks'
 //[ hooks ]
 
@@ -30,14 +32,14 @@ import SmallButton from 'components/reusable/Button/small'
 
 //=> DOM
 export default () => {
-	const [loadId, title] = useLoadId()
-	const show = useShow()
+	const loadId = useStore(popupAims)
+	const title = useStore(popupTitle)
+	const show = useStore(popupShow)
+
 	const addPopup = useAddPopup()
 	const closePopup = useClosePopup()
-	const updateLoadId = useUpdateLoadId()
-	const updateShow = useUpdateShow()
-	const Loaded = getLoaded()
-	const addLoaded = useAddLoaded()
+
+	const Loaded = useStore(popupLoaded)
 
 	const [showDom, setShowDom] = useState<boolean>(false) //=> 显示弹窗动画
 	const [popupId, setPopupId] = useState<string>(null) //=> Popup ID
@@ -110,7 +112,7 @@ export default () => {
 					setTimeout(() => setShowDom(false), 250)
 					setTimeout(() => {
 						DOM.removeAttribute('style')
-						updateLoadId(null, '')
+						popupOpen(null, '')
 						updateShow(false)
 					}, 500)
 				})

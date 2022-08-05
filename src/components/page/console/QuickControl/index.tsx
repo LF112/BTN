@@ -14,7 +14,7 @@ import Button from 'components/reusable/Button'
 //[ components ]
 
 import { useApiState, $ } from 'store/api'
-import { useUpdateLoadId } from 'state/popupbox/hooks'
+import { popupOpen } from 'state/popupbox/hooks'
 //[ hooks ]
 
 import ClickHandler from './click'

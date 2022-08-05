@@ -4,7 +4,7 @@ import { SafetyCertificateOutlined } from '@ant-design/icons'
 //[ package ]
 
 import { useApiState, $ } from 'store/api'
-import { useUpdateLoadId } from 'state/popupbox/hooks'
+import { popupOpen } from 'state/popupbox/hooks'
 //[ hooks ]
 
 //=> DOM

@@ -9,7 +9,7 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 //[ package ]
 
-import { useUpdateShow } from 'state/popupbox/hooks'
+import { updateShow } from 'store/popupbox'
 import { useUpdateApi, useApiState, $ } from 'store/api'
 //[ hooks ]
 
@@ -20,7 +20,6 @@ import Logs from './Logs'
 
 //=> DOM
 export default () => {
-	const updateShow = useUpdateShow()
 	const updateApi = useUpdateApi()
 	const {
 		panelIsNew,
