@@ -18,7 +18,7 @@ import {
 } from 'components/page/config/ReusableComponents'
 //[ Components ]
 
-import { ID as _NID } from 'state/api/linkId'
+import { ID as _NID } from 'store/api/linkId'
 import { useAddPopup } from 'state/popup/hooks'
 import { BTFetch } from 'store/fetch'
 import { useApiState, $ } from 'store/api'
