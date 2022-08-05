@@ -10,13 +10,13 @@ import styled from 'styled-components'
 import { CloudServerOutlined } from '@ant-design/icons'
 //[ package ]
 
-import { useApiState, useUpdateApi } from 'state/api/hooks'
+import { useApiState, useUpdateApi, $ } from 'state2/api'
 //[ hooks ]
 
 //=> Component
 export default () => {
 	const updateApi = useUpdateApi()
-	const $panel = useApiState('panel')
+	const { serverIP } = useApiState('panel')
 
 	useEffect(() => {
 		updateApi(['panel.serverIP'])
@@ -31,7 +31,7 @@ export default () => {
 				<ServerInfo>
 					<div>
 						<h1>Server</h1>
-						<p>{$panel.serverIP}</p>
+						<p>{$(serverIP)}</p>
 					</div>
 					<UnfoldIcon>
 						<i className='el-icon-arrow-up'></i>

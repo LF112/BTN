@@ -15,7 +15,7 @@ import Reboot from './reboot'
 //[ components ]
 
 import { useUpdateShow } from 'state/popupbox/hooks'
-import { useUpdateApi, useApiState } from 'state/api/hooks'
+import { useUpdateApi, useApiState, $ } from 'state2/api'
 //[ hooks ]
 
 import useToggle from 'utils/useToggle'
@@ -28,12 +28,12 @@ export default (props: any) => {
 	const { Close } = props
 	const updateShow = useUpdateShow()
 	const updateApi = useUpdateApi()
-	const { webserver } = useApiState('system')
+	const { webServer } = useApiState('system')
 
 	useEffect(() => {
 		//=> 显示弹窗 | '通知父组件子组件成功装载'
 		updateShow(true)
-		updateApi(['system.webserver'])
+		updateApi(['system.webServer'])
 	}, [''])
 
 	const [showReboot, toggleShowReboot] = useToggle()
@@ -62,7 +62,7 @@ export default (props: any) => {
 					/>
 				</ChooseReboot>
 			</div>
-			<Reboot show={showReboot} webserver={webserver} Close={Close} />
+			<Reboot show={showReboot} webserver={$(webServer)} Close={Close} />
 			<DecorateIcon />
 		</Main>
 	)

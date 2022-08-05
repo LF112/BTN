@@ -18,7 +18,7 @@ import List from './List'
 //[ components ]
 
 import { useUpdateShow } from 'state/popupbox/hooks'
-import { useUpdateApi, useApiState } from 'state/api/hooks'
+import { useUpdateApi, useApiState, $ } from 'state2/api'
 //[ hooks ]
 
 import ClickHandler from './click'
@@ -29,7 +29,7 @@ export default (props: any) => {
 	const { Close } = props
 	const updateShow = useUpdateShow()
 	const updateApi = useUpdateApi()
-	const $security = useApiState('security')
+	const { riskList, securityList, ignoreList } = useApiState('security')
 
 	const _list = [
 		{ name: '风险项', to: 'risk' },
@@ -41,7 +41,11 @@ export default (props: any) => {
 	useEffect(() => {
 		//=> 显示弹窗 | '通知父组件子组件成功装载'
 		updateShow(true)
-		updateApi(['security.risk'])
+		updateApi([
+			'security.riskList',
+			'security.securityList',
+			'security.ignoreList'
+		])
 	}, [''])
 
 	const [buttonStatus, setButtonStatus] = useState<number>(-2)
@@ -49,6 +53,11 @@ export default (props: any) => {
 		setButtonStatus: setButtonStatus
 	})
 
+	const $security = {
+		risk: $(riskList),
+		security: $(securityList),
+		ignore: $(ignoreList)
+	}
 	return (
 		<Main>
 			<div>

@@ -86,7 +86,11 @@ Object.keys(_API).forEach((aimsApi: string) => {
  */
 const FitRequestQueue = (queue: string[]): any[] => {
 	const FitArr = []
-	queue.forEach((aims: string) => FitArr.push(apiUpdateIndexArr[aims]))
+	queue.forEach((aims: string) => {
+		const QUERY = apiUpdateIndexArr[aims]
+		if (QUERY) FitArr.push(QUERY)
+		else console.log('API 索引错误:', aims)
+	})
 	return FitArr
 }
 

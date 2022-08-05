@@ -13,14 +13,14 @@ import Input from 'components/reusable/Input'
 
 import { ID as _NID } from 'state/api/linkId'
 import { BTFetch } from 'state2/fetch'
-import { useApiState } from 'state/api/hooks'
+import { useApiState, $ } from 'state2/api'
 import { useAddPopup } from 'state/popup/hooks'
 //[ hooks ]
 
 //=> DOM
 export default () => {
 	const $fetch = BTFetch()
-	const { name } = useApiState('panel')
+	const { panelName } = useApiState('panel')
 	const addPopup = useAddPopup()
 
 	return (
@@ -28,7 +28,7 @@ export default () => {
 			<SetUpMainN>
 				<div>
 					<Input
-						defaultValue={name}
+						defaultValue={$(panelName)}
 						tips={'键入 WEB 面板网页别名'}
 						handleNext={async (
 							text: string,

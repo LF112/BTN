@@ -18,7 +18,7 @@ import Overtime from 'components/page/config/settingPage/Overtime'
 import ServerIP from 'components/page/config/settingPage/ServerIP'
 //[ components ]
 
-import { useUpdateApi } from 'state/api/hooks'
+import { useUpdateApi } from 'state2/api'
 //[ hooks ]
 
 //=> DOM
@@ -28,10 +28,10 @@ export default () => {
 	useEffect(() => {
 		updateApi([
 			'config.ipv6',
-			'panel.name',
 			'config.overTime',
-			'panel.Local',
-			'panel.DevMode',
+			'panel.panelName',
+			'panel.panelLocalMode',
+			'panel.panelDevMode',
 			'panel.serverIP'
 		])
 	}, [''])

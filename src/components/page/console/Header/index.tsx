@@ -17,13 +17,15 @@ import VersionInfo from 'components/page/console/Header/VersionInfo'
 import { ReactComponent as FreeIcon } from 'assets/svg/global_link.svg'
 //[ assets ]
 
-import { useApiState } from 'state/api/hooks'
+import { useApiState, $ } from 'state2/api'
 //[ hooks ]
 
 //=> DOM
 export default () => {
-	const $panel = useApiState('panel')
+	const { panelPro, panelLtd, panelRunTime } = useApiState('panel')
 
+	const _PanelPro = $(panelPro)
+	const _PanelLtd = $(panelLtd)
 	return (
 		<Main>
 			<PanelInfo>
@@ -34,17 +36,15 @@ export default () => {
 			<BadgeList>
 				<BadgeIcon
 					icon={
-						$panel.Pro > 0 ? (
+						_PanelPro > 0 ? (
 							<ThunderboltOutlined />
-						) : $panel.ltd > 0 ? (
+						) : _PanelLtd > 0 ? (
 							<PayCircleOutlined />
 						) : (
 							<FreeIcon />
 						)
 					}
-					text={
-						$panel.Pro > 0 ? '专业版' : $panel.Ltd > 0 ? '企业版' : '免费版'
-					}
+					text={_PanelPro > 0 ? '专业版' : _PanelLtd > 0 ? '企业版' : '免费版'}
 					style={{
 						opacity: 0,
 						animation: 'ScaleIn 0.25s forwards',
@@ -53,7 +53,7 @@ export default () => {
 				/>
 				<BadgeIcon
 					icon={<i className='el-icon-time' />}
-					text={$panel.time}
+					text={$(panelRunTime)}
 					style={{
 						opacity: 0,
 						animation: 'ScaleIn 0.25s forwards',

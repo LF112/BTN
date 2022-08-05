@@ -21,13 +21,13 @@ import {
 import { ID as _NID } from 'state/api/linkId'
 import { useAddPopup } from 'state/popup/hooks'
 import { BTFetch } from 'state2/fetch'
-import { useApiState } from 'state/api/hooks'
+import { useApiState, $ } from 'state2/api'
 //[ hooks ]
 
 //=> DOM
 export default () => {
 	const $fetch = BTFetch()
-	const { Local } = useApiState('panel')
+	const { panelLocalMode } = useApiState('panel')
 	const addPopup = useAddPopup()
 
 	return (
@@ -35,7 +35,7 @@ export default () => {
 			<SetUpMain>
 				<div>
 					<Switch
-						Default={Local}
+						Default={$(panelLocalMode)}
 						toggleSwitch={async (
 							Switch: boolean,
 							Toggle: (specify?: boolean) => void,

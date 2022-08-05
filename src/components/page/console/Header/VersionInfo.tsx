@@ -12,20 +12,20 @@ import styled from 'styled-components'
 import { ReactComponent as VersionIcon } from 'assets/svg/global_version.svg'
 //[ assets ]
 
-import { useApiState } from 'state/api/hooks'
+import { useApiState, $ } from 'state2/api'
 //[ hooks ]
 
 //=> DOM
 export default () => {
-	const $panel = useApiState('panel')
+	const { panelVersion, panelBeta } = useApiState('panel')
 
 	return (
 		<>
 			<VersionTEXT>
 				<VersionIcon />
-				{$panel.version}
+				{$(panelVersion)}
 			</VersionTEXT>
-			<Releases>{`${$panel.Beta ? '测试' : '正式'}版`}</Releases>
+			<Releases>{`${$(panelBeta) ? '测试' : '正式'}版`}</Releases>
 		</>
 	)
 }

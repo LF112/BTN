@@ -13,7 +13,7 @@ import { RocketOutlined, ToolOutlined, ReloadOutlined } from '@ant-design/icons'
 import Button from 'components/reusable/Button'
 //[ components ]
 
-import { useApiState } from 'state/api/hooks'
+import { useApiState, $ } from 'state2/api'
 import { useUpdateLoadId } from 'state/popupbox/hooks'
 //[ hooks ]
 
@@ -22,7 +22,7 @@ import ClickHandler from './click'
 
 //=> DOM
 export default () => {
-	const $panel = useApiState('panel')
+	const { panelIsNew } = useApiState('panel')
 	const updateLoadId = useUpdateLoadId()
 
 	const [buttonStatus, setButtonStatus] = useState<number>(-2)
@@ -34,7 +34,7 @@ export default () => {
 	return (
 		<Main>
 			<Button
-				tag={$panel.isNew ? '#f44336' : null}
+				tag={$(panelIsNew) ? '#f44336' : null}
 				first={<RocketOutlined />}
 				text='更新'
 				onClick={() => updateLoadId('UpdatePanel', '更新面板')}

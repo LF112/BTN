@@ -10,7 +10,7 @@ import styled from 'styled-components'
 //[ package ]
 
 import { useUpdateShow } from 'state/popupbox/hooks'
-import { useUpdateApi, useApiState } from 'state/api/hooks'
+import { useUpdateApi, useApiState, $ } from 'state2/api'
 //[ hooks ]
 
 import VersionStatus from './VersionStatus'
@@ -22,41 +22,53 @@ import Logs from './Logs'
 export default () => {
 	const updateShow = useUpdateShow()
 	const updateApi = useUpdateApi()
-	const $panel = useApiState('panel')
+	const {
+		panelIsNew,
+		panelBetaVersion,
+		panelNewVersion,
+		panelBetaVersionLogs,
+		panelNewVersionLogs,
+		panelBetaVersionUptime,
+		panelNewVersionUptime,
+		panelBeta,
+		panelVersion
+	} = useApiState('panel')
 
 	useEffect(() => {
 		//=> 显示弹窗 | '通知父组件子组件成功装载'
 		updateShow(true)
 		//=> 更新版本信息
 		updateApi([
-			'panel.isNew',
-			'panel.betaVersionId',
-			'panel.VersionId',
-			'panel.betaVersionLogs',
-			'panel.VersionLogs',
-			'panel.betaUptime',
-			'panel.Uptime'
+			'panel.panelVersion',
+			'panel.panelBeta',
+			'panel.panelIsNew',
+			'panel.panelBetaVersion',
+			'panel.panelNewVersion',
+			'panel.panelBetaVersionLogs',
+			'panel.panelNewVersionLogs',
+			'panel.panelBetaVersionUptime',
+			'panel.panelNewVersionUptime'
 		])
 	}, [''])
 
+	const _IsNew = $(panelIsNew)
+	const _Beta = $(panelBeta)
 	return (
 		<Main>
 			<VersionStatus
-				isNew={$panel.isNew}
-				Beta={$panel.Beta}
-				UpdateTime={$panel[$panel.Beta ? 'betaUptime' : 'Uptime']}
+				isNew={_IsNew}
+				Beta={_Beta}
+				UpdateTime={
+					_Beta ? $(panelBetaVersionUptime) : $(panelNewVersionUptime)
+				}
 			/>
-			<CurrentVersion
-				isNew={$panel.isNew}
-				Beta={$panel.Beta}
-				version={$panel.version}
-			/>
+			<CurrentVersion isNew={_IsNew} Beta={_Beta} version={$(panelVersion)} />
 			<Logs
-				Beta={$panel.Beta}
-				VersionLogs={$panel.VersionLogs}
-				betaVersionLogs={$panel.betaVersionLogs}
-				versionId={$panel.VersionId}
-				betaVersionId={$panel.betaVersionId}
+				Beta={_Beta}
+				VersionLogs={$(panelNewVersionLogs)}
+				betaVersionLogs={$(panelBetaVersionLogs)}
+				versionId={$(panelNewVersion)}
+				betaVersionId={$(panelBetaVersion)}
 			/>
 		</Main>
 	)

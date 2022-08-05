@@ -13,7 +13,7 @@ import Input from 'components/reusable/Input'
 
 import { ID as _NID } from 'state/api/linkId'
 import { BTFetch } from 'state2/fetch'
-import { useApiState } from 'state/api/hooks'
+import { useApiState, $ } from 'state2/api'
 import { useAddPopup } from 'state/popup/hooks'
 //[ hooks ]
 
@@ -28,7 +28,7 @@ export default () => {
 			<SetUpMainN>
 				<div>
 					<Input
-						defaultValue={serverIP}
+						defaultValue={$(serverIP)}
 						tips={'键入服务器 IP'}
 						handleNext={async (
 							text: string,

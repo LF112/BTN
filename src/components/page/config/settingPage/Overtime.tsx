@@ -13,7 +13,7 @@ import Input from 'components/reusable/Input'
 
 import { ID as _NID } from 'state/api/linkId'
 import { BTFetch } from 'state2/fetch'
-import { useApiState } from 'state/api/hooks'
+import { useApiState, $ } from 'state2/api'
 import { useAddPopup } from 'state/popup/hooks'
 //[ hooks ]
 
@@ -23,12 +23,13 @@ export default () => {
 	const { overTime } = useApiState('config')
 	const addPopup = useAddPopup()
 
+	const _overTime = $(overTime) || 0
 	return (
 		<SetMain>
 			<SetUpMainN>
 				<div>
 					<Input
-						defaultValue={String(overTime)}
+						defaultValue={String(_overTime)}
 						tips={'键入面板登录状态超时时间'}
 						type={'number'}
 						max={86400}
@@ -50,7 +51,9 @@ export default () => {
 					/>
 					<SetUpTitle>自动退出时间</SetUpTitle>
 				</div>
-				<SetUpDescription>{overTime} 秒内无操作将自动退出登录</SetUpDescription>
+				<SetUpDescription>
+					{$(overTime)} 秒内无操作将自动退出登录
+				</SetUpDescription>
 			</SetUpMainN>
 		</SetMain>
 	)

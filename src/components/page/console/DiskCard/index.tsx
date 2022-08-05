@@ -12,16 +12,17 @@ import styled from 'styled-components'
 import Card from './Card'
 //[ components ]
 
-import { useApiState } from 'state/api/hooks'
+import { useApiState, $ } from 'state2/api'
 //[ hooks ]
 
 //=> DOM
 export default () => {
-	const { disk } = useApiState('system')
+	const { disk } = useApiState('disk')
 
+	const _Disk = $(disk)
 	return (
 		<DiskCardList>
-			{disk.map((item: any, index: number) => (
+			{_Disk.map((item: any, index: number) => (
 				<Card
 					key={index}
 					data={item}

@@ -3,20 +3,21 @@ import styled from 'styled-components'
 import { SafetyCertificateOutlined } from '@ant-design/icons'
 //[ package ]
 
-import { useApiState } from 'state/api/hooks'
+import { useApiState, $ } from 'state2/api'
 import { useUpdateLoadId } from 'state/popupbox/hooks'
 //[ hooks ]
 
 //=> DOM
 export default () => {
-	const { risk } = useApiState('security')
+	const { riskList } = useApiState('security')
 	const updateLoadId = useUpdateLoadId()
 
 	const [riskCount, setRiskCount] = useState<number>(0)
+	const _RiskList = $(riskList)
 	useEffect(() => {
-		const count = risk?.length || 0
+		const count = _RiskList?.length || 0
 		if (count !== riskCount) setRiskCount(count)
-	}, [risk])
+	}, [_RiskList])
 
 	return (
 		<Main onClick={() => updateLoadId('SecurityPanel', '安全风险')}>

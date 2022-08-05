@@ -17,7 +17,8 @@ export const OSVersion = atom<string>('-') // 内核版本
 export const OSArch = atom<string>('-') // 内核架构
 export const systemDate = atom<string>('-') // 系统时间
 export const distribution = atom<string>('-') // 发行版本
-export const memory = atom<object>({}) // 内存状态
+export const systemLoad = atom<number>(0) // 系统负载
+export const systemLoadMax = atom<number>(0) // 系统最高负载
 
 //=> INDEX
 const { CONFIG, _ConfigInfo, _NetWork, _SystemInfo } = ID
@@ -27,5 +28,14 @@ export const stateApiUpdateIndex: any = {
 	OSArch: [_SystemInfo, 'data.architecture'],
 	systemDate: [_ConfigInfo, 'systemdate'],
 	distribution: [CONFIG, 'distribution'],
-	memory: [_NetWork, 'load']
+	systemLoad: [_NetWork, 'load']
+}
+
+//=> Interceptor
+export const Interceptor = {
+	systemLoad: (data: any) => {
+		const { one, max } = data
+		systemLoad.set(one)
+		systemLoadMax.set(max)
+	}
 }

@@ -19,7 +19,7 @@ import DiskCard from 'components/page/console/DiskCard'
 import DataHub from 'components/page/console/DataHub'
 //[ components ]
 
-import { useUpdateApi } from 'state/api/hooks'
+import { useUpdateApi } from 'state2/api'
 import { _apiStatus } from 'state2/status'
 import { setPageLoad, _pageLoad } from 'state2/animation'
 //[ hooks ]
@@ -44,23 +44,26 @@ export default () => {
 	let Timer: any = null
 	useEffect(() => {
 		updateApi([
-			'panel.version',
-			'panel.name',
-			'panel.Pro',
-			'panel.Ltd',
-			'panel.Beta',
-			'panel.time',
-			'panel.isNew',
-			'panel.betaVersionId',
-			'panel.VersionId',
-			'panel.betaVersionLogs',
-			'panel.VersionLogs',
-			'panel.betaUptime',
-			'panel.Uptime',
-			'system.load',
-			'system.os',
-			'system.disk',
-			'security.risk'
+			'panel.panelVersion',
+			'panel.panelName',
+			'panel.panelPro',
+			'panel.panelLtd',
+			'panel.panelBeta',
+			'panel.panelRunTime',
+			'panel.panelIsNew',
+			'panel.panelBetaVersion',
+			'panel.panelNewVersion',
+			'panel.panelBetaVersionLogs',
+			'panel.panelNewVersionLogs',
+			'panel.panelBetaVersionUptime',
+			'panel.panelNewVersionUptime',
+			'cpu.cpu',
+			'server.OS',
+			'disk.disk',
+			'disk.iostat',
+			'security.riskList',
+			'security.securityList',
+			'security.ignoreList'
 		])
 
 		//=> 持续获取面板状态
@@ -71,15 +74,13 @@ export default () => {
 			Timer = setRafInterval(() => {
 				if (apiStatus)
 					updateApi([
-						'system.load',
-						'system.disk',
-						'system.up',
-						'system.down',
-						'system.upTotal',
-						'system.downTotal',
-						'system.iostat',
-						'cpu.cpu',
-						'memory.mem'
+						'network.networkUp',
+						'network.networkDown',
+						'network.networkUpTotal',
+						'network.networkDownTotal',
+						'disk.disk',
+						'disk.iostat',
+						'cpu.cpu'
 					])
 			}, 2000)
 		return () => {

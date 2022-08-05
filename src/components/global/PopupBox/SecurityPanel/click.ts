@@ -10,7 +10,7 @@ import { ID as _NID } from 'state/api/linkId'
 
 import { useAddPopup, useClosePopup } from 'state/popup/hooks'
 import { BTFetch } from 'state2/fetch'
-import { useUpdateApi } from 'state/api/hooks'
+import { useUpdateApi } from 'state2/api'
 //[ hooks ]
 
 /**
@@ -84,7 +84,11 @@ export default class {
 			m_name: aims
 		})
 		if (status) {
-			this.updateApi(['security.risk'])
+			this.updateApi([
+				'security.riskList',
+				'security.securityList',
+				'security.ignoreList'
+			])
 			this.closePopup(CBID)
 			this.setIgnoreButtonStatus(1)
 			this.addPopup(`已${ignore ? '取消' : ''}忽略${title}`, 'success', 1500)

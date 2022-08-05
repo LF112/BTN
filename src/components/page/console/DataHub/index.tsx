@@ -16,7 +16,7 @@ import Iostat from './Iostat'
 import OverflowMask from 'components/reusable/Mask/Overflow'
 //[ component ]
 
-import { useApiState } from 'state/api/hooks'
+import { useApiState, $ } from 'state2/api'
 //[ hooks ]
 
 import { bytesToSize } from 'utils/useTools'
@@ -24,7 +24,9 @@ import { bytesToSize } from 'utils/useTools'
 
 //=> DOM
 export default () => {
-	const { up, down, upTotal, downTotal, iostat } = useApiState('system')
+	const { networkUp, networkDown, networkUpTotal, networkDownTotal } =
+		useApiState('network')
+	const { iostat } = useApiState('disk')
 
 	//=> 显示遮罩
 	const cardBoxNode = useRef<HTMLDivElement>(null)
@@ -54,12 +56,12 @@ export default () => {
 			<nav ref={cardBoxNode}>
 				<div>
 					<Network
-						up={up}
-						down={down}
-						upTotal={bytesToSize(upTotal)}
-						downTotal={bytesToSize(downTotal)}
+						up={$(networkUp)}
+						down={$(networkDown)}
+						upTotal={bytesToSize($(networkUpTotal))}
+						downTotal={bytesToSize($(networkDownTotal))}
 					/>
-					<Iostat data={iostat} />
+					<Iostat data={$(iostat)} />
 				</div>
 			</nav>
 			<OverflowMask showMask={showMask} bottom={true} />

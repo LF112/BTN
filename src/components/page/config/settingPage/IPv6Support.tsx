@@ -22,7 +22,7 @@ import Tips from 'components/page/config/Tips'
 import { ID as _NID } from 'state/api/linkId'
 import { useAddPopup } from 'state/popup/hooks'
 import { BTFetch } from 'state2/fetch'
-import { useApiState, useUpdateApi } from 'state/api/hooks'
+import { useApiState, useUpdateApi, $ } from 'state2/api'
 //[ hooks ]
 //[ hooks ]
 
@@ -34,12 +34,13 @@ export default () => {
 
 	const { ipv6 } = useApiState('config')
 
+	const _ipv6 = $(ipv6)
 	return (
 		<SetMain>
 			<SetUpMain>
 				<div>
 					<Switch
-						Default={ipv6}
+						Default={_ipv6}
 						toggleSwitch={async (
 							Switch: boolean,
 							Toggle: (specify?: boolean) => void,
@@ -51,7 +52,11 @@ export default () => {
 							if (status) {
 								updateApi(['config.ipv6'])
 								setLoading(false)
-								addPopup(`已${ipv6 ? '禁用' : '启用'} IPv6 ！`, 'success', 1500)
+								addPopup(
+									`已${_ipv6 ? '禁用' : '启用'} IPv6 ！`,
+									'success',
+									1500
+								)
 							} else {
 								addPopup(msg, 'warn', 1500)
 								setLoading(false)

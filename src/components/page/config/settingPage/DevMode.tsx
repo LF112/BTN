@@ -16,7 +16,7 @@ import {
 	SetUpTitle,
 	SetUpDescription
 } from 'components/page/config/ReusableComponents'
-import { useApiState } from 'state/api/hooks'
+import { useApiState, $ } from 'state2/api'
 //[ Components ]
 
 import { ID as _NID } from 'state/api/linkId'
@@ -27,7 +27,7 @@ import { BTFetch } from 'state2/fetch'
 //=> DOM
 export default () => {
 	const $fetch = BTFetch()
-	const { DevMode } = useApiState('panel')
+	const { panelDevMode } = useApiState('panel')
 	const addPopup = useAddPopup()
 
 	return (
@@ -35,7 +35,7 @@ export default () => {
 			<SetUpMain>
 				<div>
 					<Switch
-						Default={DevMode}
+						Default={$(panelDevMode)}
 						toggleSwitch={async (
 							Switch: boolean,
 							Toggle: (specify?: boolean) => void,

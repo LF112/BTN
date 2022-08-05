@@ -9,7 +9,7 @@ import { ID as _NID } from 'state/api/linkId'
 //[ constants ]
 
 import { BTFetch } from 'state2/fetch'
-import { useUpdateApi } from 'state/api/hooks'
+import { useUpdateApi } from 'state2/api'
 import { useAddPopup } from 'state/popup/hooks'
 //[ hooks ]
 
@@ -62,13 +62,13 @@ export default class {
 			}, 500)
 			//=> 刷新数据
 			this.updateApi([
-				'panel.isNew',
-				'panel.betaVersionId',
-				'panel.VersionId',
-				'panel.betaVersionLogs',
-				'panel.VersionLogs',
-				'panel.betaUptime',
-				'panel.Uptime'
+				'panel.panelIsNew',
+				'panel.panelBetaVersion',
+				'panel.panelNewVersion',
+				'panel.panelBetaVersionLogs',
+				'panel.panelNewVersionLogs',
+				'panel.panelBetaVersionUptime',
+				'panel.panelNewVersionUptime'
 			])
 		}
 	}

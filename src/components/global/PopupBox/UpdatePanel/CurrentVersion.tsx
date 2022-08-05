@@ -15,7 +15,6 @@ import Button from 'components/reusable/Button'
 
 import { useAddPopup } from 'state/popup/hooks'
 import { BTFetch } from 'state2/fetch'
-import { useUpdateApi } from 'state/api/hooks'
 //[ hooks ]
 
 import ClickHandler from './click'
@@ -26,7 +25,6 @@ export default (props: any) => {
 	const { isNew, Beta, version } = props
 	const addPopup = useAddPopup()
 	const $fetch = BTFetch()
-	const updateApi = useUpdateApi()
 
 	const [buttonStatus, setButtonStatus] = useState<number>(-2)
 
@@ -35,8 +33,7 @@ export default (props: any) => {
 		isNew: isNew,
 		setButtonStatus: setButtonStatus,
 		addPopup: addPopup,
-		Beta: Beta,
-		updateApi: updateApi
+		Beta: Beta
 	})
 
 	return (

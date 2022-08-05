@@ -16,20 +16,21 @@ import SystemCard from './SystemCard'
 import Security from './Security'
 //[ components ]
 
-import { useApiState } from 'state/api/hooks'
+import { useApiState, $ } from 'state2/api'
 //[ hooks ]
 
 //=> DOM
 export default () => {
-	const { os, osVersion, osArch, pythonVersion } = useApiState('system')
+	const { OS, OSVersion, OSArch } = useApiState('server')
+	const { pythonVersion } = useApiState('system')
 
 	return (
 		<Main>
 			<SystemCard
-				OS={os}
-				OSVersion={osVersion}
-				OSArch={osArch}
-				isPanelArch={`独立 PY${pythonVersion} 版`}
+				OS={$(OS)}
+				OSVersion={$(OSVersion)}
+				OSArch={$(OSArch)}
+				isPanelArch={`独立 PY${$(pythonVersion)} 版`}
 			/>
 			<FooInfo>
 				<Security />

@@ -12,7 +12,6 @@ import { ID } from 'state2/api/linkId'
 //[ API ID ]
 
 //=> STORES
-export const memory = atom<object>({}) // 内存状态
 export const memoryTotal = atom<number>(0) // 内存总量
 export const memoryFree = atom<number>(0) // 内存空闲
 export const memoryBuffers = atom<number>(0) // 内存缓冲
@@ -22,11 +21,10 @@ export const memoryRealUsed = atom<number>(0) // 内存使用
 //=> INDEX
 const { _NetWork } = ID
 export const stateApiUpdateIndex: any = {
-	memory: [_NetWork, 'load'],
 	mem: [_NetWork, 'mem']
 }
 
-//=> TODO
+//=> Interceptor
 export const Interceptor = {
 	mem: (data: any) => {
 		const { memBuffers, memCached, memFree, memRealUsed, memTotal } = data
