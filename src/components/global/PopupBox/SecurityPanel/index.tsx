@@ -18,7 +18,7 @@ import List from './List'
 //[ components ]
 
 import { useUpdateShow } from 'state/popupbox/hooks'
-import { useUpdateApi, useApiState, $ } from 'state2/api'
+import { useUpdateApi, useApiState, $ } from 'store/api'
 //[ hooks ]
 
 import ClickHandler from './click'

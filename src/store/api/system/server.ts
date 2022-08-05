@@ -8,7 +8,7 @@
 import { atom } from 'nanostores'
 //[ package ]
 
-import { ID } from 'state2/api/linkId'
+import { ID } from 'store/api/linkId'
 //[ API ID ]
 
 //=> STORES

@@ -17,7 +17,7 @@ import VersionInfo from 'components/page/console/Header/VersionInfo'
 import { ReactComponent as FreeIcon } from 'assets/svg/global_link.svg'
 //[ assets ]
 
-import { useApiState, $ } from 'state2/api'
+import { useApiState, $ } from 'store/api'
 //[ hooks ]
 
 //=> DOM

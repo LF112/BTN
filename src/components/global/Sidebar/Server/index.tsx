@@ -10,7 +10,7 @@ import styled from 'styled-components'
 import { CloudServerOutlined } from '@ant-design/icons'
 //[ package ]
 
-import { useApiState, useUpdateApi, $ } from 'state2/api'
+import { useApiState, useUpdateApi, $ } from 'store/api'
 //[ hooks ]
 
 //=> Component

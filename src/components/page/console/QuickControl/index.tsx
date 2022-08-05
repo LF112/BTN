@@ -13,7 +13,7 @@ import { RocketOutlined, ToolOutlined, ReloadOutlined } from '@ant-design/icons'
 import Button from 'components/reusable/Button'
 //[ components ]
 
-import { useApiState, $ } from 'state2/api'
+import { useApiState, $ } from 'store/api'
 import { useUpdateLoadId } from 'state/popupbox/hooks'
 //[ hooks ]
 

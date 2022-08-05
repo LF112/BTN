@@ -21,7 +21,7 @@ import Tips from 'components/page/config/Tips'
 
 import { ID as _NID } from 'state/api/linkId'
 import { useAddPopup } from 'state/popup/hooks'
-import { BTFetch } from 'state2/fetch'
+import { BTFetch } from 'store/fetch'
 //[ hooks ]
 
 //=> DOM

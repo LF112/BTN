@@ -8,27 +8,16 @@
 import { atom } from 'nanostores'
 //[ package ]
 
-import { ID } from 'state2/api/linkId'
+import { ID } from 'store/api/linkId'
 //[ API ID ]
 
 //=> STORES
-export const disk = atom<any[]>([]) // 磁盘列表
-export const iostat = atom<object>({
-	ALL: {
-		read_bytes: 0,
-		read_count: 0,
-		read_merged_count: 0,
-		read_time: 0,
-		write_bytes: 0,
-		write_count: 0,
-		write_merged_count: 0,
-		write_time: 0
-	}
-}) // 磁盘 IO
+export const pythonVersion = atom<string>('-') // Python 版本
+export const webServer = atom<string>('-') // Web 服务器
 
 //=> INDEX
-const { _NetWork } = ID
+const { _ConfigInfo, _SystemInfo } = ID
 export const stateApiUpdateIndex: any = {
-	disk: [_NetWork, 'disk'],
-	iostat: [_NetWork, 'iostat']
+	pythonVersion: [_SystemInfo, 'data.py'],
+	webServer: [_ConfigInfo, 'webserver']
 }

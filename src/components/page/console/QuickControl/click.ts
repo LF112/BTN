@@ -9,7 +9,7 @@ import { ID as _NID } from 'state/api/linkId'
 //[ contants ]
 
 import { useAddPopup } from 'state/popup/hooks'
-import { BTFetch } from 'state2/fetch'
+import { BTFetch } from 'store/fetch'
 //[ hooks ]
 
 /**

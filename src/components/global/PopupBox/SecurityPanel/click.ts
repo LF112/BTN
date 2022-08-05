@@ -9,8 +9,8 @@ import { ID as _NID } from 'state/api/linkId'
 //[ constants ]
 
 import { useAddPopup, useClosePopup } from 'state/popup/hooks'
-import { BTFetch } from 'state2/fetch'
-import { useUpdateApi } from 'state2/api'
+import { BTFetch } from 'store/fetch'
+import { useUpdateApi } from 'store/api'
 //[ hooks ]
 
 /**

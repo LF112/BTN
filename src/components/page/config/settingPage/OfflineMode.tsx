@@ -20,8 +20,8 @@ import {
 
 import { ID as _NID } from 'state/api/linkId'
 import { useAddPopup } from 'state/popup/hooks'
-import { BTFetch } from 'state2/fetch'
-import { useApiState, $ } from 'state2/api'
+import { BTFetch } from 'store/fetch'
+import { useApiState, $ } from 'store/api'
 //[ hooks ]
 
 //=> DOM

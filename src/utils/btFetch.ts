@@ -11,7 +11,7 @@ import { DateTime } from 'luxon'
 import axios from 'axios'
 import { MD5 } from 'crypto-js'
 import qs from 'qs'
-import { setNetwork } from 'state2/status'
+import { setNetwork } from 'store/status'
 //[ package ]
 
 /**

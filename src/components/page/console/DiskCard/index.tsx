@@ -12,7 +12,7 @@ import styled from 'styled-components'
 import Card from './Card'
 //[ components ]
 
-import { useApiState, $ } from 'state2/api'
+import { useApiState, $ } from 'store/api'
 //[ hooks ]
 
 //=> DOM

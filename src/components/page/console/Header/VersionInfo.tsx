@@ -12,7 +12,7 @@ import styled from 'styled-components'
 import { ReactComponent as VersionIcon } from 'assets/svg/global_version.svg'
 //[ assets ]
 
-import { useApiState, $ } from 'state2/api'
+import { useApiState, $ } from 'store/api'
 //[ hooks ]
 
 //=> DOM

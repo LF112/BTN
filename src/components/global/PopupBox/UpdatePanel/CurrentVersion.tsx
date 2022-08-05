@@ -14,7 +14,7 @@ import Button from 'components/reusable/Button'
 //[ components ]
 
 import { useAddPopup } from 'state/popup/hooks'
-import { BTFetch } from 'state2/fetch'
+import { BTFetch } from 'store/fetch'
 //[ hooks ]
 
 import ClickHandler from './click'

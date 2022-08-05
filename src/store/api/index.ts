@@ -14,7 +14,7 @@ import _ from 'lodash'
 import $fetch from 'utils/btFetch'
 //[ utils ]
 
-import { _connect } from 'state2/btnconfig'
+import { _connect } from 'store/btnconfig'
 
 import * as config from './config'
 import * as panel from './panel'

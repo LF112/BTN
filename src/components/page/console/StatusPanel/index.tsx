@@ -15,7 +15,7 @@ import StatusCard from 'components/page/console/StatusPanel/Card'
 import OverflowMask from 'components/reusable/Mask/Overflow'
 //[ components ]
 
-import { useApiState, $ } from 'state2/api'
+import { useApiState, $ } from 'store/api'
 //[ hooks ]
 
 import { getStatusDisplay } from 'utils/useTools'

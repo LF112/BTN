@@ -15,7 +15,7 @@ import Navigation from 'components/page/config/Navigation'
 import Page from './Page'
 //[ Components ]
 
-import { setPageLoad, _pageLoad } from 'state2/animation'
+import { setPageLoad, _pageLoad } from 'store/animation'
 //[ state ]
 
 //=> DOM

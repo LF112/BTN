@@ -19,9 +19,9 @@ import DiskCard from 'components/page/console/DiskCard'
 import DataHub from 'components/page/console/DataHub'
 //[ components ]
 
-import { useUpdateApi } from 'state2/api'
-import { _apiStatus } from 'state2/status'
-import { setPageLoad, _pageLoad } from 'state2/animation'
+import { useUpdateApi } from 'store/api'
+import { _apiStatus } from 'store/status'
+import { setPageLoad, _pageLoad } from 'store/animation'
 //[ hooks ]
 
 //=> DOM

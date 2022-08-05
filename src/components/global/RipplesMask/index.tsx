@@ -10,7 +10,7 @@ import styled from 'styled-components'
 import { useStore } from '@nanostores/react'
 //[ package ]
 
-import { _ripplesMask } from 'state2/animation'
+import { _ripplesMask } from 'store/animation'
 //[ hooks ]
 
 //=> DOM

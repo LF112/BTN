@@ -10,7 +10,7 @@ import styled from 'styled-components'
 //[ package ]
 
 import { useUpdateShow } from 'state/popupbox/hooks'
-import { useUpdateApi, useApiState, $ } from 'state2/api'
+import { useUpdateApi, useApiState, $ } from 'store/api'
 //[ hooks ]
 
 import VersionStatus from './VersionStatus'

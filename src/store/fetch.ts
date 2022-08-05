@@ -13,7 +13,7 @@ import qs from 'qs'
 //[ package ]
 
 import { _connect } from './btnconfig'
-import { setNetwork } from 'state2/status'
+import { setNetwork } from 'store/status'
 //[ state ]
 
 //=> FUNCTIONS

@@ -16,7 +16,7 @@ import Iostat from './Iostat'
 import OverflowMask from 'components/reusable/Mask/Overflow'
 //[ component ]
 
-import { useApiState, $ } from 'state2/api'
+import { useApiState, $ } from 'store/api'
 //[ hooks ]
 
 import { bytesToSize } from 'utils/useTools'

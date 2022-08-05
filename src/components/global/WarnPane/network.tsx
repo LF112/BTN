@@ -17,8 +17,8 @@ import Taskbar from 'components/reusable/Taskbar'
 
 import { ReactComponent as ICON_HeartRate } from 'assets/svg/global_heartrate.svg'
 
-import { _apiStatus, _aimsJson, _rawJson } from 'state2/status'
-import { setRipplesMask } from 'state2/animation'
+import { _apiStatus, _aimsJson, _rawJson } from 'store/status'
+import { setRipplesMask } from 'store/animation'
 //[ hooks ]
 
 //=> DOM

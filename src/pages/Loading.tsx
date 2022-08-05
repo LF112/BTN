@@ -13,7 +13,7 @@ import { useStore } from '@nanostores/react'
 import Loader from 'components/reusable/Loading/HalfFilled'
 //[ Components ]
 
-import { _pageLoad } from 'state2/animation'
+import { _pageLoad } from 'store/animation'
 //[ state ]
 
 //=> DOM

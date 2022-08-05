@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { SafetyCertificateOutlined } from '@ant-design/icons'
 //[ package ]
 
-import { useApiState, $ } from 'state2/api'
+import { useApiState, $ } from 'store/api'
 import { useUpdateLoadId } from 'state/popupbox/hooks'
 //[ hooks ]
 

@@ -8,8 +8,8 @@
 import { ID as _NID } from 'state/api/linkId'
 //[ constants ]
 
-import { BTFetch } from 'state2/fetch'
-import { useUpdateApi } from 'state2/api'
+import { BTFetch } from 'store/fetch'
+import { useUpdateApi } from 'store/api'
 import { useAddPopup } from 'state/popup/hooks'
 //[ hooks ]
 

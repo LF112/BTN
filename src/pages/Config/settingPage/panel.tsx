@@ -18,7 +18,7 @@ import Overtime from 'components/page/config/settingPage/Overtime'
 import ServerIP from 'components/page/config/settingPage/ServerIP'
 //[ components ]
 
-import { useUpdateApi } from 'state2/api'
+import { useUpdateApi } from 'store/api'
 //[ hooks ]
 
 //=> DOM
