@@ -14,7 +14,7 @@ import Input from 'components/reusable/Input'
 import { ID as _NID } from 'store/api/linkId'
 import { BTFetch } from 'store/fetch'
 import { useApiState, $ } from 'store/api'
-import { useAddPopup } from 'state/popup/hooks'
+import { useAddPopup } from 'store/popup'
 //[ hooks ]
 
 //=> DOM

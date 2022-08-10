@@ -8,7 +8,7 @@
 import { ID as _NID } from 'store/api/linkId'
 //[ constants ]
 
-import { useAddPopup, useClosePopup } from 'state/popup/hooks'
+import { useAddPopup, closePopup } from 'store/popup'
 import { BTFetch } from 'store/fetch'
 import { useUpdateApi } from 'store/api'
 //[ hooks ]
@@ -36,7 +36,6 @@ export default class {
 		} = Fn
 
 		const addPopup = useAddPopup()
-		const closePopup = useClosePopup()
 		const $fetch = BTFetch()
 		const updateApi = useUpdateApi()
 

@@ -10,7 +10,7 @@ import { ID as _NID } from 'store/api/linkId'
 
 import { BTFetch } from 'store/fetch'
 import { useUpdateApi } from 'store/api'
-import { useAddPopup } from 'state/popup/hooks'
+import { useAddPopup } from 'store/popup'
 //[ hooks ]
 
 /**

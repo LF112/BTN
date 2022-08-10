@@ -19,7 +19,7 @@ import {
 //[ Components ]
 
 import { ID as _NID } from 'store/api/linkId'
-import { useAddPopup } from 'state/popup/hooks'
+import { useAddPopup } from 'store/popup'
 import { BTFetch } from 'store/fetch'
 import { useApiState, $ } from 'store/api'
 //[ hooks ]

@@ -13,7 +13,7 @@ import { DefaultCard } from 'components/reusable/Card'
 import Button from 'components/reusable/Button'
 //[ components ]
 
-import { useAddPopup } from 'state/popup/hooks'
+import { useAddPopup } from 'store/popup'
 import { BTFetch } from 'store/fetch'
 //[ hooks ]
 

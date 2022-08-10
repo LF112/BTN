@@ -23,7 +23,7 @@ import {
 	popupOpen,
 	addLoaded
 } from 'store/popupbox'
-import { useAddPopup, useClosePopup } from 'state/popup/hooks'
+import { useAddPopup, closePopup } from 'store/popup'
 //[ hooks ]
 
 import { ICONS } from 'constants/popupBox_consts'
@@ -37,7 +37,6 @@ export default () => {
 	const show = useStore(popupShow)
 
 	const addPopup = useAddPopup()
-	const closePopup = useClosePopup()
 
 	const Loaded = useStore(popupLoaded)
 

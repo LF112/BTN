@@ -14,7 +14,7 @@ import Button from 'components/reusable/Button'
 //[ components ]
 
 import { useApiState, $ } from 'store/api'
-import { popupOpen } from 'state/popupbox/hooks'
+import { popupOpen } from 'store/popupbox'
 //[ hooks ]
 
 import ClickHandler from './click'
@@ -23,7 +23,6 @@ import ClickHandler from './click'
 //=> DOM
 export default () => {
 	const { panelIsNew } = useApiState('panel')
-	const updateLoadId = useUpdateLoadId()
 
 	const [buttonStatus, setButtonStatus] = useState<number>(-2)
 
@@ -37,7 +36,7 @@ export default () => {
 				tag={$(panelIsNew) ? '#f44336' : null}
 				first={<RocketOutlined />}
 				text='更新'
-				onClick={() => updateLoadId('UpdatePanel', '更新面板')}
+				onClick={() => popupOpen('UpdatePanel', '更新面板')}
 				style={{
 					opacity: 0,
 					animation: 'ScaleIn 0.25s forwards',
@@ -58,7 +57,7 @@ export default () => {
 			<Button
 				first={<ReloadOutlined />}
 				text='重启'
-				onClick={() => updateLoadId('Reboot', '重启')}
+				onClick={() => popupOpen('Reboot', '重启')}
 				style={{
 					opacity: 0,
 					animation: 'ScaleIn 0.25s forwards',
