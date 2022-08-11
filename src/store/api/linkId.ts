@@ -42,5 +42,6 @@ export const ID = {
 	to_not_beta: 'ajax?action=to_not_beta', // 切换至正式版 [ 需要 check ]
 	approve_beta: 'ajax?action=apple_beta', // 切换至测试版 ( 申请 ) [ 需要 check ]
 	_WarningList: 'warning?action=get_list', // 获取安全警告列表
-	SetWaringIgnore: 'warning?action=set_ignore' // 安全警告条目忽略处理
+	SetWaringIgnore: 'warning?action=set_ignore', // 安全警告条目忽略处理
+	ReCheckWaring: 'warning?action=check_find' // 重新检测指定安全条目
 }

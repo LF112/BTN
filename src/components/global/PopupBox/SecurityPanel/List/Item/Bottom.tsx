@@ -19,11 +19,9 @@ import ClickHandler from './../../click'
 export default (props: any) => {
 	const { checkTime, ignore, m_name, title } = props
 
-	const [DetailButtonStatus, setDetailButtonStatus] = useState<number>(-2)
 	const [IgnoreButtonStatus, setIgnoreButtonStatus] = useState<number>(-2)
 	const [ReCheckButtonStatus, setReCheckButtonStatus] = useState<number>(-2)
 	const CLICK = new ClickHandler({
-		setDetailButtonStatus: setDetailButtonStatus,
 		setIgnoreButtonStatus: setIgnoreButtonStatus,
 		setReCheckButtonStatus: setReCheckButtonStatus
 	})
@@ -35,7 +33,6 @@ export default (props: any) => {
 				<Button
 					first={<i className='el-icon-warning-outline' />}
 					text={'详情'}
-					status={DetailButtonStatus}
 				/>
 				<Button
 					onClick={() => CLICK.SaladForked(m_name, title, ignore)}
@@ -44,6 +41,7 @@ export default (props: any) => {
 					status={IgnoreButtonStatus}
 				/>
 				<Button
+					onClick={() => CLICK.ReCheck(m_name, title)}
 					first={<i className='el-icon-aim' />}
 					text={'重新检测'}
 					status={ReCheckButtonStatus}

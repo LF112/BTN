@@ -22,25 +22,19 @@ export default class {
 	private addPopup: any
 	private closePopup: any
 	private setButtonStatus: (number: number) => void
-	private setDetailButtonStatus: (number: number) => void
 	private setIgnoreButtonStatus: (number: number) => void
 	private setReCheckButtonStatus: (number: number) => void
 	private updateApi: (queue: any) => void
 
 	constructor(Fn: any) {
-		const {
-			setButtonStatus,
-			setDetailButtonStatus,
-			setIgnoreButtonStatus,
-			setReCheckButtonStatus
-		} = Fn
+		const { setButtonStatus, setIgnoreButtonStatus, setReCheckButtonStatus } =
+			Fn
 
 		const addPopup = useAddPopup()
 		const $fetch = BTFetch()
 		const updateApi = useUpdateApi()
 
 		this.setButtonStatus = setButtonStatus // 更新按钮状态
-		this.setDetailButtonStatus = setDetailButtonStatus
 		this.setIgnoreButtonStatus = setIgnoreButtonStatus
 		this.setReCheckButtonStatus = setReCheckButtonStatus
 		this.updateApi = updateApi // 内置更新数据方法
@@ -95,6 +89,32 @@ export default class {
 			//=> 忽略失败
 			this.closePopup(CBID)
 			this.setIgnoreButtonStatus(0)
+			this.addPopup(msg, 'warn', 1500)
+		}
+	}
+
+	/**
+	 * CLICK: 重新检测
+	 */
+	public async ReCheck(aims: string, title: string): Promise<void> {
+		this.setReCheckButtonStatus(-1)
+		const CBID = this.addPopup('正在处理...', 'load', -1)
+		const { status, msg } = await this.$fetch(_NID['ReCheckWaring'], {
+			m_name: aims
+		})
+		if (status) {
+			this.updateApi([
+				'security.riskList',
+				'security.securityList',
+				'security.ignoreList'
+			])
+			this.closePopup(CBID)
+			this.setReCheckButtonStatus(1)
+			this.addPopup(`已重新检测${title}`, 'success', 1500)
+		} else {
+			//=> 忽略失败
+			this.closePopup(CBID)
+			this.setReCheckButtonStatus(0)
 			this.addPopup(msg, 'warn', 1500)
 		}
 	}
