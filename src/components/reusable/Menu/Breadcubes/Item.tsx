@@ -41,6 +41,7 @@ const Main = styled.main`
 		background: #323840;
 		> nav {
 			> div {
+				transform: scale(0.9);
 				background: #3d454f;
 			}
 		}
@@ -55,6 +56,9 @@ const Switch = styled.nav<{ show: boolean }>`
 	border-radius: 4px;
 	background: #272b32;
 	box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	> div {
 		width: 12px;
 		height: 12px;
