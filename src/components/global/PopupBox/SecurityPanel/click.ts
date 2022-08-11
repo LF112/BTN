@@ -56,7 +56,7 @@ export default class {
 		this.setButtonStatus(-1)
 		const CBID = this.addPopup('正在进行安全检查...', 'load', -1)
 		//=> 刷新数据
-		const { ignore } = (await this.$fetch(_NID['GetWarningList'])) as any
+		const { ignore } = (await this.$fetch(_NID['_WarningList'])) as any
 		if (ignore) {
 			this.closePopup(CBID)
 			this.setButtonStatus(1)
