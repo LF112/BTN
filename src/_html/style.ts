@@ -54,6 +54,39 @@ span {
     /* transition: all 0.5s cubic-bezier(0.66, 0.09, 0.49, 1.21);*//* 全局非线性 */
 }
 
+/* 触摸提示框 */
+.TIP:after {
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	z-index: 300;
+	overflow: hidden;
+	padding: 4px 8px;
+	max-width: 320px;
+	border-radius: 4px;
+	background: rgba(79, 89, 95, 0.4);
+	box-shadow: 0 1px 2px rgba(68, 75, 88, 50%);
+	color: #fff;
+	content: attr(data-tooltip);
+	text-overflow: ellipsis;
+	white-space: pre;
+	font-weight: bold;
+	font-size: 14px;
+	letter-spacing: 0.2px;
+	font-family: 'Poppins', 'HarmonyOS', 'Titillium Web';
+	line-height: 20px;
+	opacity: 0;
+	transition: opacity 0.2s, transform 0.2s;
+	transform: translate(-50%, 0.4rem) scale(0.75);
+	pointer-events: none;
+}
+.TIP:focus:after,
+.TIP:hover:after {
+	opacity: 1;
+	transform: translate(-50%, -0.2rem) scale(0.8);
+}
+
+
 /* 滚动条 & 选中 */
 
 ::-webkit-scrollbar {
