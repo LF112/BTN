@@ -121,7 +121,6 @@ export default (props: any) => {
 const Main = styled(DefaultCard)`
 	height: 270px;
 	width: 100%;
-	margin-top: 5px;
 	margin-bottom: 10px;
 	padding: 15px;
 	user-select: none;
