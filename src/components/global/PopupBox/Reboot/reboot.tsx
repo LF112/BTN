@@ -34,10 +34,10 @@ export default (props: any) => {
 	const CLICK = new ClickHandler({
 		setServerButtonStatus: setButtonStatus,
 		SetTaskArr: setTaskList,
-		setLight: setLight,
+		setLight,
 		TaskList: taskList,
-		webserver: webserver,
-		Close: Close
+		webserver,
+		Close
 	})
 
 	return (

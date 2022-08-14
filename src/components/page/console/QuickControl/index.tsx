@@ -27,7 +27,7 @@ export default () => {
 	const [buttonStatus, setButtonStatus] = useState<number>(-2)
 
 	const CLICK = new ClickHandler({
-		setButtonStatus: setButtonStatus
+		setButtonStatus
 	})
 
 	return (

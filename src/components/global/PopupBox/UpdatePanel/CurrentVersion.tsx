@@ -29,11 +29,11 @@ export default (props: any) => {
 	const [buttonStatus, setButtonStatus] = useState<number>(-2)
 
 	const CLICK = new ClickHandler({
-		$fetch: $fetch,
-		isNew: isNew,
-		setButtonStatus: setButtonStatus,
-		addPopup: addPopup,
-		Beta: Beta
+		$fetch,
+		isNew,
+		setButtonStatus,
+		addPopup,
+		Beta
 	})
 
 	return (

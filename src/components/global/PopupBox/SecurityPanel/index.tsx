@@ -49,7 +49,7 @@ export default (props: any) => {
 
 	const [buttonStatus, setButtonStatus] = useState<number>(-2)
 	const CLICK = new ClickHandler({
-		setButtonStatus: setButtonStatus
+		setButtonStatus
 	})
 
 	const $security = {

@@ -22,8 +22,8 @@ export default (props: any) => {
 	const [IgnoreButtonStatus, setIgnoreButtonStatus] = useState<number>(-2)
 	const [ReCheckButtonStatus, setReCheckButtonStatus] = useState<number>(-2)
 	const CLICK = new ClickHandler({
-		setIgnoreButtonStatus: setIgnoreButtonStatus,
-		setReCheckButtonStatus: setReCheckButtonStatus
+		setIgnoreButtonStatus,
+		setReCheckButtonStatus
 	})
 
 	return (

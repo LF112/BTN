@@ -25,8 +25,8 @@ export default (props: any) => {
 	const [buttonStatus, setButtonStatus] = useState<number>(-2)
 
 	const CLICK = new ClickHandler({
-		isNew: isNew,
-		setButtonStatus: setButtonStatus
+		isNew,
+		setButtonStatus
 	})
 
 	return (

@@ -40,8 +40,8 @@ export default (props: any) => {
 	const [serverButtonStatus, setServerButtonStatus] = useState<number>(-2)
 
 	const CLICK = new ClickHandler({
-		setPanelButtonStatus: setPanelButtonStatus,
-		setServerButtonStatus: setServerButtonStatus
+		setPanelButtonStatus,
+		setServerButtonStatus
 	})
 
 	return (
