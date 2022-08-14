@@ -11,14 +11,14 @@ import styled from 'styled-components'
 
 //=> DOM
 export default (props: any) => {
-	const { icon, title, content } = props
+	const { icon, title, children } = props
 	return (
 		<Main>
 			<Title>
 				{icon}
 				{title}
 			</Title>
-			<Content>{content}</Content>
+			{children}
 		</Main>
 	)
 }
@@ -47,16 +47,5 @@ const Title = styled.h1`
 		height: 22px;
 		margin-top: 2px;
 		margin-right: 10px;
-	}
-`
-
-const Content = styled.div`
-	width: 100%;
-	padding: 15px 0;
-	> p {
-		font-family: 'HarmonyOS';
-		line-height: 1;
-		color: #fff;
-		font-size: 12px;
 	}
 `

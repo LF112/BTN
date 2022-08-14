@@ -66,22 +66,14 @@ export function BTFetch(): (
 			//=> API 请求失败校验
 			if (!status && msg)
 				if (/验证失败,禁止|IP校验失败,您的访问/g.test(msg)) {
-					setNetwork({
-						status: false,
-						rawJson: data,
-						aimsJson: 'msg'
-					})
+					setNetwork(false, data, 'msg')
 					return null
 				}
 
 			//=> 打回数据
 			return data
 		} else {
-			setNetwork({
-				status: false,
-				rawJson: { status: false, msg: err.message },
-				aimsJson: 'msg'
-			})
+			setNetwork(false, { status: false, msg: err.message }, 'msg')
 			return { status: false, msg: err.message }
 		}
 	}, [])

@@ -10,6 +10,8 @@
  */
 
 export const ID = {
+	WhoAmI: 'plugin?name=btnext&action=a&s=whoami', // 从 BTN BT-Panel Plugin 中获取 API 状态
+
 	_OverTime: 'plugin?name=btnext&action=a&s=getOverTime', // 获取面板登录状态过期时间
 	SetOverTime: 'plugin?name=btnext&action=a&s=setOverTime', // 设置面板登录状态过期时间
 	SetPanelTitle: 'plugin?name=btnext&action=a&s=setPanelTitle', // 设置面板标题

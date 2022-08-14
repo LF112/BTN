@@ -10,7 +10,7 @@ import { atom } from 'nanostores'
 
 //=> STORE
 // 网络状态
-export const _apiStatus = atom<boolean>(true)
+export const _apiStatus = atom<boolean>(false)
 export const _aimsJson = atom<string>('')
 export const _rawJson = atom<object>({})
 

@@ -22,9 +22,11 @@ export const _ripplesMask = atom<$ripplesMask>({
 // 更新页面载入状态
 export const setPageLoad = (status: boolean): void => _pageLoad.set(status)
 // 更新水波纹状态
-export const setRipplesMask = (show: boolean, el: HTMLElement): void => {
-	const { x, y } = el.getBoundingClientRect()
-	_ripplesMask.set({ show, x, y })
+export const setRipplesMask = (show: boolean, el?: HTMLElement): void => {
+	if (el) {
+		const { x, y } = el.getBoundingClientRect()
+		_ripplesMask.set({ show, x, y })
+	} else _ripplesMask.set({ show, x: 0, y: 0 })
 }
 
 //=> Types

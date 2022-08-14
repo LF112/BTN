@@ -13,6 +13,7 @@ import { useStore } from '@nanostores/react'
 
 import WarnPane from 'components/reusable/WarnPane'
 import Taskbar from 'components/reusable/Taskbar'
+import ReConnect from './ReConnect'
 //[ components ]
 
 import { ReactComponent as ICON_HeartRate } from 'assets/svg/global_heartrate.svg'
@@ -35,17 +36,25 @@ export default () => {
 	useEffect(() => {
 		if (!apiStatus) {
 			fastdom.measure(() => {
-				const DOM = node.current
-				const { style } = DOM
+				const { current } = node
+				const { style } = current
 
 				//=> 展开遮罩 | '此处可做成根据鼠标位置展开，暂未实现'
-				setRipplesMask(true, DOM)
+				setRipplesMask(true, current)
 
 				setTimeout(() => {
 					style.opacity = '1'
 					style.transform = 'scale(1)'
 				}, 250)
 			})
+		} else {
+			setTimeout(() => {
+				const { current } = node
+				const { style } = current
+				style.opacity = '0'
+				style.transform = 'scale(0.8)'
+				setTimeout(() => setRipplesMask(false, current), 350)
+			}, 500)
 		}
 		setUpdateNow(apiStatus)
 	}, [apiStatus])
@@ -53,22 +62,19 @@ export default () => {
 	return (
 		<Main>
 			<div ref={node as any}>
-				<WarnPane
-					icon={<ICON_HeartRate />}
-					title={'喔唷，API 请求失败！'}
-					content={
-						<>
-							<p>
-								侦测到近一次请求中返回了异常的结果，已停用面板相关功能，待解决后将自动恢复。
-							</p>
-							<Taskbar
-								rawJson={rawJson}
-								aimsJson={aimsJson}
-								UpdateNow={UpdateNow}
-							/>
-						</>
-					}
-				/>
+				<WarnPane icon={<ICON_HeartRate />} title={'喔唷，API 请求失败！'}>
+					<Content>
+						<p>
+							侦测到近一次请求中返回了异常的结果，已停用面板相关功能，待解决后将自动恢复。
+						</p>
+						<Taskbar
+							rawJson={rawJson}
+							aimsJson={aimsJson}
+							UpdateNow={UpdateNow}
+						/>
+					</Content>
+					<ReConnect apiStatus={apiStatus} />
+				</WarnPane>
 			</div>
 		</Main>
 	)
@@ -87,5 +93,16 @@ const Main = styled.main`
 	> div {
 		opacity: 0;
 		transform: scale(0.8);
+	}
+`
+
+const Content = styled.div`
+	width: 100%;
+	padding: 15px 0;
+	> p {
+		font-family: 'HarmonyOS';
+		line-height: 1;
+		color: #fff;
+		font-size: 12px;
 	}
 `

@@ -11,11 +11,12 @@
 	overflow-x: auto;
 	color: #abb2bf;
 	font-family: 'Consolas';
-	* {
-		font-family: 'Consolas';
-		line-height: 1;
-		font-size: 14px;
-	}
+}
+
+.hljs * {
+    font-family: 'Consolas';
+    line-height: 1;
+    font-size: 14px;
 }
 
 .hljs-comment,
