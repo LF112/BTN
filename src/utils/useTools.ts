@@ -95,6 +95,7 @@ export const strLogsToArr = (str: string): any[] => {
 		.split(/^【(.{1,2})】(.*)<br>/gm)
 		.filter((v: string) => v !== '')
 		.map((v: string) => v.replace('<br>', ''))
+		.filter((v: string) => !/<[^>]+>/gi.test(v))
 
 	const LogsArr = []
 	if (Pretreatment.length > 0) {

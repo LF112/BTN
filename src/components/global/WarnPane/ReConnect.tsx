@@ -54,9 +54,9 @@ export default (props: any) => {
 							//=> 仅自动重试 10 次
 							if (reConnectCount <= 10) {
 								//=> 首次自动重连
-								if (reConnectCountdown === 1) CLICK.check()
+								if (reConnectCountdown === 1) CLICK.check(true)
 								else if (reConnectCountdown === 5) {
-									CLICK.check()
+									CLICK.check(true)
 									//=> 第一次自动重试失败后
 									if (!apiStatus && buttonStatus !== -1)
 										setTimeout(() => {

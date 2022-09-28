@@ -30,11 +30,13 @@ export default () => {
 
 	const node = useRef<HTMLElement>()
 
-	const [UpdateNow, setUpdateNow] = useState(null)
+	const [UpdateNow, setUpdateNow] = useState<boolean>(null)
+	const [showLock, setShowLock] = useState<boolean>(false)
 
 	//=> API 请求异常时
 	useEffect(() => {
 		if (!apiStatus) {
+			setShowLock(true)
 			fastdom.measure(() => {
 				const { current } = node
 				const { style } = current
@@ -47,12 +49,13 @@ export default () => {
 					style.transform = 'scale(1)'
 				}, 250)
 			})
-		} else {
+		} else if (showLock) {
 			setTimeout(() => {
 				const { current } = node
 				const { style } = current
 				style.opacity = '0'
 				style.transform = 'scale(0.8)'
+				setShowLock(false)
 				setTimeout(() => setRipplesMask(false, current), 350)
 			}, 500)
 		}

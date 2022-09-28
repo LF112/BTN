@@ -39,20 +39,22 @@ export default class {
 	/**
 	 * FN: 连接检测
 	 */
-	async check(): Promise<any> {
+	async check(auto: boolean = false): Promise<any> {
 		this.setButtonStatus(-1)
 		this.setText('正在重连...')
-		const { status } = await this.$fetch(_NID['WhoAmI'])
-		if (status) {
+		const request = await this.$fetch(_NID['WhoAmI'])
+		if (request?.status) {
 			this.setButtonStatus(1)
 			this.setText('连接成功！')
 			setNetwork(true, { code: '200 OK!' }, 'code')
 			this.addPopup('连接已恢复！', 'success', 1500)
 			return true
 		} else {
-			this.setReConnectCountdown(5)
 			this.setButtonStatus(0)
-			this.setText('请求失败！即将自动尝试重连...')
+			if (auto) {
+				this.setReConnectCountdown(5)
+				this.setText('请求失败！即将自动尝试重连...')
+			} else this.setText('请求失败！')
 			this.addPopup('请求失败！', 'warn', 1500)
 			return false
 		}
