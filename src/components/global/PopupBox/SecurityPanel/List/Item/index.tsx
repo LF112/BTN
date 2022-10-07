@@ -13,13 +13,18 @@ import Head from './Head'
 import Bottom from './Bottom'
 //[ components ]
 
+import { _secpanel_choose_data, _secpanel_show } from 'store/status'
+
 import { simplifyTime } from 'utils/useTools'
+//[ utils ]
 
 //=> DOM
 export default (props: any) => {
 	const { data } = props
 
 	const { title, taking, level, check_time, ignore, m_name } = data
+
+	const chooseDetils = (data: object) => _secpanel_choose_data.set(data)
 
 	return (
 		<Main>
@@ -37,6 +42,10 @@ export default (props: any) => {
 				ignore={ignore}
 				m_name={m_name}
 				title={title}
+				choose={() => {
+					chooseDetils(data)
+					_secpanel_show.set(true)
+				}}
 			/>
 		</Main>
 	)

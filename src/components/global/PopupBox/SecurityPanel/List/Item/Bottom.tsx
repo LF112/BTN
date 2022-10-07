@@ -17,7 +17,7 @@ import ClickHandler from './../../click'
 
 //=> DOM
 export default (props: any) => {
-	const { checkTime, ignore, m_name, title } = props
+	const { checkTime, ignore, m_name, title, choose } = props
 
 	const [IgnoreButtonStatus, setIgnoreButtonStatus] = useState<number>(-2)
 	const [ReCheckButtonStatus, setReCheckButtonStatus] = useState<number>(-2)
@@ -33,6 +33,7 @@ export default (props: any) => {
 				<Button
 					first={<i className='el-icon-warning-outline' />}
 					text={'详情'}
+					onClick={choose}
 				/>
 				<Button
 					onClick={() => CLICK.SaladForked(m_name, title, ignore)}

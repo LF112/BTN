@@ -13,6 +13,9 @@ import { atom } from 'nanostores'
 export const _apiStatus = atom<boolean>(true)
 export const _aimsJson = atom<string>('')
 export const _rawJson = atom<object>({})
+// 面板安全 Popup
+export const _secpanel_choose_data = atom<object>({})
+export const _secpanel_show = atom<boolean>(false)
 
 //=> FUNCTIONS
 // 更新网络状态

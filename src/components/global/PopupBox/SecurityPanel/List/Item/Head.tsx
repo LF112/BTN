@@ -54,7 +54,8 @@ const Main = styled.header`
 	}
 `
 
-const Title = styled.div`
+export const Title = styled.div`
+    position: relative;
 	display: flex;
 	align-items: center;
 	> div {
@@ -62,6 +63,7 @@ const Title = styled.div`
 		margin-right: 5px;
 	}
 	> h1 {
+		max-width: 320px;
 		font-family: 'Noto Sans SC';
 		color: #fff;
 		font-size: 16px;
@@ -85,7 +87,7 @@ const CheckTime = styled.div`
 	}
 `
 
-const Tag = styled.div<{ level: number }>`
+export const Tag = styled.div<{ level: number }>`
 	font-size: 12px;
 	color: #fff;
 	line-height: 1;

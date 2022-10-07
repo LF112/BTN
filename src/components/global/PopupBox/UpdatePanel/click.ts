@@ -78,7 +78,7 @@ export default class {
 	 */
 	public async _UpdatePanel(): Promise<boolean> {
 		//=> 升级面板
-		const { msg, status } = (await this.$fetch(_NID['UpdatePanel'], {
+		const { msg, status } = (await this.$fetch(_NID['_PanelUpdate'], {
 			toUpdate: true
 		})) as any
 		if (status) {

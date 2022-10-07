@@ -116,6 +116,7 @@ export const strLogsToArr = (str: string): any[] => {
 }
 
 /**
+ *
  * 文本逐个清除
  * @param next 文本
  */

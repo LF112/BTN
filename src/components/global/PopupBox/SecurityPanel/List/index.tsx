@@ -11,6 +11,7 @@ import styled from 'styled-components'
 
 import Item from './Item'
 import BetterScroll from 'components/reusable/BetterScroll'
+import Details from './Details'
 //[ component ]
 
 //=> DOM
@@ -41,6 +42,12 @@ export default (props: any) => {
 					<Item key={index} data={item} />
 				))}
 			</BetterScroll>
+			<Empty show={data[choose].length === 0}>
+				<h1>
+					暂无{{ risk: '风险', security: '安全', ignore: '忽略' }[choose]}项
+				</h1>
+			</Empty>
+			<Details />
 		</Main>
 	)
 }
@@ -59,5 +66,22 @@ const Main = styled.main`
 				margin-top: 10px;
 			}
 		}
+	}
+`
+
+const Empty = styled.div<{ show: boolean }>`
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	opacity: ${({ show }) => (show ? 1 : 0)};
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	user-select: none;
+	pointer-events: none;
+	> h1 {
+		color: #fff;
+		font-size: 20px;
+		font-family: 'HarmonyOS';
 	}
 `
