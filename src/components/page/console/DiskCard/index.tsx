@@ -10,6 +10,7 @@ import styled from 'styled-components'
 //[ package ]
 
 import Card from './Card'
+import BetterScroll from 'components/reusable/BetterScroll'
 //[ components ]
 
 import { useApiState, $ } from 'store/api'
@@ -22,13 +23,15 @@ export default () => {
 	const _Disk = $(disk)
 	return (
 		<DiskCardList>
-			{_Disk.map((item: any, index: number) => (
-				<Card
-					key={index}
-					data={item}
-					style={{ animationDelay: `${340 + 25 * index}ms` }}
-				/>
-			))}
+			<BetterScroll height={78 * _Disk?.length || 0 + 2}>
+				{_Disk.map((item: any, index: number) => (
+					<Card
+						key={index}
+						data={item}
+						style={{ animationDelay: `${340 + 25 * index}ms` }}
+					/>
+				))}
+			</BetterScroll>
 		</DiskCardList>
 	)
 }
