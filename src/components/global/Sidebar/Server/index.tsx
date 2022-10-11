@@ -1,14 +1,26 @@
-import React from 'react'
+/*
+ * @Author: LF112 (futiwolf) <lf@lf112.net>
+ * @License: GNU Affero General Public License v3.0
+ *
+ * Copyright (c) 2022 LF112 (futiwolf), All Rights Reserved.
+ * 请注意，本项目使用 AGPL v3 开源协议开源，请严格依照开源协议进行不限于编辑、分发等操作。详见 https://www.chinasona.org/gnu/agpl-3.0-cn.html
+ */
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { CloudServerOutlined } from '@ant-design/icons'
 //[ package ]
 
-import { useApiState } from 'state/api/hooks'
+import { useApiState, useUpdateApi, $ } from 'store/api'
 //[ hooks ]
 
 //=> Component
 export default () => {
-	const $panel = useApiState('panel')
+	const updateApi = useUpdateApi()
+	const { serverIP } = useApiState('panel')
+
+	useEffect(() => {
+		updateApi(['panel.serverIP'])
+	}, [''])
 
 	return (
 		<Server>
@@ -19,7 +31,7 @@ export default () => {
 				<ServerInfo>
 					<div>
 						<h1>Server</h1>
-						<p>{$panel.serverIP}</p>
+						<p>{$(serverIP)}</p>
 					</div>
 					<UnfoldIcon>
 						<i className='el-icon-arrow-up'></i>

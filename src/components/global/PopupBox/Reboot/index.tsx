@@ -1,3 +1,10 @@
+/*
+ * @Author: LF112 (futiwolf) <lf@lf112.net>
+ * @License: GNU Affero General Public License v3.0
+ *
+ * Copyright (c) 2022 LF112 (futiwolf), All Rights Reserved.
+ * 请注意，本项目使用 AGPL v3 开源协议开源，请严格依照开源协议进行不限于编辑、分发等操作。详见 https://www.chinasona.org/gnu/agpl-3.0-cn.html
+ */
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 //[ package ]
@@ -7,8 +14,8 @@ import { SyncOutlined } from '@ant-design/icons'
 import Reboot from './reboot'
 //[ components ]
 
-import { useUpdateShow } from 'state/popupbox/hooks'
-import { useUpdateApi, useApiState } from 'state/api/hooks'
+import { updateShow } from 'store/popupbox'
+import { useUpdateApi, useApiState, $ } from 'store/api'
 //[ hooks ]
 
 import useToggle from 'utils/useToggle'
@@ -19,14 +26,13 @@ import ClickHandler from './click'
 //=> DOM
 export default (props: any) => {
 	const { Close } = props
-	const updateShow = useUpdateShow()
 	const updateApi = useUpdateApi()
-	const { webserver } = useApiState('system')
+	const { webServer } = useApiState('system')
 
 	useEffect(() => {
 		//=> 显示弹窗 | '通知父组件子组件成功装载'
 		updateShow(true)
-		updateApi(['system', 'webserver'])
+		updateApi(['system.webServer'])
 	}, [''])
 
 	const [showReboot, toggleShowReboot] = useToggle()
@@ -34,8 +40,8 @@ export default (props: any) => {
 	const [serverButtonStatus, setServerButtonStatus] = useState<number>(-2)
 
 	const CLICK = new ClickHandler({
-		setPanelButtonStatus: setPanelButtonStatus,
-		setServerButtonStatus: setServerButtonStatus
+		setPanelButtonStatus,
+		setServerButtonStatus
 	})
 
 	return (
@@ -55,7 +61,7 @@ export default (props: any) => {
 					/>
 				</ChooseReboot>
 			</div>
-			<Reboot show={showReboot} webserver={webserver} Close={Close} />
+			<Reboot show={showReboot} webserver={$(webServer)} Close={Close} />
 			<DecorateIcon />
 		</Main>
 	)

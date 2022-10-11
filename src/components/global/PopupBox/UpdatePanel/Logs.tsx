@@ -1,9 +1,19 @@
-import React, { useState, useEffect } from 'react'
+/*
+ * @Author: LF112 (futiwolf) <lf@lf112.net>
+ * @License: GNU Affero General Public License v3.0
+ *
+ * Copyright (c) 2022 LF112 (futiwolf), All Rights Reserved.
+ * 请注意，本项目使用 AGPL v3 开源协议开源，请严格依照开源协议进行不限于编辑、分发等操作。详见 https://www.chinasona.org/gnu/agpl-3.0-cn.html
+ */
+import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
+import BScroll from '@better-scroll/core'
+import MouseWheel from '@better-scroll/mouse-wheel'
 //[ package ]
 
 import { DefaultCard } from 'components/reusable/Card'
 import Button from 'components/reusable/Button'
+import OverflowMask from 'components/reusable/Mask/Overflow'
 //[ components ]
 
 import useToggle from 'utils/useToggle'
@@ -26,6 +36,34 @@ export default (props: any) => {
 			setFormalLogs(strLogsToArr(VersionLogs))
 		}
 	}, [VersionLogs, betaVersionLogs])
+
+	const node = useRef<HTMLDivElement>(null)
+	const [BScrollCore, setBScroll] = useState<BScroll | null>(null)
+	useEffect(() => {
+		if (node) {
+			const DOM = node.current
+			//=> 装载 BetterScroll
+			BScroll.use(MouseWheel)
+			setTimeout(
+				() =>
+					setBScroll(
+						new BScroll(DOM, {
+							scrollX: false,
+							scrollY: true,
+							mouseWheel: true
+						})
+					),
+				516
+			)
+		}
+	}, [node])
+
+	useEffect(() => {
+		if (BScrollCore) {
+			BScrollCore.refresh()
+			BScrollCore.scrollTo(0, 0)
+		}
+	}, [Switch])
 
 	const LogsCard = (Arr: any[]) => {
 		return Arr.map((item: any, index: number) => {
@@ -53,24 +91,36 @@ export default (props: any) => {
 				</h1>
 				<Button
 					text={`查看${!Switch ? '测试版' : '正式版'}`}
-					onClick={toggle}
+					onClick={() => toggle()}
 				/>
 			</LtFi1t1l2e>
-			<Container>
-				<LogsBox
+			<Container ref={node}>
+				<div
 					style={{
-						opacity: Switch ? 1 : 0,
-						pointerEvents: Switch ? 'auto' : 'none'
+						height: `${30 * (Switch ? BetaLogs : FormalLogs).length + 30}px`
 					}}>
-					{LogsCard(BetaLogs)}
-				</LogsBox>
-				<LogsBox
+					<LogsBox
+						style={{
+							opacity: Switch ? 1 : 0,
+							pointerEvents: Switch ? 'auto' : 'none'
+						}}>
+						{LogsCard(BetaLogs)}
+					</LogsBox>
+					<LogsBox
+						style={{
+							opacity: !Switch ? 1 : 0,
+							pointerEvents: !Switch ? 'auto' : 'none'
+						}}>
+						{LogsCard(FormalLogs)}
+					</LogsBox>
+				</div>
+				<OverflowMask
+					showMask={true}
+					bottom={true}
 					style={{
-						opacity: !Switch ? 1 : 0,
-						pointerEvents: !Switch ? 'auto' : 'none'
-					}}>
-					{LogsCard(FormalLogs)}
-				</LogsBox>
+						background: 'linear-gradient(0deg, #2b313c 1%, transparent)'
+					}}
+				/>
 			</Container>
 		</Main>
 	)
@@ -112,6 +162,7 @@ const Container = styled.div`
 	width: 100%;
 	height: 100px;
 	margin-top: 10px;
+	overflow: hidden;
 `
 
 const LogsBox = styled.div`
@@ -119,7 +170,7 @@ const LogsBox = styled.div`
 	top: 0;
 	width: 100%;
 	height: 100%;
-	overflow-y: auto;
+	overflow-y: hidden;
 	> div {
 		width: 100%;
 		height: 20px;
@@ -137,7 +188,8 @@ const LogsBox = styled.div`
 		}
 		p {
 			font-family: 'Saira', 'Noto Sans SC';
-			font-weight: 400;
+			font-weight: 800;
+			letter-spacing: 0.6px;
 			line-height: 1;
 			font-size: 12px;
 			color: #fff;

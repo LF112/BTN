@@ -1,8 +1,17 @@
+/*
+ * BTN 网络请求库
+ *
+ * @Author: LF112 (futiwolf) <lf@lf112.net>
+ * @License: GNU Affero General Public License v3.0
+ *
+ * Copyright (c) 2022 LF112 (futiwolf), All Rights Reserved.
+ * 请注意，本项目使用 AGPL v3 开源协议开源，请严格依照开源协议进行不限于编辑、分发等操作。详见 https://www.chinasona.org/gnu/agpl-3.0-cn.html
+ */
 import { DateTime } from 'luxon'
 import axios from 'axios'
 import { MD5 } from 'crypto-js'
 import qs from 'qs'
-import { updateStatus } from 'state/status/slice'
+import { setNetwork } from 'store/status'
 //[ package ]
 
 /**
@@ -54,31 +63,14 @@ export default async (
 
 		//=> API 请求失败校验
 		if (!status && msg)
-			if (/验证失败,禁止|IP校验失败,您的访问/g.test(msg))
-				return [
-					updateStatus({
-						data: false,
-						type: 'network',
-						aims: 'apiStatus',
-						rawJson: data,
-						aimsJson: 'msg'
-					}),
-					true
-				]
+			if (/验证失败,禁止|IP校验失败,您的访问/g.test(msg)) {
+				setNetwork(false, data, 'msg')
+				return null
+			}
 
-		return [data]
+		return data
 	} catch (error) {
 		if (error.message !== 'repeat')
-			return [
-				updateStatus({
-					data: false,
-					type: 'network',
-					aims: 'apiStatus',
-					rawJson: { status: false, msg: error.message },
-					aimsJson: 'msg'
-				}),
-				true
-			]
-		else return null
+			setNetwork(false, { status: false, msg: error.message }, 'msg')
 	}
 }

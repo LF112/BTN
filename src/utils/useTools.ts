@@ -1,3 +1,12 @@
+/*
+ * BTN Tools 工具库
+ *
+ * @Author: LF112 (futiwolf) <lf@lf112.net>
+ * @License: GNU Affero General Public License v3.0
+ *
+ * Copyright (c) 2022 LF112 (futiwolf), All Rights Reserved.
+ * 请注意，本项目使用 AGPL v3 开源协议开源，请严格依照开源协议进行不限于编辑、分发等操作。详见 https://www.chinasona.org/gnu/agpl-3.0-cn.html
+ */
 import loadStatus from 'constants/loadStatus'
 //[ constants ]
 
@@ -83,9 +92,10 @@ export const bytesToSize = (
  */
 export const strLogsToArr = (str: string): any[] => {
 	const Pretreatment = str
-		.split(/^【(.*)】(.*)/gim)
+		.split(/^【(.{1,2})】(.*)<br>/gm)
 		.filter((v: string) => v !== '')
 		.map((v: string) => v.replace('<br>', ''))
+		.filter((v: string) => !/<[^>]+>/gi.test(v))
 
 	const LogsArr = []
 	if (Pretreatment.length > 0) {
@@ -103,4 +113,51 @@ export const strLogsToArr = (str: string): any[] => {
 		})
 	}
 	return LogsArr
+}
+
+/**
+ *
+ * 文本逐个清除
+ * @param next 文本
+ */
+export const clearText = (next: string, setText: (text: string) => void) => {
+	if ([...next].length > 0) {
+		setText(next)
+		setTimeout(() => clearText(next.slice(0, -1), setText), 10)
+	} else setText('')
+}
+
+/**
+ * 时间戳转化
+ * @description 获取时间简化缩写
+ * @param dateTimeStamp 需要转换的时间戳
+ * @return 简化后的时间格式
+ */
+export const simplifyTime = (dateTimeStamp: number) => {
+	if (dateTimeStamp === 0) return '刚刚'
+
+	if (dateTimeStamp.toString().length == 10)
+		dateTimeStamp = dateTimeStamp * 1000
+
+	const minute = 1000 * 60
+	const hour = minute * 60
+	const day = hour * 24
+	const month = day * 30
+	const now = new Date().getTime()
+	const diffValue = now - dateTimeStamp
+
+	if (diffValue < 0) return '刚刚'
+
+	const monthC = diffValue / month
+	const weekC = diffValue / (7 * day)
+	const dayC = diffValue / day
+	const hourC = diffValue / hour
+	const minC = diffValue / minute
+
+	if (monthC >= 1) return ~~monthC + '月前'
+	else if (weekC >= 1) return ~~weekC + '周前'
+	else if (dayC >= 1) return ~~dayC + '天前'
+	else if (hourC >= 1) return ~~hourC + '小时前'
+	else if (minC >= 1) return ~~minC + '分钟前'
+	else return '刚刚'
 }

@@ -1,0 +1,42 @@
+/* 字体 */
+@font-face {
+    font-family: 'consola';
+    src: url('./src/assets/fonts/consola.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'MiSans';
+    src: url('./src/assets/fonts/MiSans.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'HarmonyOS';
+    src: url('./src/assets/fonts/HarmonyOS.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Geometos';
+    src: url('./src/assets/fonts/geometos.woff') format('truetype');
+}
+
+@font-face {
+    font-family: 'element-icons';
+    src: url('./src/assets/fonts/element-icons.woff') format('woff'),
+        url('./src/assets/fonts/element-icons.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'REEJI-PinboGB';
+    src: url('./src/assets/fonts/REEJI-PinboGB.woff2') format('woff2'),
+        url('./src/assets/fonts/REEJI-PinboGB.woff') format('woff'),
+        url('./src/assets/fonts/REEJI-PinboGB.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* --- 自动文本子字集识别区 | '可以在此处填写需要写入字集的文本' => HarmonyOS, MiSans
+关于
+*/

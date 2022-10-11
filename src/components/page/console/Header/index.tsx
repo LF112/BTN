@@ -1,3 +1,10 @@
+/*
+ * @Author: LF112 (futiwolf) <lf@lf112.net>
+ * @License: GNU Affero General Public License v3.0
+ *
+ * Copyright (c) 2022 LF112 (futiwolf), All Rights Reserved.
+ * 请注意，本项目使用 AGPL v3 开源协议开源，请严格依照开源协议进行不限于编辑、分发等操作。详见 https://www.chinasona.org/gnu/agpl-3.0-cn.html
+ */
 import React from 'react'
 import styled from 'styled-components'
 //[ package ]
@@ -10,13 +17,15 @@ import VersionInfo from 'components/page/console/Header/VersionInfo'
 import { ReactComponent as FreeIcon } from 'assets/svg/global_link.svg'
 //[ assets ]
 
-import { useApiState } from 'state/api/hooks'
+import { useApiState, $ } from 'store/api'
 //[ hooks ]
 
 //=> DOM
 export default () => {
-	const $panel = useApiState('panel')
+	const { panelPro, panelLtd, panelRunTime } = useApiState('panel')
 
+	const _PanelPro = $(panelPro)
+	const _PanelLtd = $(panelLtd)
 	return (
 		<Main>
 			<PanelInfo>
@@ -27,19 +36,30 @@ export default () => {
 			<BadgeList>
 				<BadgeIcon
 					icon={
-						$panel.Pro > 0 ? (
+						_PanelPro > 0 ? (
 							<ThunderboltOutlined />
-						) : $panel.ltd > 0 ? (
+						) : _PanelLtd > 0 ? (
 							<PayCircleOutlined />
 						) : (
 							<FreeIcon />
 						)
 					}
-					text={
-						$panel.Pro > 0 ? '专业版' : $panel.Ltd > 0 ? '企业版' : '免费版'
-					}
+					text={_PanelPro > 0 ? '专业版' : _PanelLtd > 0 ? '企业版' : '免费版'}
+					style={{
+						opacity: 0,
+						animation: 'ScaleIn 0.25s forwards',
+						animationDelay: '226ms'
+					}}
 				/>
-				<BadgeIcon icon={<i className='el-icon-time' />} text={$panel.time} />
+				<BadgeIcon
+					icon={<i className='el-icon-time' />}
+					text={$(panelRunTime)}
+					style={{
+						opacity: 0,
+						animation: 'ScaleIn 0.25s forwards',
+						animationDelay: '258ms'
+					}}
+				/>
 			</BadgeList>
 		</Main>
 	)
@@ -57,6 +77,8 @@ const Main = styled.header`
 	align-items: center;
 	justify-content: space-between;
 	padding: 5px 10px;
+	opacity: 0;
+	animation: FadeIn 0.25s forwards;
 `
 
 const BadgeList = styled.div`
@@ -83,6 +105,9 @@ const HightTEXT = styled.h1`
 	font-size: 20px;
 	line-height: 1;
 	margin-top: -4px;
+	opacity: 0;
+	animation: FadeIn 0.25s forwards;
+	animation-delay: 41ms;
 `
 
 const Line = styled.hr`
@@ -91,4 +116,7 @@ const Line = styled.hr`
 	border-radius: 5px;
 	background: #b2b7c2;
 	margin: 0 15px;
+	opacity: 0;
+	animation: HeightIn 0.25s, FadeIn 0.25s forwards;
+	animation-delay: 98ms;
 `

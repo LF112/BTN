@@ -1,9 +1,17 @@
+/*
+ * @Author: LF112 (futiwolf) <lf@lf112.net>
+ * @License: GNU Affero General Public License v3.0
+ *
+ * Copyright (c) 2022 LF112 (futiwolf), All Rights Reserved.
+ * 请注意，本项目使用 AGPL v3 开源协议开源，请严格依照开源协议进行不限于编辑、分发等操作。详见 https://www.chinasona.org/gnu/agpl-3.0-cn.html
+ */
 import React, { useEffect, memo, useState } from 'react'
 import styled from 'styled-components'
 import fastdom from 'fastdom'
+import { useStore } from '@nanostores/react'
 //[ package ]
 
-import { useRemovePopup, useTriggerChoose } from 'state/popup/hooks'
+import { removePopup, useTriggerChoose, closeList } from 'store/popup'
 //[ Hooks ]
 
 import { Rand } from 'utils/useTools'
@@ -13,8 +21,6 @@ import { Rand } from 'utils/useTools'
 export default memo((props: any) => {
 	const { type, popupId, timeout, close, content } = props
 
-	//=> 移除弹窗 hooks
-	const removePopup = useRemovePopup()
 	//=> 触发选择回调 hooks
 	const triggerChoose = useTriggerChoose()
 
@@ -75,18 +81,19 @@ export default memo((props: any) => {
 				DOM.opacity = '1'
 
 				//=> 自动关闭弹窗 | '仅 type 为 info 等普通弹窗时'
-				if (timeout > 0)
-					setTimeout(() => {
-						Close()
-					}, timeout)
+				if (timeout > 0) setTimeout(() => Close(), timeout)
 			})
 		})
 	}, [timeout])
 
 	//=> 侦测 hooks close 状态改变
+	const CloseArr = useStore(closeList)
 	useEffect(() => {
-		if (close) Close()
-	}, [close])
+		if (CloseArr.includes(popupId)) {
+			closeList.set(CloseArr.replace(`.${popupId}`, ''))
+			Close()
+		}
+	}, [CloseArr])
 
 	/**
 	 * 关闭弹窗

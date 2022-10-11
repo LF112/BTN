@@ -1,3 +1,10 @@
+/*
+ * @Author: LF112 (futiwolf) <lf@lf112.net>
+ * @License: GNU Affero General Public License v3.0
+ *
+ * Copyright (c) 2022 LF112 (futiwolf), All Rights Reserved.
+ * 请注意，本项目使用 AGPL v3 开源协议开源，请严格依照开源协议进行不限于编辑、分发等操作。详见 https://www.chinasona.org/gnu/agpl-3.0-cn.html
+ */
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useLocation } from 'react-router-dom'
@@ -10,17 +17,9 @@ import Item from './Item'
 import sidebarConsts from 'constants/sidebar_consts'
 //[ constants ]
 
-import { useUpdateApi } from 'state/api/hooks'
-//[ hooks ]
-
 //=> Component
 export default () => {
 	const { pathname } = useLocation()
-	const updateApi = useUpdateApi()
-
-	useEffect(() => {
-		updateApi(['panel', 'serverIP'])
-	}, [''])
 
 	return (
 		<Sidebar>
@@ -40,6 +39,7 @@ export default () => {
 const Sidebar = styled.nav`
 	position: relative;
 	width: 198px;
+	min-width: 198px;
 	height: calc(100% - 20px);
 	display: flex;
 	justify-content: center;

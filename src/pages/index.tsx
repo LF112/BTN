@@ -1,11 +1,14 @@
+/*
+ * @Author: LF112 (futiwolf) <lf@lf112.net>
+ * @License: GNU Affero General Public License v3.0
+ *
+ * Copyright (c) 2022 LF112 (futiwolf), All Rights Reserved.
+ * 请注意，本项目使用 AGPL v3 开源协议开源，请严格依照开源协议进行不限于编辑、分发等操作。详见 https://www.chinasona.org/gnu/agpl-3.0-cn.html
+ */
 import React, { Suspense, useEffect } from 'react'
-import styled from 'styled-components'
 import { Route, Routes } from 'react-router-dom'
 import { useNavigate, useLocation } from 'react-router-dom'
 //[ package ]
-
-import Loader from 'components/reusable/Loading/HalfFilled'
-//[ Components ]
 
 //=> DOM
 export default () => {
@@ -23,12 +26,7 @@ export default () => {
 	const PAGE = (name: string) => {
 		const PageComponent = _page[name] // 取出页面
 		return (
-			<Suspense
-				fallback={
-					<LoadMaskMain>
-						<Loader speed={1.2} lineSpeed={1.4} width={4} size={50} />
-					</LoadMaskMain>
-				}>
+			<Suspense fallback={<></>}>
 				<PageComponent />
 			</Suspense>
 		)
@@ -38,8 +36,8 @@ export default () => {
 	const navigate = useNavigate()
 	const location = useLocation()
 	useEffect(() => {
-		const { key } = location
-		if (key === 'default') navigate('/')
+		const { key, pathname } = location
+		if (key === 'default' && pathname === '/') navigate('/')
 	}, [location.key])
 
 	return (
@@ -58,11 +56,3 @@ export default () => {
 		</Routes>
 	)
 }
-
-const LoadMaskMain = styled.div`
-	width: calc(100% - 218px);
-	height: 500px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-`

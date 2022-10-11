@@ -1,8 +1,16 @@
-import { ID as _NID } from 'state/api/linkId'
+/*
+ * @Author: LF112 (futiwolf) <lf@lf112.net>
+ * @License: GNU Affero General Public License v3.0
+ *
+ * Copyright (c) 2022 LF112 (futiwolf), All Rights Reserved.
+ * 请注意，本项目使用 AGPL v3 开源协议开源，请严格依照开源协议进行不限于编辑、分发等操作。详见 https://www.chinasona.org/gnu/agpl-3.0-cn.html
+ */
+import { ID as _NID } from 'store/api/linkId'
+//[ constants ]
 
-import { BTFetch } from 'state/fetch/hooks'
-import { useUpdateApi } from 'state/api/hooks'
-import { useAddPopup } from 'state/popup/hooks'
+import { BTFetch } from 'store/fetch'
+import { useUpdateApi } from 'store/api'
+import { useAddPopup } from 'store/popup'
 //[ hooks ]
 
 /**
@@ -54,14 +62,13 @@ export default class {
 			}, 500)
 			//=> 刷新数据
 			this.updateApi([
-				'panel',
-				'isNew',
-				'betaVersionId',
-				'VersionId',
-				'betaVersionLogs',
-				'VersionLogs',
-				'betaUptime',
-				'Uptime'
+				'panel.panelIsNew',
+				'panel.panelBetaVersion',
+				'panel.panelNewVersion',
+				'panel.panelBetaVersionLogs',
+				'panel.panelNewVersionLogs',
+				'panel.panelBetaVersionUptime',
+				'panel.panelNewVersionUptime'
 			])
 		}
 	}
@@ -71,7 +78,7 @@ export default class {
 	 */
 	public async _UpdatePanel(): Promise<boolean> {
 		//=> 升级面板
-		const { msg, status } = (await this.$fetch(_NID['UpdatePanel'], {
+		const { msg, status } = (await this.$fetch(_NID['_PanelUpdate'], {
 			toUpdate: true
 		})) as any
 		if (status) {

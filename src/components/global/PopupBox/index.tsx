@@ -1,31 +1,44 @@
+/*
+ * @Author: LF112 (futiwolf) <lf@lf112.net>
+ * @License: GNU Affero General Public License v3.0
+ *
+ * Copyright (c) 2022 LF112 (futiwolf), All Rights Reserved.
+ * 请注意，本项目使用 AGPL v3 开源协议开源，请严格依照开源协议进行不限于编辑、分发等操作。详见 https://www.chinasona.org/gnu/agpl-3.0-cn.html
+ */
 import React, { Suspense, useEffect, useState, useRef, useMemo } from 'react'
 import styled from 'styled-components'
 import fastdom from 'fastdom'
+import { useStore } from '@nanostores/react'
 //[ package ]
 
 import { DefaultCard } from 'components/reusable/Card'
 //[ Components ]
 
 import {
-	useLoadId,
-	useShow,
-	useUpdateLoadId,
-	useUpdateShow
-} from 'state/popupbox/hooks'
-import { useAddPopup, useClosePopup } from 'state/popup/hooks'
+	popupAims,
+	popupTitle,
+	popupShow,
+	popupLoaded,
+	updateShow,
+	popupOpen,
+	addLoaded
+} from 'store/popupbox'
+import { useAddPopup, closePopup } from 'store/popup'
 //[ hooks ]
 
 import { ICONS } from 'constants/popupBox_consts'
+import SmallButton from 'components/reusable/Button/small'
 //[ constants ]
 
 //=> DOM
 export default () => {
-	const [loadId, title] = useLoadId()
-	const show = useShow()
+	const loadId = useStore(popupAims)
+	const title = useStore(popupTitle)
+	const show = useStore(popupShow)
+
 	const addPopup = useAddPopup()
-	const closePopup = useClosePopup()
-	const updateLoadId = useUpdateLoadId()
-	const updateShow = useUpdateShow()
+
+	const Loaded = useStore(popupLoaded)
 
 	const [showDom, setShowDom] = useState<boolean>(false) //=> 显示弹窗动画
 	const [popupId, setPopupId] = useState<string>(null) //=> Popup ID
@@ -58,7 +71,8 @@ export default () => {
 		}
 		if (loadId) {
 			//=> 显示载入状态弹窗
-			setPopupId(addPopup('正在加载中...', 'load', -1) as string)
+			if (!Loaded.includes(loadId))
+				setPopupId(addPopup('正在加载中...', 'load', -1) as string)
 			//=> 绑定 ESC 关闭弹窗快捷键
 			document.addEventListener('keydown', escKey)
 		}
@@ -68,7 +82,8 @@ export default () => {
 	useEffect(() => {
 		if (show) {
 			//=> 移除载入状态弹窗
-			closePopup(popupId)
+			if (!Loaded.includes(loadId)) closePopup(popupId)
+			addLoaded(loadId)
 			setTimeout(() => {
 				fastdom.measure(() => {
 					const DOM = node.current
@@ -96,7 +111,7 @@ export default () => {
 					setTimeout(() => setShowDom(false), 250)
 					setTimeout(() => {
 						DOM.removeAttribute('style')
-						updateLoadId(null, '')
+						popupOpen(null, '')
 						updateShow(false)
 					}, 500)
 				})
@@ -118,9 +133,7 @@ export default () => {
 						{ICONS.hasOwnProperty(loadId) ? ICONS[loadId] : <></>}
 						<h1>{title}</h1>
 					</Title>
-					<CloseButton onClick={Close}>
-						<i className='el-icon-close' />
-					</CloseButton>
+					<SmallButton onClick={Close} icon={<i className='el-icon-close' />} />
 				</Header>
 				{useMemo(() => {
 					return loadId ? MSGBOX(loadId) : <></>
@@ -159,6 +172,7 @@ const CloseMask = styled.div`
 	width: 100%;
 	height: 100%;
 	border-radius: 8px 8px 0 0;
+	backdrop-filter: blur(2px);
 	background: linear-gradient(18deg, rgb(8 20 53 / 25%), rgb(32 33 34 / 90%)),
 		linear-gradient(333deg, rgba(39, 52, 64, 0.3), rgba(180, 255, 217, 0.08)),
 		radial-gradient(

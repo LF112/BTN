@@ -1,9 +1,16 @@
+/*
+ * @Author: LF112 (futiwolf) <lf@lf112.net>
+ * @License: GNU Affero General Public License v3.0
+ *
+ * Copyright (c) 2022 LF112 (futiwolf), All Rights Reserved.
+ * 请注意，本项目使用 AGPL v3 开源协议开源，请严格依照开源协议进行不限于编辑、分发等操作。详见 https://www.chinasona.org/gnu/agpl-3.0-cn.html
+ */
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 //[ package ]
 
-import { useUpdateShow } from 'state/popupbox/hooks'
-import { useUpdateApi, useApiState } from 'state/api/hooks'
+import { updateShow } from 'store/popupbox'
+import { useUpdateApi, useApiState, $ } from 'store/api'
 //[ hooks ]
 
 import VersionStatus from './VersionStatus'
@@ -13,44 +20,54 @@ import Logs from './Logs'
 
 //=> DOM
 export default () => {
-	const updateShow = useUpdateShow()
 	const updateApi = useUpdateApi()
-	const $panel = useApiState('panel')
+	const {
+		panelIsNew,
+		panelBetaVersion,
+		panelNewVersion,
+		panelBetaVersionLogs,
+		panelNewVersionLogs,
+		panelBetaVersionUptime,
+		panelNewVersionUptime,
+		panelBeta,
+		panelVersion
+	} = useApiState('panel')
 
 	useEffect(() => {
 		//=> 显示弹窗 | '通知父组件子组件成功装载'
 		updateShow(true)
 		//=> 更新版本信息
 		updateApi([
-			'panel',
-			'isNew',
-			'betaVersionId',
-			'VersionId',
-			'betaVersionLogs',
-			'VersionLogs',
-			'betaUptime',
-			'Uptime'
+			'panel.panelVersion',
+			'panel.panelBeta',
+			'panel.panelIsNew',
+			'panel.panelBetaVersion',
+			'panel.panelNewVersion',
+			'panel.panelBetaVersionLogs',
+			'panel.panelNewVersionLogs',
+			'panel.panelBetaVersionUptime',
+			'panel.panelNewVersionUptime'
 		])
 	}, [''])
 
+	const _IsNew = $(panelIsNew)
+	const _Beta = $(panelBeta)
 	return (
 		<Main>
 			<VersionStatus
-				isNew={$panel.isNew}
-				Beta={$panel.Beta}
-				UpdateTime={$panel[$panel.Beta ? 'betaUptime' : 'Uptime']}
+				isNew={_IsNew}
+				Beta={_Beta}
+				UpdateTime={
+					_Beta ? $(panelBetaVersionUptime) : $(panelNewVersionUptime)
+				}
 			/>
-			<CurrentVersion
-				isNew={$panel.isNew}
-				Beta={$panel.Beta}
-				version={$panel.version}
-			/>
+			<CurrentVersion isNew={_IsNew} Beta={_Beta} version={$(panelVersion)} />
 			<Logs
-				Beta={$panel.Beta}
-				VersionLogs={$panel.VersionLogs}
-				betaVersionLogs={$panel.betaVersionLogs}
-				versionId={$panel.VersionId}
-				betaVersionId={$panel.betaVersionId}
+				Beta={_Beta}
+				VersionLogs={$(panelNewVersionLogs)}
+				betaVersionLogs={$(panelBetaVersionLogs)}
+				versionId={$(panelNewVersion)}
+				betaVersionId={$(panelBetaVersion)}
 			/>
 		</Main>
 	)
