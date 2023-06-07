@@ -10,6 +10,8 @@
 
 </div>
 
+![Preview](./images/index.png)
+
 > ```bash
 > $ echo 'High cohesion & Low coupling.'
 > $ # 快速开始！
@@ -37,6 +39,13 @@
   - 构建工具 [Vite](https://vitejs.dev/)
 
 > `BTN` ≈ `BTCO 3.0`，`BTN` 实则是在继 `BTCO` 发布后而重新构建的，更加全面的响应式面板插件的下一个版本。
+
+### 截图
+
+![Preview2](./images/index2.png)
+![Preview3](./images/index3.png)
+![Preview4](./images/index4.png)
+![Preview5](./images/setting.png)
 
 ## 参与贡献
 
