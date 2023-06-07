@@ -1,6 +1,6 @@
 {
     "name": "btnext",
-    "version": "0.2.9-1fb0b4c",
+    "version": "0.2.11-30c50e3",
     "description": "Front-end reconstruction of new generation BT-Panel based on plug-in.",
     "scripts": {
         "dev": "vite",
